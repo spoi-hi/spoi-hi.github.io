@@ -1,7 +1,7 @@
 WEBVTT
 
 1
-00:00:04.607 --> 00:00:09.509
+00:00:04.608 --> 00:00:09.509
 Kennarar (teachers): one tab per
 teacher of the course.
 
@@ -11,45 +11,70 @@ The tick: teaches the course
 this year.
 
 3
-00:00:13.611 --> 00:00:19.513
+00:00:13.611 --> 00:00:19.512
 Kennir eftirfarandi tíma: which
-sessions this teacher teaches.
+sessions, and of what type.
 
 4
-00:00:19.613 --> 00:00:25.514
-Athugasemdir kennara: what the
-teacher wrote – read only.
+00:00:19.612 --> 00:00:25.514
+With no session selected, a tick
+is for the whole course.
 
 5
 00:00:25.614 --> 00:00:31.516
+Select a session in the calendar:
+the ticks are then for it alone.
+
+6
+00:00:31.616 --> 00:00:37.518
+PE joins this dæmatími – the
+other sessions stay as they were.
+
+7
+00:00:37.618 --> 00:00:42.519
+One click on empty space: back
+to the whole course.
+
+8
+00:00:42.619 --> 00:00:48.521
+Athugasemdir kennara: what the
+teacher wrote – read only.
+
+9
+00:00:48.621 --> 00:00:54.523
 Óskatímar: one click = busy (red),
 for all of the teacher's sessions.
 
-6
-00:00:31.616 --> 00:00:35.518
+10
+00:00:54.623 --> 00:00:58.524
 Two clicks = wanted (green).
 
-7
-00:00:35.618 --> 00:00:40.520
+11
+00:00:58.624 --> 00:01:03.526
 Kennir vikur: the weeks this
 teacher teaches.
 
-8
-00:00:40.620 --> 00:00:46.521
+12
+00:01:03.626 --> 00:01:09.528
 Stofuóskir: one click = used last
 (yellow), two = wanted (green).
 
-9
-00:00:46.621 --> 00:00:52.000
+13
+00:01:09.628 --> 00:01:15.255
 Athugasemd stjórnanda: the
 admin's own note.
 
-10
-00:00:52.100 --> 00:00:58.001
-Afgreiða óskir (process wishes)
-saves this section – on its own.
+14
+00:01:15.355 --> 00:01:21.256
+Every change waits here – Staðfesta
+og vista saves it all at once.
 
-11
-00:00:58.101 --> 00:01:04.003
+15
+00:01:21.356 --> 00:01:27.258
+Or Afgreiða athugasemdir: saves the
+teachers and closes their answers.
+
+16
+00:01:27.358 --> 00:01:33.258
 The wishes now sit in each
 session's Stillingar, for Besta.
