@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Athugasemdir kennara</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="page-head">
+  <h1>Athugasemdir kennara</h1>
+  <p class="lede">
+    Athugasemdir um vikur, tíma og stofur. Hafðar til hliðsjónar, en ekki trygging.
+  </p>
+</header>
+
+<main>
+  <!-- Step 1 ------------------------------------------------------------ -->
+  <section class="card">
+    <h2><span class="step">1</span> Hver ert þú?</h2>
+    <div class="field-row">
+      <label class="field">
+        <span>Svið</span>
+        <select id="school"></select>
+      </label>
+      <label class="field">
+        <!-- Which term these wishes are for. Normally decided by the
+             link the administrator sends (?year=2026&semester=V) and
+             shown here so the teacher can see it; a select rather than
+             a label because a school can be planning two terms at once
+             and a wrong guess wastes the whole form. -->
+        <span>Misseri</span>
+        <select id="term"></select>
+      </label>
+      <label class="field">
+        <span>Netfang</span>
+        <input id="email" type="email" placeholder="nafn@hi.is" autocomplete="email">
+      </label>
+      <label class="field">
+        <!-- Required, not politeness: teachers.username embeds the
+             kennitala, so it is the only thing that ties a wish to a
+             teacher and their sessions. A wish without one cannot be
+             imported into Spoi at all. -->
+        <span>Kennitala</span>
+        <input id="ssn" type="text" inputmode="numeric" required
+               pattern="[0-9]{10}" maxlength="10" placeholder="DDMMYYXXXX">
+      </label>
+    </div>
+    <p class="hint" id="termHint"></p>
+  </section>
+
+  <!-- Step 2 ------------------------------------------------------------ -->
+  <section class="card">
+    <h2><span class="step">2</span> Námskeið</h2>
+    <div class="field combo">
+      <span>Leitaðu að námskeiði</span>
+      <!-- The select stays as the value itself, so everything downstream
+           reads el('course').value exactly as before. It is only hidden
+           because 196 courses is a lot of scrolling, not because a
+           dropdown is wrong. -->
+      <select id="course" hidden><option value="">Sæki námskeið…</option></select>
+      <input id="courseSearch" type="search" autocomplete="off"
+             role="combobox" aria-expanded="false" aria-autocomplete="list"
+             aria-controls="courseResults"
+             placeholder="Númer eða heiti, t.d. IÐN508M eða aðgerða">
+      <ul id="courseResults" class="combo-results" role="listbox" hidden></ul>
+    </div>
+    <p class="hint" id="courseHint"></p>
+  </section>
+
+  <!-- The course as Spoi has it now - read-only, for context ------------ -->
+  <section class="card" id="planCard" hidden>
+    <h2>Núverandi drög</h2>
+    <p class="hint" id="planHint"></p>
+    <div id="planGrid" class="plan-grid"></div>
+    <div id="planList" class="plan-list"></div>
+  </section>
+
+  <!-- Step 3 ------------------------------------------------------------ -->
+  <section class="card" id="weeksCard" hidden>
+    <h2><span class="step">3</span> Vikur</h2>
+    <p class="hint" id="weekAnchor"></p>
+    <div id="weekGrid" class="week-grid"></div>
+    <div class="toolbar">
+      <button type="button" class="link-btn" data-weeks="all">Velja allar</button>
+      <button type="button" class="link-btn" data-weeks="none">Hreinsa</button>
+    </div>
+  </section>
+
+  <!-- Step 4 ------------------------------------------------------------ -->
+  <section class="card" id="timesCard" hidden>
+    <h2><span class="step">4</span> Tímar</h2>
+    <p class="hint">
+      Einn smellur = <b class="swatch-prefer">hentar vel</b>, tveir =
+      <b class="swatch-avoid">hentar ekki</b>, þrír hreinsa.
+    </p>
+    <div id="slotGrid" class="slot-grid"></div>
+  </section>
+
+  <!-- Step 5 ------------------------------------------------------------ -->
+  <section class="card" id="roomsCard" hidden>
+    <h2><span class="step">5</span> Stofur</h2>
+    <p class="hint">
+      Smellt eins og að ofan. &bdquo;Hentar ekki&ldquo; útilokar ekki stofuna,
+      hún er sett aftast.
+      <a href="https://hi.is/haskolinn/adalbygging" target="_blank" rel="noopener">
+        Yfirlitsmyndir bygginga</a>.
+    </p>
+    <div id="roomList" class="room-list"></div>
+    <p class="hint" id="roomCount"></p>
+
+    <details class="more-rooms">
+      <summary>Finna aðra stofu</summary>
+      <p class="hint">
+        Listinn að ofan nær yfir byggingarnar sem námskeiðið er í núna.
+      </p>
+      <input id="roomSearch" type="search" placeholder="Sláðu inn stofu eða byggingu, t.d. Oddi eða HT-104">
+      <div id="roomSearchResults" class="room-list"></div>
+    </details>
+  </section>
+
+  <!-- Step 6 ------------------------------------------------------------ -->
+  <section class="card" id="teachersCard" hidden>
+    <h2><span class="step">6</span> Kennarar námskeiðsins</h2>
+    <p class="hint">
+      Kennarar skráðir á námskeiðið í Uglu, með upphafsstöfum. Taktu hakið af
+      &bdquo;Kennir&ldquo; hjá þeim sem kenna <b>ekki</b> námskeiðið á þessu misseri,
+      og merktu hvers konar tíma hver og einn kennir.
+    </p>
+    <div id="teacherList" class="teacher-list"></div>
+    <textarea id="teachersNote" rows="2"
+      placeholder="Vantar kennara? T.d. &bdquo;Kennari með kennitölu … kennir líka, vantar í Uglu&ldquo;"></textarea>
+  </section>
+
+  <!-- Step 7 ------------------------------------------------------------ -->
+  <section class="card" id="noteCard" hidden>
+    <h2><span class="step">7</span> Athugasemd</h2>
+    <textarea id="note" rows="3" placeholder="Frjáls texti til stjórnar…"></textarea>
+  </section>
+
+  <section class="card" id="summaryCard" hidden>
+    <h2>Yfirlit</h2>
+    <p class="hint">Þetta verður sent.</p>
+    <div id="summary" class="summary"></div>
+  </section>
+
+  <section class="card submit-card" id="submitCard" hidden>
+    <button id="submitBtn" type="button" class="primary">Senda athugasemdir</button>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

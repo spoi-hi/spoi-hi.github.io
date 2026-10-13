@@ -1,5 +1,5 @@
 /* The static pages: front page, faculty pages, tutorials, 404. The
-   teachers' wishes page (oskir/) is an app with its own stylesheet. */
+   teachers' wishes page (athugasemdir/) is an app with its own stylesheet. */
 :root {
   --bg: #f5f7fb;
   --bg-glow: radial-gradient(1200px 500px at 15% -10%, rgba(37, 99, 235, .10), transparent 60%),

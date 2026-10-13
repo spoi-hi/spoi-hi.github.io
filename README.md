@@ -10,7 +10,7 @@ Public timetable site, served by GitHub Pages.
   PDFs in `pdf/`.
 - **`kennsla/`** — tutorial videos for staff, written by Spoi's
   `scripts/tutorial_site.py` (do not edit by hand).
-- **`oskir/`** — the teacher-wishes page: weeks, times and rooms for a
+- **`athugasemdir/`** — the teacher-wishes page: weeks, times and rooms for a
   course the teacher picks. Static; it talks to an Apps Script endpoint
   that appends to a private Google Sheet.
 
@@ -40,13 +40,13 @@ lowercased; `<term>` is e.g. `haust-2026`.
 
 ## The wishes page
 
-`oskir/app.js` has a `CONFIG` block at the top: the endpoint URL, the five
+`athugasemdir/app.js` has a `CONFIG` block at the top: the endpoint URL, the five
 faculties, the week range, the slot grid, and how many rooms a teacher may
 name. Two URL parameters are useful for links sent to a faculty:
 
 ```
-oskir/?school=von        preselects the faculty
-oskir/?weeks=2-16        spring term instead of the default 34-47
+athugasemdir/?school=von        preselects the faculty
+athugasemdir/?weeks=2-16        spring term instead of the default 34-47
 ```
 
 The endpoint URL is public, which is inherent to a link teachers open, and
