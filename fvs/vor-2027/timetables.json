@@ -6,15 +6,29 @@
       "name": "1. ár í mannfræði",
       "file": "1-ar-i-mannfraedi.html",
       "source": "0bbe706c",
-      "hash": "6e3dc8a8f48803e8",
-      "updated": "2026-10-02"
+      "hash": "22802993a4f34438",
+      "updated": "2026-10-14"
+    },
+    {
+      "name": "Lögfræði 2. ár",
+      "file": "logfraedi-2-ar.html",
+      "source": "0bbe706c",
+      "hash": "e8a508c805d35356",
+      "updated": "2026-10-14"
+    },
+    {
+      "name": "Lögfræði 3. ár",
+      "file": "logfraedi-3-ar.html",
+      "source": "0bbe706c",
+      "hash": "ac0772d6757cd5aa",
+      "updated": "2026-10-14"
     },
     {
       "name": "Viðskiptafræði 2. ár (öll kjörsvið)",
       "file": "vidskiptafraedi-2-ar-oll-kjorsvid.html",
       "source": "0bbe706c",
-      "hash": "e09c4645d9beaab8",
-      "updated": "2026-10-02"
+      "hash": "066059e1cd13294a",
+      "updated": "2026-10-14"
     }
   ]
 }
