@@ -3,13 +3,6 @@
   "label": "Vor 2027",
   "timetables": [
     {
-      "name": "1. ár í mannfræði",
-      "file": "1-ar-i-mannfraedi.html",
-      "source": "0bbe706c",
-      "hash": "22802993a4f34438",
-      "updated": "2026-10-14"
-    },
-    {
       "name": "Kjörgreinar í meistaranámi í lögfræði",
       "file": "kjorgreinar-i-meistaranami-i-logfraedi.html",
       "source": "0bbe706c",
