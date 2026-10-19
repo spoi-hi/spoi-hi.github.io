@@ -1,13 +1,5 @@
 {
   "term": "vor-2027",
   "label": "Vor 2027",
-  "timetables": [
-    {
-      "name": "MA til starfsréttinda í félagsráðgjöf",
-      "file": "ma-til-starfsrettinda-i-felagsradgjof.html",
-      "source": "0bbe706c",
-      "hash": "a2c8df980361f4e8",
-      "updated": "2026-10-19"
-    }
-  ]
+  "timetables": []
 }
