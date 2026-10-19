@@ -1,13 +1,5 @@
 {
   "term": "vor-2027",
   "label": "Vor 2027",
-  "timetables": [
-    {
-      "name": "Kjörgreinar í meistaranámi í lögfræði",
-      "file": "kjorgreinar-i-meistaranami-i-logfraedi.html",
-      "source": "0bbe706c",
-      "hash": "69e13bc038e319fe",
-      "updated": "2026-10-19"
-    }
-  ]
+  "timetables": []
 }
