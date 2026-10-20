@@ -1,86 +1,101 @@
 WEBVTT
 
 1
-00:00:04.604 --> 00:00:10.506
-Grænt: bókað. Tíminn í Spoi og
-bókun í TermTime passa saman.
+00:00:04.605 --> 00:00:10.506
+Grænt: bókað. Tími í Spóa og bókun
+í TermTime passa saman.
 
 2
-00:00:10.606 --> 00:00:15.508
-Activity-númerið tengir
-þetta tvennt saman.
+00:00:10.606 --> 00:00:15.507
+Hver kassi: heiti tímans,
+svo stofa og vikur.
 
 3
-00:00:15.608 --> 00:00:20.510
-Blátt: tími sem á enga
-bókun í TermTime enn.
+00:00:15.607 --> 00:00:22.509
+* á eftir heitinu: Samhliða – einn af
+hópum; hver nemandi sækir einn þeirra.
 
 4
-00:00:20.610 --> 00:00:26.512
-Kassinn sýnir stofuna
-í núverandi lausn.
+00:00:22.609 --> 00:00:27.510
+Auðkenni bókunarinnar (Activity ID)
+tengir þau saman.
 
 5
-00:00:26.612 --> 00:00:31.513
-Appelsínugult: bókun í TermTime
-án tíma í Spoi.
+00:00:27.610 --> 00:00:32.513
+Blátt: tími sem er ekki enn
+bókaður í TermTime.
 
 6
-00:00:31.613 --> 00:00:35.513
-Upplýsingarnar koma
-beint úr TermTime.
+00:00:32.613 --> 00:00:37.514
+Appelsínugult: bókun í TermTime
+án tíma í Spóa.
 
 7
-00:00:35.613 --> 00:00:40.514
-„Búa til tíma“ býr til
-tíma úr bókuninni.
+00:00:37.614 --> 00:00:44.515
+„Búa til tíma“ býr til tíma úr henni;
+„Fjarlægja bókun“ tekur hana úr TermTime.
 
 8
-00:00:40.614 --> 00:00:46.516
-„Fjarlægja bókun“ virkar þegar
-tenging við TermTime er komin.
+00:00:44.615 --> 00:00:51.517
+Fjólublátt: bókað, en tíminn hefur breyst
+síðan – þarf að endurnýja bókun (sjá 1c).
 
 9
-00:00:46.616 --> 00:00:52.517
+00:00:51.617 --> 00:00:57.520
 „Ekki tímasett“: tímar
-sem hafa engan tíma enn.
+sem hafa ekki fengið tíma.
 
 10
-00:00:57.621 --> 00:01:03.627
-Á námskeiði með fleiri árekstrum
-birtast merkin eftir smástund.
+00:01:01.624 --> 00:01:08.526
+Heilt: kennsluvikur. Strikað: tími sem er
+bara þá viku. Skástrikað: engir tímar.
 
 11
-00:01:03.727 --> 00:01:08.629
-Rautt: nemendur sem eiga annað
-námskeið á sama tíma.
+00:01:08.626 --> 00:01:15.526
+Stakar vikur byrja óvaldar svo venjuleg
+vika sjáist; smelltu til að sjá þær.
 
 12
-00:01:08.729 --> 00:01:14.631
-Guli kassinn sýnir stöðuna
-þar sem tíminn er núna.
+00:01:15.626 --> 00:01:22.528
+Haltu inni og dragðu yfir hnappana
+til að velja eða afvelja margar í einu.
 
 13
-00:01:14.731 --> 00:01:19.633
-„14x6/14“: 14 nemendur,
-í 6 af 14 vikum.
+00:01:27.629 --> 00:01:33.529
+Á stærra námskeiði birtast merkin
+augnabliki eftir að það hleðst.
 
 14
-00:01:19.734 --> 00:01:25.636
-Gult ⛔: stofan er bókuð í
-TermTime – bókun myndi ekki ganga.
+00:01:33.629 --> 00:01:39.529
+Rautt: nemendur sem eru líka
+í öðru námskeiði á þeim tíma.
 
 15
-00:01:25.736 --> 00:01:30.638
-Gult ⚠: annað námskeið hefur
-stofuna í núverandi lausn.
+00:01:39.629 --> 00:01:45.532
+Guli kassinn sýnir stöðuna
+þar sem tíminn er.
 
 16
-00:01:30.738 --> 00:01:36.640
+00:01:45.632 --> 00:01:52.533
+„14x6/15“: 14 nemendur, í 6 af 15 vikum –
+og hvaða tími þess er fyrir.
+
+17
+00:01:52.633 --> 00:01:58.535
+Gult ⛔: stofan er bókuð í TermTime –
+bókun myndi ekki ganga.
+
+18
+00:01:58.635 --> 00:02:03.536
+Gult ⚠: annað námskeið er með stofuna
+í núverandi lausn.
+
+19
+00:02:03.636 --> 00:02:09.539
 Fjólublátt: kennari sem kennir
 annars staðar á sama tíma.
 
-17
-00:01:36.740 --> 00:01:41.641
-Neðsta línan segir við hvað
-var borið saman.
+20
+00:02:09.639 --> 00:02:16.541
+Síurnar efst þrengja námskeiðalistann –
+„Námskeið án tíma“: námskeið án tíma enn.

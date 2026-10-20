@@ -1,91 +1,101 @@
 WEBVTT
 
 1
-00:00:04.608 --> 00:00:10.510
+00:00:04.605 --> 00:00:10.506
 Guli kassinn sýnir stöðuna
 þar sem tíminn er: engir árekstrar.
 
 2
-00:00:10.610 --> 00:00:18.454
+00:00:10.606 --> 00:00:18.435
 Á meðan dregið er sýna merkin
 hvað hver staður kostar.
 
 3
-00:00:18.554 --> 00:00:24.457
+00:00:18.535 --> 00:00:24.436
 Hér: 15 nemendur rekast á (rautt)
 og kennari líka (fjólublátt).
 
 4
-00:00:24.557 --> 00:00:30.460
+00:00:24.536 --> 00:00:30.438
 „Áhrif breytingar“:
 fyrir → eftir.
 
 5
-00:00:30.560 --> 00:00:35.463
+00:00:30.538 --> 00:00:35.439
 PRÓ124F deilir 15 nemendum,
 og prufa1 kennir það þá.
 
 6
-00:00:35.563 --> 00:00:41.465
+00:00:35.539 --> 00:00:41.441
 Stofa HT-104: ⛔ – hún er bókuð
 í TermTime. Bókun myndi ekki ganga.
 
 7
-00:00:41.565 --> 00:00:45.468
+00:00:41.541 --> 00:00:45.442
 Bóka er lokað
 á meðan ⛔ stendur.
 
 8
-00:00:45.568 --> 00:00:55.570
+00:00:45.542 --> 00:00:55.539
 Fimmtudagur í V02-152: ⚠ – verklegt
 PRÓ124F er þar í núverandi lausn.
 
 9
-00:00:55.670 --> 00:01:04.451
+00:00:55.639 --> 00:01:04.423
 Föstudagur kl. 10 er laus:
 engin merki, engir árekstrar.
 
 10
-00:01:04.551 --> 00:01:10.454
+00:01:04.523 --> 00:01:10.424
 Tímafjöldi: fjöldi 50 mínútna
 hólfa. 3 lengir tímann.
 
 11
-00:01:10.554 --> 00:01:15.456
+00:01:10.524 --> 00:01:15.425
 Tegund: hvers konar tími,
 eins og í TermTime.
 
 12
-00:01:15.556 --> 00:01:20.459
+00:01:15.525 --> 00:01:20.427
 Athugasemd fer til
 umsjónarmanna stofa.
 
 13
-00:01:20.559 --> 00:01:25.460
+00:01:20.527 --> 00:01:25.429
 Vikur: smelltu af og á –
 hér er vika 9 tekin út.
 
 14
-00:01:25.560 --> 00:01:30.626
+00:01:25.529 --> 00:01:30.600
 Ein vistun fyrir allt:
 Staðfesta og vista.
 
 15
-00:01:30.726 --> 00:01:36.628
-Bókaður (grænn) tími: að draga
-hann merkir hann til endurbókunar.
+00:01:34.703 --> 00:01:44.371
+Bóka: bókar nákvæmlega það sem stendur.
+Óvistaðar breytingar vistast fyrst.
 
 16
-00:01:36.728 --> 00:01:40.631
-Núllstilla setur
-hann til baka.
+00:01:44.471 --> 00:01:51.372
+Bókað: kassinn verður grænn og námskeiðið
+er lesið aftur úr TermTime.
 
 17
-00:01:40.731 --> 00:01:47.035
-Bóka og Uppfæra bókun:
-virkt fljótlega.
+00:01:51.472 --> 00:02:00.954
+Bókaður tími færður og vistaður: fjólublár
+– TermTime er enn með gamla tímann.
 
 18
-00:01:58.151 --> 00:02:12.388
-Á hvaða námskeiði sem er: prófaðu
-og Núllstilla. Ekkert vistast.
+00:02:01.054 --> 00:02:14.336
+„Uppfæra bókun“ færir
+bókunina líka.
+
+19
+00:02:14.436 --> 00:02:20.338
+„Fjarlægja bókun“ tekur hana úr TermTime;
+tíminn verður eftir, blár.
+
+20
+00:02:30.444 --> 00:02:44.673
+Prófaðu að vild, svo Núllstilla:
+ekkert er vistað eða bókað.

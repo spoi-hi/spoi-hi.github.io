@@ -1,85 +1,83 @@
 WEBVTT
 
 1
-00:00:04.610 --> 00:00:10.512
+00:00:04.605 --> 00:00:11.764
+A course with no session yet:
+its first session opens by itself.
+
+2
+00:00:11.865 --> 00:00:19.013
+Filled in: a lecture, Mon 08:20, in the
+weeks most sessions this term use.
+
+3
+00:00:19.113 --> 00:00:27.209
+Move it and choose a room –
+“Annað” means no room yet.
+
+4
+00:00:27.309 --> 00:00:32.279
+“Vista án bókunar”: save it in Spoi,
+book it later.
+
+5
+00:00:36.382 --> 00:00:42.324
 This tutorial and the orange booking
 are one class, not linked.
 
-2
-00:00:10.612 --> 00:00:15.513
+6
+00:00:42.424 --> 00:00:47.324
 Spoi suggests the match:
 the booking pulses.
 
-3
-00:00:15.613 --> 00:00:19.515
-Right-click the booking
-to pair them.
+7
+00:00:47.424 --> 00:00:51.325
+Right-click the booking to pair them.
 
-4
-00:00:19.615 --> 00:00:23.518
-Afturkalla (undo)
-takes it back.
-
-5
-00:00:23.618 --> 00:00:28.695
+8
+00:00:51.425 --> 00:00:56.495
 Saved: the session is green,
 at its booked time.
 
-6
-00:00:28.795 --> 00:00:34.699
-A session with no time: click it
-under “Ekki tímasett”.
+9
+00:01:00.599 --> 00:01:06.500
+A session with no time:
+click it under “Ekki tímasett”.
 
-7
-00:00:34.799 --> 00:00:40.702
+10
+00:01:06.600 --> 00:01:12.501
 Choose a Tímasetning (time) –
 it moves onto the calendar.
 
-8
-00:00:40.802 --> 00:00:46.706
-Pick a room. The yellow box shows
-what that position collides with.
-
-9
-00:00:46.806 --> 00:00:51.710
-“Engir árekstrar”: no clashes.
-A good position.
-
-10
-00:00:51.810 --> 00:00:56.213
-Staðfesta og vista
-(confirm and save).
-
 11
-00:00:56.313 --> 00:01:01.216
-A single click on empty space
-does nothing.
+00:01:12.601 --> 00:01:18.503
+Pick a room. “Engir árekstrar”:
+no clashes – a good position.
 
 12
-00:01:01.316 --> 00:01:07.218
-Double-click to create a session –
-a two-slot lecture by default.
+00:01:18.603 --> 00:01:22.989
+Staðfesta og vista (confirm and save).
 
 13
-00:01:07.318 --> 00:01:12.220
-Choose its weeks under
-“Vikur sem á að bóka”.
+00:01:27.092 --> 00:01:33.992
+Double-click empty space for a new
+session – a two-slot lecture by default.
 
 14
-00:01:12.320 --> 00:01:17.224
+00:01:34.092 --> 00:01:41.733
+Choose its weeks – drag across
+the chips to pick many at once.
+
+15
+00:01:41.833 --> 00:01:46.792
 Saved – blue, because
 it is not booked yet.
 
-15
-00:01:17.324 --> 00:01:21.225
-To delete: “Eyða tíma”
-(delete session).
-
 16
-00:01:21.325 --> 00:01:25.531
-Saved – it is gone.
+00:01:46.892 --> 00:01:53.254
+To delete: “Eyða tíma”, then save.
 
 17
-00:01:25.631 --> 00:01:31.535
-A booked session can't be deleted
-here – its booking would remain.
+00:01:53.354 --> 00:02:00.254
+A booked session can't be deleted here –
+remove its booking first (1c).

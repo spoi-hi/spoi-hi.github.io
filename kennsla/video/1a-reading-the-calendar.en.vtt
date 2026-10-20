@@ -1,86 +1,100 @@
 WEBVTT
 
 1
-00:00:04.604 --> 00:00:10.506
+00:00:04.605 --> 00:00:10.506
 Green: booked. Spoi's session and a
 TermTime booking match.
 
 2
-00:00:10.606 --> 00:00:15.508
-The booking's activity ID
-links the two.
+00:00:10.606 --> 00:00:15.507
+Each box: the session's name,
+then its room and weeks.
 
 3
-00:00:15.608 --> 00:00:20.510
+00:00:15.607 --> 00:00:22.509
+* after the name: Samhliða – one of
+several groups; each student attends one.
+
+4
+00:00:22.609 --> 00:00:27.510
+The booking's activity ID links the two.
+
+5
+00:00:27.610 --> 00:00:32.513
 Blue: a session with no booking
 in TermTime yet.
 
-4
-00:00:20.610 --> 00:00:26.512
-The box shows its room in
-Núverandi lausn (current solution).
-
-5
-00:00:26.612 --> 00:00:31.513
+6
+00:00:32.613 --> 00:00:37.514
 Orange: a TermTime booking
 with no session in Spoi.
 
-6
-00:00:31.613 --> 00:00:35.513
-Its details come straight
-from TermTime.
-
 7
-00:00:35.613 --> 00:00:40.514
-“Búa til tíma” (create session)
-makes a session from it.
+00:00:37.614 --> 00:00:44.515
+“Búa til tíma” makes a session of it;
+“Fjarlægja bókun” deletes it in TermTime.
 
 8
-00:00:40.614 --> 00:00:46.516
-“Fjarlægja bókun” (remove booking)
-works once TermTime is connected.
+00:00:44.615 --> 00:00:51.517
+Purple: booked, but changed since –
+it needs rebooking (see 1c).
 
 9
-00:00:46.616 --> 00:00:52.517
+00:00:51.617 --> 00:00:57.520
 “Ekki tímasett” (not scheduled):
 sessions with no time yet.
 
 10
-00:00:57.621 --> 00:01:03.627
-On a busier course, the pills
-appear a moment after it loads.
+00:01:01.624 --> 00:01:08.526
+Solid: teaching weeks. Dashed: a one-off
+session that week. Striped: no sessions.
 
 11
-00:01:03.727 --> 00:01:08.629
+00:01:08.626 --> 00:01:15.526
+One-off weeks start unselected, so the
+regular week shows; click to see them.
+
+12
+00:01:15.626 --> 00:01:22.528
+Press and drag across chips
+to set several at once.
+
+13
+00:01:27.629 --> 00:01:33.529
+On a busier course, the pills appear
+a moment after it loads.
+
+14
+00:01:33.629 --> 00:01:39.529
 Red: students who also have another
 course at that time.
 
-12
-00:01:08.729 --> 00:01:14.631
+15
+00:01:39.629 --> 00:01:45.532
 The yellow box reports the status
 of the session's current position.
 
-13
-00:01:14.731 --> 00:01:19.633
-“14x6/14”: 14 students,
-in 6 of the 14 weeks.
-
-14
-00:01:19.734 --> 00:01:25.636
-Amber ⛔: the room is booked in
-TermTime – booking would fail.
-
-15
-00:01:25.736 --> 00:01:30.638
-Amber ⚠: another course has the
-room in Núverandi lausn.
-
 16
-00:01:30.738 --> 00:01:36.640
+00:01:45.632 --> 00:01:52.533
+“14x6/15”: 14 students, 6 of 15 weeks –
+and which of its sessions is in the way.
+
+17
+00:01:52.633 --> 00:01:58.535
+Amber ⛔: the room is booked in TermTime –
+booking would fail.
+
+18
+00:01:58.635 --> 00:02:03.536
+Amber ⚠: another course has the room
+in Núverandi lausn.
+
+19
+00:02:03.636 --> 00:02:09.539
 Purple: a teacher who teaches
 elsewhere at that time.
 
-17
-00:01:36.740 --> 00:01:41.641
-The last line says what it was
-checked against.
+20
+00:02:09.639 --> 00:02:16.541
+Filters narrow the course list – “Námskeið
+án tíma”: courses with no session yet.

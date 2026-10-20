@@ -1,91 +1,101 @@
 WEBVTT
 
 1
-00:00:04.608 --> 00:00:10.510
+00:00:04.605 --> 00:00:10.506
 The yellow box reports the status of
 the current position: no clashes.
 
 2
-00:00:10.610 --> 00:00:18.454
+00:00:10.606 --> 00:00:18.435
 While dragging, the pills show
 what each spot would cost.
 
 3
-00:00:18.554 --> 00:00:24.457
+00:00:18.535 --> 00:00:24.436
 Here: 15 students clash (red)
 and a teacher clash (purple).
 
 4
-00:00:24.557 --> 00:00:30.460
+00:00:24.536 --> 00:00:30.438
 “Áhrif breytingar” (effect of the
 change): before → after.
 
 5
-00:00:30.560 --> 00:00:35.463
+00:00:30.538 --> 00:00:35.439
 PRÓ124F shares 15 students,
 and prufa1 teaches it then.
 
 6
-00:00:35.563 --> 00:00:41.465
+00:00:35.539 --> 00:00:41.441
 Room HT-104: ⛔ – it is booked in
 TermTime. A booking would fail.
 
 7
-00:00:41.565 --> 00:00:45.468
+00:00:41.541 --> 00:00:45.442
 Bóka (book) is blocked
 while a ⛔ stands.
 
 8
-00:00:45.568 --> 00:00:55.570
+00:00:45.542 --> 00:00:55.539
 Thursday in V02-152: ⚠ – PRÓ124F's
 lab has it in Núverandi lausn.
 
 9
-00:00:55.670 --> 00:01:04.451
+00:00:55.639 --> 00:01:04.423
 Friday 10:00 is free:
 no pills, no clashes.
 
 10
-00:01:04.551 --> 00:01:10.454
+00:01:04.523 --> 00:01:10.424
 Tímafjöldi: number of 50-minute
 slots. 3 makes it longer.
 
 11
-00:01:10.554 --> 00:01:15.456
+00:01:10.524 --> 00:01:15.425
 Tegund (type): what kind of
 session, as in TermTime.
 
 12
-00:01:15.556 --> 00:01:20.459
+00:01:15.525 --> 00:01:20.427
 Athugasemd (note) goes to the
 room administrators.
 
 13
-00:01:20.559 --> 00:01:25.460
+00:01:20.527 --> 00:01:25.429
 Weeks: click on and off –
 here week 9 is left out.
 
 14
-00:01:25.560 --> 00:01:30.626
+00:01:25.529 --> 00:01:30.600
 One save for all of it:
 Staðfesta og vista.
 
 15
-00:01:30.726 --> 00:01:36.628
-A booked (green) session: dragging
-only marks it for rebooking.
+00:01:34.703 --> 00:01:44.371
+Bóka: books exactly what the card shows.
+Unsaved changes are saved first.
 
 16
-00:01:36.728 --> 00:01:40.631
-Núllstilla (reset)
-puts it back.
+00:01:44.471 --> 00:01:51.372
+Booked: the box turns green, and the
+course is read back from TermTime.
 
 17
-00:01:40.731 --> 00:01:47.035
-Bóka (book) and Uppfæra bókun
-(update booking): live soon.
+00:01:51.472 --> 00:02:00.954
+A booked session moved and saved: purple –
+TermTime still has the old time.
 
 18
-00:01:58.151 --> 00:02:12.388
-On any course: try freely,
-then Núllstilla. Nothing is saved.
+00:02:01.054 --> 00:02:14.336
+“Uppfæra bókun” (update booking)
+moves the booking too.
+
+19
+00:02:14.436 --> 00:02:20.338
+“Fjarlægja bókun” deletes it in TermTime;
+the session stays, blue.
+
+20
+00:02:30.444 --> 00:02:44.673
+Try freely, then Núllstilla:
+nothing is saved or booked.
