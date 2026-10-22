@@ -1,51 +1,51 @@
 WEBVTT
 
 1
-00:00:04.608 --> 00:00:09.510
+00:00:04.604 --> 00:00:09.505
 Below Bókun: Stillingar (settings)
 for this one session.
 
 2
-00:00:09.610 --> 00:00:15.512
+00:00:09.605 --> 00:00:15.507
 Heiti (name): what the session
 is called, e.g. Fyrirlestur-A.
 
 3
-00:00:15.612 --> 00:00:21.513
-Nemendafjöldi (students): decides
-which rooms are big enough.
+00:00:15.607 --> 00:00:22.510
+Nemendafjöldi (students): which rooms
+fit – and a Samhliða group's size.
 
 4
-00:00:21.613 --> 00:00:28.514
+00:00:22.610 --> 00:00:29.512
 Virkt (active): untick to keep the
 session but leave it out of everything.
 
 5
-00:00:28.614 --> 00:00:34.516
+00:00:29.612 --> 00:00:35.515
 Tímasetja (schedule): may Besta
 (the optimiser) move its time?
 
 6
-00:00:34.616 --> 00:00:39.518
+00:00:35.615 --> 00:00:40.516
 Úthluta stofu (assign room):
 may Besta choose its room?
 
 7
-00:00:39.618 --> 00:00:45.519
+00:00:40.616 --> 00:00:46.516
 Samhliða (parallel): one of several
 groups – each student attends one.
 
 8
-00:00:45.619 --> 00:00:52.729
+00:00:46.616 --> 00:00:53.716
 The tutorial is Samhliða: over
 the lecture, it is no clash.
 
 9
-00:00:52.830 --> 00:00:58.730
+00:00:53.816 --> 00:00:59.717
 Untick Samhliða – everyone attends
 it – and they clash: red ⚠ 20.
 
 10
-00:00:58.830 --> 00:01:02.733
+00:00:59.817 --> 00:01:03.719
 Núllstilla (reset)
 undoes it all.
