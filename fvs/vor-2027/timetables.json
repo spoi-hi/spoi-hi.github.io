@@ -3,6 +3,13 @@
   "label": "Vor 2027",
   "timetables": [
     {
+      "name": "Hagfræði 1. ár",
+      "file": "hagfraedi-1-ar.html",
+      "source": "0bbe706c",
+      "hash": "d74d759f7c40db8c",
+      "updated": "2026-10-26"
+    },
+    {
       "name": "Kjörgreinar í meistaranámi í lögfræði",
       "file": "kjorgreinar-i-meistaranami-i-logfraedi.html",
       "source": "0bbe706c",
