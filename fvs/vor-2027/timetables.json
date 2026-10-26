@@ -3,6 +3,13 @@
   "label": "Vor 2027",
   "timetables": [
     {
+      "name": "Kjörgreinar í meistaranámi í lögfræði",
+      "file": "kjorgreinar-i-meistaranami-i-logfraedi.html",
+      "source": "0bbe706c",
+      "hash": "72a46503037a91df",
+      "updated": "2026-10-26"
+    },
+    {
       "name": "Lögfræði 1. ár",
       "file": "logfraedi-1-ar.html",
       "source": "0bbe706c",
