@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. og 3. ár í félagsfræði — Stundatafla</title>
+<link rel="icon" href="../../spoi.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- The site's own look (top bar, cards, dark mode, IS/EN) - a change to
+     it reaches every published page without republishing. -->
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js"></script>
+<style>
+  :root { --tt-line: var(--border); --tt-holiday: #fef2f2; --tt-holiday-text: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    :root { --tt-holiday: rgba(239, 68, 68, .12); --tt-holiday-text: #fca5a5; }
+  }
+  .wrap.wide { max-width: 1280px; }
+  /* body is a flex column (site.css): without this a wide timetable
+     stretches the whole page instead of scrolling inside its card. */
+  main, .tt-card { min-width: 0; }
+  .hero.compact { padding: 32px 0 8px; }
+  .hero.compact h1 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 8px; }
+  .hero.compact p.lede { font-size: 15px; }
+
+  .tt-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 14px; }
+  .tt-bar select, .tt-bar button { font: inherit; font-size: 14px; padding: 7px 12px; border-radius: 10px;
+    border: 1px solid var(--border-strong); background: var(--surface-2); color: var(--text); }
+  .tt-bar button { cursor: pointer; }
+  .tt-bar button:hover { border-color: var(--accent); }
+  .tt-bar select { flex: 0 1 340px; min-width: 0; }
+  .tt-bar .spacer { flex: 1; }
+
+  /* Course key - on screen and on paper. */
+  .tt-key { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+  .tt-key span { display: inline-flex; align-items: center; gap: 6px; }
+  .tt-key b { color: var(--text); font-weight: 600; }
+  .tt-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; flex: none; }
+
+  .tt-grid { display: grid; grid-template-columns: 52px repeat(var(--days), minmax(0, 1fr));
+    border-top: 1px solid var(--tt-line); }
+  /* Day headers stay in view while scrolling down a long day. */
+  .tt-head { position: sticky; top: 60px; z-index: 2; background: var(--surface); font-weight: 600;
+    font-size: 13px; padding: 7px 4px; text-align: center; border-bottom: 1px solid var(--tt-line); }
+  .tt-times { position: relative; background: var(--surface); }
+  .tt-time { position: absolute; right: 6px; font-size: 11px; color: var(--muted); transform: translateY(-50%); }
+  .tt-time:first-child { transform: none; }
+  .tt-day { position: relative; border-left: 1px solid var(--tt-line); }
+  .tt-line { position: absolute; left: 0; right: 0; border-top: 1px dashed var(--tt-line); opacity: .7; }
+  .tt-ev { position: absolute; border-radius: 6px; padding: 3px 5px; font-size: 11px; line-height: 1.25;
+    overflow: hidden; color: #fff; border: 1px solid rgba(0, 0, 0, .15); box-sizing: border-box; }
+  .tt-ev b { display: block; font-size: 12px; }
+  .tt-ev span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: .95; }
+  .tt-empty { color: var(--muted); padding: 16px 0; margin: 0; }
+  /* A named day from the school's calendar (Páskar, Skírdagur...) - the
+     same faint red band and label Stundatöflur shows. */
+  .tt-head.tt-holiday, .tt-day.tt-holiday { background: var(--tt-holiday); }
+  .tt-holiday-name { display: block; font-weight: 500; font-size: 11px; color: var(--tt-holiday-text); }
+
+  .tt-list { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tt-list th, .tt-list td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--tt-line);
+    vertical-align: top; }
+  .tt-list th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  .card + .card { margin-top: 14px; }
+  .print-only { display: none; }
+
+  /* A phone: the whole week, scrolled sideways rather than squeezed; the
+     times stay on the left. */
+  @media (max-width: 760px) {
+    .card.tt-card { padding: 16px 12px; }
+    .tt-bar { flex-wrap: nowrap; }
+    .tt-bar select { flex: 1 1 0; }
+    .tt-bar .spacer, #print { display: none; }
+    .tt-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .tt-grid { grid-template-columns: 46px repeat(var(--days), minmax(112px, 1fr)); min-width: max-content; }
+    .tt-head { position: static; }
+    .tt-times, .tt-grid > .tt-head:first-child { position: sticky; left: 0; z-index: 3; }
+  }
+
+  /* Paper / PDF: the chosen week on one landscape page, with the key. */
+  @page { size: A4 landscape; margin: 10mm; }
+  @media print {
+    body { background: #fff; color: #000; display: block; min-height: 0; }
+    .topbar, .footer, .no-print, .crumb { display: none !important; }
+    .print-only { display: block; }
+    .hero.compact { padding: 0 0 6px; }
+    .hero.compact h1 { font-size: 20px; margin: 0 0 2px; }
+    .hero.compact p.lede { font-size: 12px; color: #333; }
+    .wrap, .wrap.wide { max-width: none; padding: 0; }
+    main { padding: 0; }
+    .card { border: 0; box-shadow: none; padding: 0; background: #fff; }
+    .tt-head { position: static; background: #fff; }
+    .tt-scroll { overflow: visible; }
+    .tt-grid { grid-template-columns: 40px repeat(var(--days), minmax(0, 1fr)); min-width: 0; }
+    .tt-times { position: relative; }
+    .tt-grid > .tt-head:first-child { position: static; }
+    .tt-ev, .tt-swatch, .tt-holiday { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    /* Heading, key and the week on one landscape page. */
+    .tt-card { zoom: .8; }
+    #printWeek { font-weight: 600; font-size: 13px; margin: 0 0 6px; }
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../../"><img src="../../spoi.png" alt=""><span class="i18n" lang="is">Stundatöflur</span><span class="i18n" lang="en">Timetables</span></a>
+    <nav class="nav">
+      <a href="../../#svid" aria-current="page"><span class="i18n" lang="is">Svið</span><span class="i18n" lang="en">Schools</span></a>
+      <a href="../../athugasemdir/"><span class="i18n" lang="is">Athugasemdir kennara</span><span class="i18n" lang="en">Teacher comments</span></a>
+      <a href="../../kennsla/"><span class="i18n" lang="is">Kennslumyndbönd</span><span class="i18n" lang="en">Tutorials</span></a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Tungumál / Language">
+      <button type="button" data-lang="is" aria-pressed="true">IS</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero compact">
+    <div class="wrap wide">
+      <a class="crumb" href="../">← FVS</a><br>
+      <h1>2. og 3. ár í félagsfræði</h1>
+      <p class="lede"><span class="term">Vor 2027</span> ·
+        <span class="i18n" lang="is">Síðast uppfært 2026-10-26 · Birt úr Spóa; breytingar geta orðið.</span><span class="i18n" lang="en">Last updated 2026-10-26 · Published from Spói; changes may occur.</span></p>
+    </div>
+  </section>
+
+  <div class="wrap wide">
+    <section class="card tt-card">
+      <div class="tt-bar no-print">
+        <button type="button" id="prev">&larr;</button>
+        <select id="week"></select>
+        <button type="button" id="next">&rarr;</button>
+        <span class="spacer"></span>
+        <button type="button" id="print"></button>
+      </div>
+      <p id="printWeek" class="print-only"></p>
+      <div class="tt-key" id="key"></div>
+      <div class="tt-scroll"><div id="grid"></div></div>
+    </section>
+    <section class="card no-print">
+      <h2 id="listTitle"></h2>
+      <div style="overflow-x:auto"><table class="tt-list" id="list"></table></div>
+    </section>
+    <section class="card no-print" id="teachersCard" hidden>
+      <h2 id="teachersTitle"></h2>
+      <div style="overflow-x:auto"><table class="tt-list" id="teachers"></table></div>
+    </section>
+  </div>
+</main>
+<footer class="footer compact">
+  <div class="wrap">
+    <img src="../../spoi.png" alt="">
+    <div><strong>Spói</strong><span class="tagline">Scheduling Planning Optimization Interface</span></div>
+  </div>
+</footer>
+<script id="tt-data" type="application/json">{"name": "2. og 3. ár í félagsfræði", "isoYear": 2027, "weeks": [{"week": 2, "monday": "2027-01-11"}, {"week": 3, "monday": "2027-01-18"}, {"week": 4, "monday": "2027-01-25"}, {"week": 5, "monday": "2027-02-01"}, {"week": 6, "monday": "2027-02-08"}, {"week": 7, "monday": "2027-02-15"}, {"week": 9, "monday": "2027-03-01"}, {"week": 10, "monday": "2027-03-08"}, {"week": 11, "monday": "2027-03-15"}, {"week": 12, "monday": "2027-03-22"}, {"week": 13, "monday": "2027-03-29"}, {"week": 14, "monday": "2027-04-05"}, {"week": 15, "monday": "2027-04-12"}, {"week": 16, "monday": "2027-04-19"}], "courses": [{"id": "FÉL404G", "name": "Nútímakenningar í félagsfræði", "color": "#9DB0D7"}, {"id": "FÉL416G", "name": "Tölfræði II: Gagnagreining", "color": "#2563EB"}, {"id": "FÉL430G", "name": "Eigindlegar rannsóknaraðferðir", "color": "#98C7C8"}, {"id": "FÉL443G", "name": "Samfélags- og nýmiðlar", "color": "#3BC44B"}, {"id": "FÉL501G", "name": "BA-smiðja I", "color": ""}, {"id": "FÉL601G", "name": "BA-smiðja II", "color": "#E36DD4"}, {"id": "FMÞ401G", "name": "Gervigreind og samfélag", "color": "#24EBC9"}, {"id": "FMÞ501M", "name": "Tölfræði félagsvísinda: Aðhvarfsgreining", "color": "#6145B0"}, {"id": "FMÞ201G", "name": "Efnismenning og samfélag: Hlutirnir, heimilið, líkaminn", "color": "#A725C1"}, {"id": "FÉL440G", "name": "Heilsa og samfélag (Heilsufélagsfræði)", "color": "#5AA22A"}], "sessions": [{"course": "FMÞ201G", "kind": "Fyrirlestur-A", "day": 2, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7], "room": "Annað", "teachers": ["ÁGK", "VTH", "KHMS", "ÓR"]}, {"course": "FMÞ201G", "kind": "Fyrirlestur-A", "day": 3, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7], "room": "Annað", "teachers": ["ÁGK", "VTH", "KHMS", "ÓR"]}, {"course": "FMÞ401G", "kind": "Fyrirlestur", "day": 0, "start": "10:00", "end": "11:30", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15], "room": "O-206", "teachers": ["VH", "MM", "DLDR"]}, {"course": "FMÞ501M", "kind": "Fyrirlestur 1", "day": 2, "start": "08:20", "end": "10:40", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "Annað", "teachers": ["ASV", "JGB"]}, {"course": "FMÞ501M", "kind": "Fyrirlestur 2", "day": 3, "start": "08:20", "end": "09:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "O301", "teachers": ["ASV", "JGB"]}, {"course": "FÉL404G", "kind": "Fyrirlestur 1", "day": 4, "start": "11:40", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15], "room": "Annað", "teachers": ["JGB"]}, {"course": "FÉL416G", "kind": "Fyrirlestur 1", "day": 0, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15], "room": "HT102", "teachers": ["TMH"]}, {"course": "FÉL416G", "kind": "Fyrirlestur 2", "day": 2, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "HT102", "teachers": ["TMH"]}, {"course": "FÉL430G", "kind": "Fyrirlestur 2", "day": 1, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15], "room": "L205", "teachers": ["VH"]}, {"course": "FÉL430G", "kind": "Fyrirlestur 3", "day": 3, "start": "10:00", "end": "11:30", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "L204", "teachers": ["VH"]}, {"course": "FÉL440G", "kind": "Fyrirlestur 1", "day": 3, "start": "13:20", "end": "15:40", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "Annað", "teachers": ["SÓ"]}, {"course": "FÉL443G", "kind": "Fyrirlestur 1", "day": 1, "start": "08:20", "end": "09:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16], "room": "L205", "teachers": ["VH"]}, {"course": "FÉL443G", "kind": "Fyrirlestur 2", "day": 4, "start": "08:20", "end": "09:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16], "room": "L205", "teachers": ["VH"]}, {"course": "FÉL501G", "kind": "Fyrirlestur", "day": 1, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15], "room": "Fjar", "teachers": ["ÓJ", "SÓ"]}, {"course": "FÉL601G", "kind": "Fyrirlestur 1", "day": 1, "start": "15:00", "end": "16:30", "weeks": [2, 5, 10, 14, 15], "room": "Annað", "teachers": ["SÓ", "HEE"]}], "holidays": [{"name": "Rektor á afmæli", "start": "2027-02-23", "end": "2027-02-23"}, {"name": "Páskar", "start": "2027-03-24", "end": "2027-03-30"}, {"name": "Skírdagur", "start": "2027-03-25", "end": "2027-03-25"}, {"name": "Föstudagurinn langi", "start": "2027-03-26", "end": "2027-03-26"}, {"name": "Annar í páskum", "start": "2027-03-29", "end": "2027-03-29"}, {"name": "Sumardagurinn fyrsti", "start": "2027-04-22", "end": "2027-04-22"}], "teachers": [{"initials": "ASV", "names": ["Anna Soffía Víkingsdóttir"]}, {"initials": "DLDR", "names": ["David Loic Daniel Reimer"]}, {"initials": "HEE", "names": ["Helgi Eiríkur Eyjólfsson"]}, {"initials": "JGB", "names": ["Jón Gunnar Bernburg"]}, {"initials": "KHMS", "names": ["Kristinn Helgi Magnússon Schram"]}, {"initials": "MM", "names": ["Marcello Milanezi"]}, {"initials": "SÓ", "names": ["Sigrún Ólafsdóttir"]}, {"initials": "TMH", "names": ["Thamar Melanie Heijstra"]}, {"initials": "VH", "names": ["Viðar Halldórsson"]}, {"initials": "VTH", "names": ["Valdimar Tryggvi Hafstein"]}, {"initials": "ÁGK", "names": ["Áki Guðni Karlsson"]}, {"initials": "ÓJ", "names": ["Ómar Jóhannsson"]}, {"initials": "ÓR", "names": ["Ólafur Rastrick"]}], "school": "FVS", "layout": 2}</script>
+<script>
+(function () {
+  var DATA = JSON.parse(document.getElementById('tt-data').textContent);
+  // The page's own words in both languages (site.js switches; data such
+  // as course names stays as Ugla has it).
+  var TEXT = {
+    is: { days: ['Mán', 'Þri', 'Mið', 'Fim', 'Fös', 'Lau', 'Sun'], week: 'Vika', prev: 'Fyrri vika',
+      next: 'Næsta vika', print: 'Prenta', noWeeks: 'Engir tímar birtir.', noSessions: 'Engir tímar þessa viku.',
+      list: 'Öll námskeið', teachers: 'Kennarar', course: 'Námskeið', kind: 'Tegund', time: 'Tími',
+      room: 'Stofa', weeks: 'Vikur', initials: 'Upphafsstafir', teacher: 'Kennari',
+      terms: {} },
+    en: { days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], week: 'Week', prev: 'Previous week',
+      next: 'Next week', print: 'Print', noWeeks: 'No sessions published.', noSessions: 'No sessions this week.',
+      list: 'All courses', teachers: 'Teachers', course: 'Course', kind: 'Type', time: 'Time',
+      room: 'Room', weeks: 'Weeks', initials: 'Initials', teacher: 'Teacher',
+      terms: { Vor: 'Spring', Haust: 'Autumn', Sumar: 'Summer' } }
+  };
+  function lang() { return document.documentElement.dataset.lang === 'en' ? 'en' : 'is'; }
+  function T() { return TEXT[lang()]; }
+
+  var PALETTE = ['#2563eb', '#0f766e', '#b45309', '#7c3aed', '#be123c', '#15803d',
+                 '#0369a1', '#a21caf', '#4d7c0f', '#c2410c'];
+  var colors = {};
+  DATA.courses.forEach(function (c, i) { colors[c.id] = c.color || PALETTE[i % PALETTE.length]; });
+  var names = {};
+  DATA.courses.forEach(function (c) { names[c.id] = c.name; });
+  var PX_PER_MIN = 0.9, DAY_START = 8 * 60 + 20, DAY_END = 19 * 60;
+
+  function minutes(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function shortDate(iso, add) {
+    var d = new Date(iso + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + (add || 0));
+    return d.getUTCDate() + '.' + (d.getUTCMonth() + 1) + '.';
+  }
+  function ranges(weeks) {
+    var out = [], run = [];
+    weeks.slice().sort(function (a, b) { return a - b; }).forEach(function (w) {
+      if (run.length && w === run[run.length - 1] + 1) { run.push(w); return; }
+      if (run.length) out.push(run.length === 1 ? run[0] : run[0] + '-' + run[run.length - 1]);
+      run = [w];
+    });
+    if (run.length) out.push(run.length === 1 ? run[0] : run[0] + '-' + run[run.length - 1]);
+    return out.join(', ');
+  }
+
+  // Date (YYYY-MM-DD) -> the calendar's names for it, from DATA.holidays.
+  var holidayNames = {};
+  (DATA.holidays || []).forEach(function (h) {
+    var d = new Date(h.start + 'T12:00:00Z'), last = new Date(h.end + 'T12:00:00Z');
+    for (; d <= last; d.setUTCDate(d.getUTCDate() + 1)) {
+      var key = d.toISOString().slice(0, 10);
+      (holidayNames[key] = holidayNames[key] || []);
+      if (holidayNames[key].indexOf(h.name) < 0) holidayNames[key].push(h.name);
+    }
+  });
+  function isoDate(monday, add) {
+    var d = new Date(monday + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + add);
+    return d.toISOString().slice(0, 10);
+  }
+  function weekHolidays(monday) {
+    var seen = [];
+    for (var i = 0; i < 7; i++) {
+      (holidayNames[isoDate(monday, i)] || []).forEach(function (n) { if (seen.indexOf(n) < 0) seen.push(n); });
+    }
+    return seen;
+  }
+
+  // Teachers, only on a page published "með kennurum": initials on each
+  // session (s.teachers), names in DATA.teachers - never an id.
+  var teacherNames = {};
+  (DATA.teachers || []).forEach(function (t) { teacherNames[t.initials] = t.names.join(', '); });
+  function teacherText(s, full) {
+    return (s.teachers || []).map(function (i) {
+      return full && teacherNames[i] ? i + ' ' + teacherNames[i] : i;
+    }).join(', ');
+  }
+
+  var select = document.getElementById('week');
+  function weekLabel(w) {
+    var off = weekHolidays(w.monday);
+    return T().week + ' ' + w.week + ' (' + shortDate(w.monday) + ' – ' + shortDate(w.monday, 4) + ')' +
+      (off.length ? ' – ' + off.join(', ') : '');
+  }
+  function fillWeeks() {
+    var chosen = select.value;
+    select.innerHTML = '';
+    DATA.weeks.forEach(function (w) {
+      var opt = document.createElement('option');
+      opt.value = w.week;
+      opt.textContent = weekLabel(w);
+      select.appendChild(opt);
+    });
+    if (chosen) select.value = chosen;
+  }
+  fillWeeks();
+  var today = new Date().toISOString().slice(0, 10);
+  var current = DATA.weeks.filter(function (w) { return w.monday <= today; }).pop();
+  if (current && today <= DATA.weeks[DATA.weeks.length - 1].monday) select.value = current.week;
+
+  // Course key: every course on the page, in its colour.
+  function drawKey() {
+    document.getElementById('key').innerHTML = DATA.courses.map(function (c) {
+      return '<span><i class="tt-swatch" style="background:' + colors[c.id] + '"></i><b>' + esc(c.id) +
+        '</b>' + esc(c.name || '') + '</span>';
+    }).join('');
+  }
+
+  function draw() {
+    var grid = document.getElementById('grid');
+    var week = +select.value;
+    var info = DATA.weeks.filter(function (w) { return w.week === week; })[0];
+    var monday = (info || {}).monday;
+    document.getElementById('printWeek').textContent = info ? weekLabel(info) : '';
+    var events = DATA.sessions.filter(function (s) { return s.weeks.indexOf(week) >= 0; });
+    if (!DATA.weeks.length) { grid.innerHTML = '<p class="tt-empty">' + esc(T().noWeeks) + '</p>'; return; }
+    var days = events.some(function (s) { return s.day > 4; }) ? 7 : 5;
+    var end = DAY_END;
+    events.forEach(function (s) { end = Math.max(end, minutes(s.end)); });
+    var height = (end - DAY_START) * PX_PER_MIN;
+    var h = '<div class="tt-grid" style="--days:' + days + '"><div class="tt-head"></div>';
+    var dayHoliday = [];
+    for (var d = 0; d < days; d++) {
+      dayHoliday[d] = monday ? (holidayNames[isoDate(monday, d)] || []).join(' · ') : '';
+      h += '<div class="tt-head' + (dayHoliday[d] ? ' tt-holiday' : '') + '">' + T().days[d] +
+        (monday ? ' ' + shortDate(monday, d) : '') +
+        (dayHoliday[d] ? '<span class="tt-holiday-name">' + esc(dayHoliday[d]) + '</span>' : '') + '</div>';
+    }
+    h += '<div class="tt-times" style="height:' + height + 'px">';
+    for (var t = DAY_START; t < end; t += 50) {
+      h += '<div class="tt-time" style="top:' + ((t - DAY_START) * PX_PER_MIN) + 'px">' +
+        String(Math.floor(t / 60)).padStart(2, '0') + ':' + String(t % 60).padStart(2, '0') + '</div>';
+    }
+    h += '</div>';
+    for (d = 0; d < days; d++) {
+      h += '<div class="tt-day' + (dayHoliday[d] ? ' tt-holiday' : '') + '" style="height:' + height + 'px"' +
+        (dayHoliday[d] ? ' title="' + esc(dayHoliday[d]) + '"' : '') + '>';
+      for (t = DAY_START; t < end; t += 50) {
+        h += '<div class="tt-line" style="top:' + ((t - DAY_START) * PX_PER_MIN) + 'px"></div>';
+      }
+      // Side-by-side lanes for sessions that overlap (electives, groups).
+      var dayEvents = events.filter(function (s) { return s.day === d; })
+        .sort(function (a, b) { return minutes(a.start) - minutes(b.start); });
+      var clusters = [], cluster = null, clusterEnd = -1;
+      dayEvents.forEach(function (s) {
+        if (!cluster || minutes(s.start) >= clusterEnd) { cluster = []; clusters.push(cluster); clusterEnd = -1; }
+        cluster.push(s); clusterEnd = Math.max(clusterEnd, minutes(s.end));
+      });
+      clusters.forEach(function (group) {
+        var laneEnds = [];
+        group.forEach(function (s) {
+          var lane = 0;
+          while (laneEnds[lane] !== undefined && laneEnds[lane] > minutes(s.start)) lane++;
+          laneEnds[lane] = minutes(s.end); s._lane = lane;
+        });
+        var lanes = laneEnds.length;
+        group.forEach(function (s) {
+          var top = (minutes(s.start) - DAY_START) * PX_PER_MIN;
+          var hgt = (minutes(s.end) - minutes(s.start)) * PX_PER_MIN;
+          // Course, then type, room and teachers each on a line of their own.
+          var lines = [s.kind, s.room, teacherText(s)].filter(Boolean)
+            .map(function (line) { return '<span>' + esc(line) + '</span>'; }).join('');
+          h += '<div class="tt-ev" style="top:' + top + 'px;height:' + hgt + 'px;left:calc(' +
+            (100 * s._lane / lanes) + '% + 1px);width:calc(' + (100 / lanes) + '% - 2px);background:' +
+            colors[s.course] + '" title="' + esc(s.course + ' ' + (names[s.course] || '') + '\n' +
+            s.kind + ' ' + s.start + '-' + s.end + '\n' + s.room +
+            (teacherText(s, true) ? '\n' + teacherText(s, true) : '')) + '"><b>' + esc(s.course) + '</b>' +
+            lines + '</div>';
+        });
+      });
+      h += '</div>';
+    }
+    h += '</div>';
+    if (!events.length) h += '<p class="tt-empty">' + esc(T().noSessions) + '</p>';
+    grid.innerHTML = h;
+  }
+
+  function drawLists() {
+    var withTeachers = !!DATA.teachers;
+    document.getElementById('listTitle').textContent = T().list;
+    var rows = '<tr><th>' + T().course + '</th><th>' + T().kind + '</th><th>' + T().time + '</th><th>' +
+      T().room + '</th><th>' + T().weeks + '</th>' + (withTeachers ? '<th>' + T().teachers + '</th>' : '') + '</tr>';
+    DATA.sessions.forEach(function (s) {
+      rows += '<tr><td><span class="tt-swatch" style="background:' + colors[s.course] + ';margin-right:6px"></span>' +
+        esc(s.course) + (names[s.course] ? ' ' + esc(names[s.course]) : '') + '</td><td>' +
+        esc(s.kind) + '</td><td>' + T().days[s.day] + ' ' + s.start + '-' + s.end + '</td><td>' +
+        esc(s.room) + '</td><td>' + ranges(s.weeks) + '</td>' +
+        (withTeachers ? '<td>' + esc(teacherText(s)) + '</td>' : '') + '</tr>';
+    });
+    document.getElementById('list').innerHTML = rows;
+    if (withTeachers && DATA.teachers.length) {
+      document.getElementById('teachersTitle').textContent = T().teachers;
+      var key = '<tr><th>' + T().initials + '</th><th>' + T().teacher + '</th></tr>';
+      DATA.teachers.forEach(function (t) {
+        key += '<tr><td>' + esc(t.initials) + '</td><td>' + esc(t.names.join(', ')) + '</td></tr>';
+      });
+      document.getElementById('teachers').innerHTML = key;
+      document.getElementById('teachersCard').hidden = false;
+    }
+  }
+
+  // Everything with words in it - again whenever the language changes.
+  function render() {
+    var termEl = document.querySelector('.term');
+    if (!termEl.dataset.is) termEl.dataset.is = termEl.textContent;
+    var word = termEl.dataset.is.split(' ')[0];
+    termEl.textContent = T().terms[word] ? termEl.dataset.is.replace(word, T().terms[word]) : termEl.dataset.is;
+    document.getElementById('prev').setAttribute('aria-label', T().prev);
+    document.getElementById('next').setAttribute('aria-label', T().next);
+    select.setAttribute('aria-label', T().week);
+    document.getElementById('print').textContent = T().print;
+    fillWeeks();
+    drawKey();
+    draw();
+    drawLists();
+  }
+
+  function step(delta) {
+    var i = select.selectedIndex + delta;
+    if (i >= 0 && i < select.options.length) { select.selectedIndex = i; draw(); }
+  }
+  select.addEventListener('change', draw);
+  document.getElementById('prev').addEventListener('click', function () { step(-1); });
+  document.getElementById('next').addEventListener('click', function () { step(1); });
+  document.getElementById('print').addEventListener('click', function () { window.print(); });
+  document.addEventListener('spoi:lang', render);
+  render();
+})();
+</script>
+</body>
+</html>
