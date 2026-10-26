@@ -3,6 +3,13 @@
   "label": "Vor 2027",
   "timetables": [
     {
+      "name": "1. ár í stjórnmálafræði",
+      "file": "1-ar-i-stjornmalafraedi.html",
+      "source": "0bbe706c",
+      "hash": "573ad6e052c1ad2c",
+      "updated": "2026-10-26"
+    },
+    {
       "name": "Hagfræði 1. ár",
       "file": "hagfraedi-1-ar.html",
       "source": "0bbe706c",
