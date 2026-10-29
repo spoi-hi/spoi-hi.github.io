@@ -583,6 +583,7 @@ function onCourseChange() {
   state.typesOn.clear();
   el('teachersNote').value = '';
   el('note').value = '';
+  resetProposal();
   // Extras belong to the course they were chosen for.
   extraRooms.clear();
   el('roomSearch').value = '';
@@ -596,14 +597,15 @@ function onCourseChange() {
 /* ---------- the course's current draft ----------------------------- */
 
 // The course's sessions as they stand in Spoi now (the survey script's
-// ?course=, from the "plan" tab the course-list update writes). Read-only:
-// context for the wishes below, not something this page changes.
+// ?course=, from the "plan" tab the course-list update writes). Context for
+// the wishes below, and what a proposed change starts from - see proposal.
 let planRequest = 0;
 async function loadPlan() {
   const request = ++planRequest;
   const courseId = el('course').value;
   el('planGrid').innerHTML = '';
   el('planList').innerHTML = '';
+  proposal.sessions = [];
   if (!courseId || !state.term) return;
   el('planHint').textContent = 'Sæki drög…';
   try {
@@ -644,6 +646,8 @@ function planSessions(rows) {
     const length = Math.max(1, Number(row.n_timeslot) || 1);
     const type = String(row.type || '').trim().toLowerCase();
     return {
+      id: String(row.session_id || '').trim(),
+      name: String(row.name || '').trim(),
       day: day,
       dayIndex: day ? dayIndex[day] : -1,
       start: Number.isFinite(start) ? start : -1,
@@ -665,17 +669,157 @@ function sessionTimeText(session) {
     + String(Math.floor(end / 60)).padStart(2, '0') + ':' + String(end % 60).padStart(2, '0');
 }
 
+// The course's sessions from the plan, and what the teacher proposes to do
+// with them ("Tillaga að tímum"). Nothing here changes Spói: the proposal is
+// sent with the answer and an administrator accepts or rejects each part in
+// Tímabókanir. A session the plan names no session_id for (a plan tab
+// written before the column existed) can be seen but not changed.
+const proposal = {
+  sessions: [],
+  updated: '',
+  // session_id -> { op: 'change'|'remove', slot, n_timeslot, weeksText, note }
+  changes: new Map(),
+  // [{ type, slot, n_timeslot, weeksText, note }]
+  added: [],
+  // { kind: 'change', id } | { kind: 'add', index } | null
+  editing: null
+};
+
+function resetProposal() {
+  proposal.changes.clear();
+  proposal.added = [];
+  proposal.editing = null;
+  el('planEditor').hidden = true;
+}
+
 function renderPlan(rows) {
-  const sessions = planSessions(rows);
-  const updated = rows.length ? String(rows[0].updated || '') : '';
-  el('planHint').textContent = sessions.length
+  proposal.sessions = planSessions(rows);
+  proposal.updated = rows.length ? String(rows[0].updated || '') : '';
+  renderPlanView();
+}
+
+function slotToken(dayIndex, start) {
+  return dayIndex >= 0 && start >= 0 ? CONFIG.days[dayIndex].token + '-' + start : '';
+}
+
+// "mið-2" -> { dayIndex, start }, or -1s for "Ekki tímasett".
+function parseSlotToken(token) {
+  const parts = String(token || '').split('-');
+  const dayIndex = CONFIG.days.findIndex((day) => day.token === parts[0]);
+  const start = parts.length === 2 ? Number(parts[1]) : NaN;
+  return dayIndex >= 0 && Number.isInteger(start) ? { dayIndex, start } : { dayIndex: -1, start: -1 };
+}
+
+// "34-40, 42" -> [34..40, 42]; blank -> [] ("as before"). Weeks outside
+// 1-53 are ignored rather than refused: the server drops them anyway.
+function parseWeeksText(text) {
+  const weeks = new Set();
+  String(text || '').split(/[,\s]+/).filter(Boolean).forEach((part) => {
+    const match = part.match(/^(\d{1,2})(?:[-–](\d{1,2}))?$/);
+    if (!match) return;
+    const from = Number(match[1]);
+    const to = match[2] ? Number(match[2]) : from;
+    for (let week = Math.min(from, to); week <= Math.max(from, to); week++) {
+      if (week >= 1 && week <= 53) weeks.add(week);
+    }
+  });
+  return Array.from(weeks).sort((a, b) => a - b);
+}
+
+// A proposed session drawn and described like a plan session.
+function proposedSession(base, change) {
+  const where = parseSlotToken(change.slot);
+  const weeks = parseWeeksText(change.weeksText);
+  const typeCode = change.type || base.typeCode;
+  return Object.assign({}, base, {
+    dayIndex: where.dayIndex,
+    start: where.start,
+    length: change.n_timeslot,
+    typeCode: typeCode,
+    type: TYPE_LABELS[typeCode] || base.type || 'Óskilgreind tegund',
+    weeks: weeks.length ? weeks : (base.weeks || [])
+  });
+}
+
+function sessionLabel(session) {
+  return (session.name || session.type) + ' (' + sessionTimeText(session) + ')';
+}
+
+// One line per proposed change, for the list, the summary and the
+// administrator's email: "Fyrirlestrar (Þri 08:20–09:50) -> Mið 10:00–10:40".
+function proposalLines() {
+  const lines = [];
+  proposal.sessions.forEach((session) => {
+    const change = proposal.changes.get(session.id);
+    if (!change) return;
+    if (change.op === 'remove') {
+      lines.push('Fella niður: ' + sessionLabel(session) + (change.note ? ' - ' + change.note : ''));
+      return;
+    }
+    const next = proposedSession(session, change);
+    const weeks = parseWeeksText(change.weeksText);
+    lines.push(sessionLabel(session) + ' → ' + sessionTimeText(next)
+      + (weeks.length ? ', vikur ' + weekRangesText(weeks) : '')
+      + (change.note ? ' - ' + change.note : ''));
+  });
+  proposal.added.forEach((item) => {
+    const next = proposedSession({ typeCode: item.type, weeks: [], teachers: [] }, item);
+    const weeks = parseWeeksText(item.weeksText);
+    lines.push('Nýr tími: ' + next.type + ' ' + sessionTimeText(next)
+      + (weeks.length ? ', vikur ' + weekRangesText(weeks) : '')
+      + (item.note ? ' - ' + item.note : ''));
+  });
+  return lines;
+}
+
+// What the answer carries: see cleanSessionChanges_ in the survey script,
+// which checks every part against the course's plan again.
+function sessionChangesPayload() {
+  const out = [];
+  proposal.changes.forEach((change, id) => {
+    if (change.op === 'remove') {
+      out.push({ op: 'remove', session_id: id, note: change.note });
+    } else {
+      out.push({ op: 'change', session_id: id, slot: change.slot, n_timeslot: change.n_timeslot,
+        weeks: parseWeeksText(change.weeksText), note: change.note });
+    }
+  });
+  proposal.added.forEach((item) => {
+    out.push({ op: 'add', type: item.type, slot: item.slot, n_timeslot: item.n_timeslot,
+      weeks: parseWeeksText(item.weeksText), note: item.note });
+  });
+  return out;
+}
+
+function renderPlanView() {
+  const sessions = proposal.sessions;
+  const updated = proposal.updated;
+  el('planHint').textContent = (sessions.length
     ? 'Tímar námskeiðsins eins og þeir standa núna í Spóa' + (updated ? ' (drög frá ' + updated + ')' : '')
       + '. Geta enn breyst - athugasemdir þínar hér fyrir neðan eru teknar með.'
-    : 'Engir tímar skráðir fyrir námskeiðið í Spóa enn.';
+    : 'Engir tímar skráðir fyrir námskeiðið í Spóa enn.')
+    + ' Þú getur lagt til breytingar á tímunum, eða nýjan tíma - stundatöfluhaldari fer yfir þær.';
+
+  // What the grid draws: each session as it is (faded when the teacher
+  // changes or drops it), and each proposed session dashed.
+  const blocks = [];
+  sessions.forEach((session) => {
+    const change = proposal.changes.get(session.id);
+    if (!change) {
+      blocks.push(Object.assign({ variant: '' }, session));
+      return;
+    }
+    blocks.push(Object.assign({}, session, { variant: change.op === 'remove' ? 'removed' : 'moved' }));
+    if (change.op === 'change') blocks.push(Object.assign(proposedSession(session, change), { variant: 'proposed' }));
+  });
+  proposal.added.forEach((item) => {
+    blocks.push(Object.assign(proposedSession({ typeCode: item.type, weeks: [], teachers: [], room: '' }, item),
+      { variant: 'proposed' }));
+  });
 
   // The week grid: days across, slots down, each session a block spanning
   // its length. Sessions overlapping on one day share it side by side.
-  const placed = sessions.filter((session) => session.start >= 0)
+  const placed = blocks.filter((session) => session.start >= 0)
     .sort((a, b) => a.dayIndex - b.dayIndex || a.start - b.start);
   const grid = el('planGrid');
   grid.innerHTML = '';
@@ -722,44 +866,231 @@ function renderPlan(rows) {
     }
     placed.forEach((session) => {
       const block = document.createElement('div');
-      block.className = 'plan-block type-' + (session.typeCode || 'none');
+      block.className = 'plan-block type-' + (session.typeCode || 'none')
+        + (session.variant ? ' plan-' + session.variant : '');
       block.style.gridRow = (session.start - first + 2) + ' / span ' + session.length;
       block.style.gridColumn = String(dayColumn[session.dayIndex] + session.lane);
       // The full name on a wide screen, a two-letter code on a phone
       // (style.css) - the list below spells everything out either way.
       const long = document.createElement('span');
       long.className = 'plan-long';
-      long.textContent = session.type;
+      long.textContent = (session.variant === 'proposed' ? 'Tillaga: ' : '') + session.type;
       const short = document.createElement('span');
       short.className = 'plan-short';
       short.textContent = TYPE_SHORT[session.typeCode] || '?';
       const who = document.createElement('span');
       who.className = 'plan-who';
-      who.textContent = session.teachers.join(', ');
+      who.textContent = (session.teachers || []).join(', ');
       block.append(long, short, who);
-      block.title = sessionTimeText(session) + ' \u00b7 ' + session.type
-        + (session.room ? ' \u00b7 ' + session.room : '')
-        + (session.weeks.length ? ' \u00b7 vikur ' + weekRangesText(session.weeks) : '');
+      block.title = (session.variant === 'proposed' ? 'Tillaga: ' : '')
+        + sessionTimeText(session) + ' · ' + session.type
+        + (session.room ? ' · ' + session.room : '')
+        + (session.weeks.length ? ' · vikur ' + weekRangesText(session.weeks) : '');
       grid.appendChild(block);
     });
   }
 
-  // The same sessions in words, with everything the blocks leave out.
+  // The same sessions in words, with everything the blocks leave out, and
+  // the way in to changing each one.
   const list = el('planList');
   list.innerHTML = '';
   sessions.slice().sort((a, b) => (a.start < 0) - (b.start < 0) || a.dayIndex - b.dayIndex || a.start - b.start)
     .forEach((session) => {
+      const change = proposal.changes.get(session.id);
       const item = document.createElement('div');
-      item.className = 'plan-item';
-      item.textContent = [
+      item.className = 'plan-item' + (change ? ' plan-item-changed' : '');
+      const text = document.createElement('span');
+      text.className = 'plan-item-text';
+      text.textContent = [
+        session.name,
         sessionTimeText(session),
         session.type,
         session.teachers.length ? session.teachers.join(', ') : 'enginn kennari skráður',
         session.room,
         session.weeks.length ? 'vikur ' + weekRangesText(session.weeks) : ''
-      ].filter(Boolean).join(' \u00b7 ');
+      ].filter(Boolean).join(' · ');
+      item.appendChild(text);
+      if (change) {
+        const line = document.createElement('span');
+        line.className = 'plan-item-proposal';
+        line.textContent = change.op === 'remove'
+          ? 'Tillaga: fella niður'
+          : 'Tillaga: ' + sessionTimeText(proposedSession(session, change))
+            + (parseWeeksText(change.weeksText).length ? ', vikur ' + weekRangesText(parseWeeksText(change.weeksText)) : '');
+        item.appendChild(line);
+      }
+      if (session.id) {
+        item.appendChild(planButton(change ? 'Breyta tillögu' : 'Leggja til breytingu',
+          () => openEditor({ kind: 'change', id: session.id })));
+        if (change) item.appendChild(planButton('Afturkalla', () => {
+          proposal.changes.delete(session.id);
+          closeEditor();
+        }));
+      }
       list.appendChild(item);
     });
+  proposal.added.forEach((added, index) => {
+    const item = document.createElement('div');
+    item.className = 'plan-item plan-item-changed';
+    const line = document.createElement('span');
+    line.className = 'plan-item-proposal';
+    const next = proposedSession({ typeCode: added.type, weeks: [], teachers: [] }, added);
+    line.textContent = 'Nýr tími (tillaga): ' + next.type + ' · ' + sessionTimeText(next)
+      + (next.weeks.length ? ' · vikur ' + weekRangesText(next.weeks) : '');
+    item.appendChild(line);
+    item.appendChild(planButton('Breyta', () => openEditor({ kind: 'add', index })));
+    item.appendChild(planButton('Eyða', () => {
+      proposal.added.splice(index, 1);
+      closeEditor();
+    }));
+    list.appendChild(item);
+  });
+  const add = planButton('+ Leggja til nýjan tíma', () => {
+    proposal.added.push({ type: 'du', slot: '', n_timeslot: 1, weeksText: '', note: '' });
+    openEditor({ kind: 'add', index: proposal.added.length - 1 });
+  });
+  add.classList.add('plan-add');
+  list.appendChild(add);
+  renderSummary();
+}
+
+function planButton(label, onClick) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'link-btn';
+  button.textContent = label;
+  button.addEventListener('click', onClick);
+  return button;
+}
+
+function closeEditor() {
+  proposal.editing = null;
+  el('planEditor').hidden = true;
+  renderPlanView();
+}
+
+// The editor for one change or one new session. Built once per opening and
+// not redrawn while typing (that would take the cursor away); each input
+// updates the proposal and redraws only the grid and list.
+function openEditor(target) {
+  proposal.editing = target;
+  const isAdd = target.kind === 'add';
+  const base = isAdd ? null : proposal.sessions.find((session) => session.id === target.id);
+  if (!isAdd && !base) return;
+  let entry;
+  if (isAdd) {
+    entry = proposal.added[target.index];
+  } else {
+    entry = proposal.changes.get(target.id) || {
+      op: 'change', slot: slotToken(base.dayIndex, base.start), n_timeslot: base.length,
+      weeksText: '', note: ''
+    };
+  }
+
+  const box = el('planEditor');
+  box.innerHTML = '';
+  box.hidden = false;
+  const title = document.createElement('h3');
+  title.textContent = isAdd ? 'Nýr tími (tillaga)' : 'Tillaga um ' + sessionLabel(base);
+  box.appendChild(title);
+
+  const field = (labelText, control) => {
+    const label = document.createElement('label');
+    label.className = 'plan-field';
+    const span = document.createElement('span');
+    span.textContent = labelText;
+    label.append(span, control);
+    box.appendChild(label);
+    return control;
+  };
+  const select = (options, value) => {
+    const control = document.createElement('select');
+    options.forEach(([optionValue, text]) => {
+      const option = document.createElement('option');
+      option.value = String(optionValue);
+      option.textContent = text;
+      control.appendChild(option);
+    });
+    control.value = String(value);
+    return control;
+  };
+
+  let typeSelect = null;
+  if (isAdd) {
+    typeSelect = field('Tegund', select(Object.keys(TYPE_LABELS).map((code) => [code, TYPE_LABELS[code]]), entry.type));
+  }
+  let removeBox = null;
+  if (!isAdd) {
+    removeBox = document.createElement('input');
+    removeBox.type = 'checkbox';
+    removeBox.checked = entry.op === 'remove';
+    field('Fella tímann niður', removeBox);
+  }
+  const where = parseSlotToken(entry.slot);
+  const daySelect = field('Dagur', select([[-1, 'Ekki tímasett']].concat(
+    CONFIG.days.map((day, index) => [index, day.label])), where.dayIndex));
+  const startSelect = field('Byrjar', select([], 0));
+  const lengthSelect = field('Lengd', select([1, 2, 3, 4].map((n) =>
+    [n, n + (n === 1 ? ' tími' : ' tímar') + ' (' + (n * 50 - 10) + ' mín)']), entry.n_timeslot));
+  const weeksInput = document.createElement('input');
+  weeksInput.type = 'text';
+  weeksInput.placeholder = isAdd ? 't.d. 35-46' : 'autt = óbreytt, t.d. 35-40, 42';
+  weeksInput.value = entry.weeksText;
+  field('Vikur', weeksInput);
+  const noteInput = document.createElement('input');
+  noteInput.type = 'text';
+  noteInput.maxLength = 500;
+  noteInput.placeholder = 'Af hverju? (valfrjálst)';
+  noteInput.value = entry.note;
+  field('Skýring', noteInput);
+
+  // Start times that leave the session inside the day's grid.
+  const fillStarts = (keep) => {
+    const length = Number(lengthSelect.value);
+    startSelect.innerHTML = '';
+    for (let slot = CONFIG.firstSlot; slot + length - 1 <= CONFIG.lastSlot; slot++) {
+      const option = document.createElement('option');
+      option.value = String(slot);
+      option.textContent = slotLabel(slot);
+      startSelect.appendChild(option);
+    }
+    const options = Array.from(startSelect.options).map((o) => Number(o.value));
+    startSelect.value = String(options.includes(keep) ? keep : options[options.length - 1]);
+  };
+  fillStarts(where.start >= 0 ? where.start : CONFIG.firstSlot);
+
+  const update = () => {
+    const removing = removeBox && removeBox.checked;
+    [daySelect, startSelect, lengthSelect, weeksInput].forEach((control) => { control.disabled = removing; });
+    startSelect.disabled = removing || Number(daySelect.value) < 0;
+    const next = {
+      op: removing ? 'remove' : 'change',
+      slot: Number(daySelect.value) < 0 ? '' : slotToken(Number(daySelect.value), Number(startSelect.value)),
+      n_timeslot: Number(lengthSelect.value),
+      weeksText: weeksInput.value,
+      note: noteInput.value.trim()
+    };
+    if (isAdd) {
+      proposal.added[target.index] = Object.assign(next, { type: typeSelect.value });
+      delete proposal.added[target.index].op;
+    } else {
+      const unchanged = next.op === 'change' && next.slot === slotToken(base.dayIndex, base.start)
+        && next.n_timeslot === base.length && !parseWeeksText(next.weeksText).length && !next.note;
+      if (unchanged) proposal.changes.delete(target.id);
+      else proposal.changes.set(target.id, next);
+    }
+    renderPlanView();
+  };
+  lengthSelect.addEventListener('change', () => { fillStarts(Number(startSelect.value)); update(); });
+  [typeSelect, removeBox, daySelect, startSelect].filter(Boolean)
+    .forEach((control) => control.addEventListener('change', update));
+  [weeksInput, noteInput].forEach((control) => control.addEventListener('input', update));
+
+  const done = planButton('Lokið', closeEditor);
+  done.classList.add('plan-done');
+  box.appendChild(done);
+  update();
+  box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
 // Every room this course may be given: the prefill's own list plus
@@ -1057,6 +1388,7 @@ function renderSummary() {
       .join('; ')]);
   }
   if (el('teachersNote').value.trim()) rows.push(['Um kennara', el('teachersNote').value.trim()]);
+  rows.push(['Tillögur að tímum', proposalLines().join('; ')]);
   const target = el('summary');
   target.innerHTML = '';
   rows.forEach(([label, value]) => {
@@ -1267,7 +1599,8 @@ async function submit() {
     // label -> types, for every teacher still ticked.
     teacher_types: courseTeacherLabels().filter((label) => !state.notTeaching.has(label))
       .reduce((out, label) => { out[label] = teacherTypesOn(label); return out; }, {}),
-    teachers_note: el('teachersNote').value.trim()
+    teachers_note: el('teachersNote').value.trim(),
+    session_changes: sessionChangesPayload()
   };
 
   el('submitBtn').disabled = true;
