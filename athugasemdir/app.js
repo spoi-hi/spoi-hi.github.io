@@ -1055,13 +1055,11 @@ function openEditor(target) {
   };
 
   // Any teaching type, for a new session and for an existing one (a
-  // lecture that should be a dæmatími). A session of some other kind
-  // (an exam) keeps its type.
-  let typeSelect = null;
-  if (isAdd || TYPE_LABELS[base.typeCode]) {
-    typeSelect = field('Tegund', select(Object.keys(TYPE_LABELS).map((code) => [code, TYPE_LABELS[code]]),
-      entry.type || (base && base.typeCode)));
-  }
+  // lecture that should be a dæmatími). A session of some other or no
+  // type (a test, "Óskilgreind tegund") offers its own first, as Óbreytt.
+  const typeOptions = Object.keys(TYPE_LABELS).map((code) => [code, TYPE_LABELS[code]]);
+  if (!isAdd && !TYPE_LABELS[base.typeCode]) typeOptions.unshift([base.typeCode, 'Óbreytt (' + base.type + ')']);
+  const typeSelect = field('Tegund', select(typeOptions, isAdd ? entry.type : entry.type || base.typeCode));
   let removeBox = null;
   if (!isAdd) {
     removeBox = document.createElement('input');
