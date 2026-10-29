@@ -301,6 +301,42 @@ function renderSchools() {
   if (preset) select.value = preset;
 }
 
+// Every week of the term, the default: a teacher narrows it only when the
+// course really is not taught all term.
+function selectAllWeeks() {
+  const range = weekRangeFromQuery();
+  state.weeks.clear();
+  for (let week = range.from; week <= range.to; week++) state.weeks.add(week);
+}
+
+// All of the term's weeks ticked says nothing, so it is sent as none: an
+// answer then carries a week wish only when the teacher made one.
+function chosenWeeks() {
+  const range = weekRangeFromQuery();
+  const weeks = Array.from(state.weeks).sort((a, b) => a - b);
+  return weeks.length === range.to - range.from + 1 ? [] : weeks;
+}
+
+function weekRangeText(range) {
+  return range.from + '-' + range.to;
+}
+
+// Teachers count teaching weeks (1-14); the plan and the proposals use
+// calendar weeks. Under the editor's week box: where to read which dates
+// a week number is, with the term's first week as an example.
+function calendarWeeksHint() {
+  const range = weekRangeFromQuery();
+  const hint = document.createElement('p');
+  hint.className = 'hint plan-weeks-hint';
+  const link = document.createElement('a');
+  link.href = '#weeksCard';
+  link.textContent = '3. Vikur';
+  hint.append('Almanaksvikur, ekki kennsluvikur: vika ' + range.from + ' hefst mánudaginn '
+    + longDate(mondayOfIsoWeek(calendarYearForWeeks(), range.from))
+    + '. Í ', link, ' hér fyrir neðan sést dagsetning hverrar viku.');
+  return hint;
+}
+
 function renderWeeks() {
   const range = weekRangeFromQuery();
   const year = calendarYearForWeeks();
@@ -577,7 +613,7 @@ function pickCourse(courseId) {
 // send the first course's wishes under the second's name.
 function onCourseChange() {
   state.rooms.clear();
-  state.weeks.clear();
+  selectAllWeeks();
   state.slots.clear();
   state.notTeaching.clear();
   state.typesOn.clear();
@@ -758,15 +794,16 @@ function proposalLines() {
     }
     const next = proposedSession(session, change);
     const weeks = parseWeeksText(change.weeksText);
-    lines.push(sessionLabel(session) + ' → ' + sessionTimeText(next)
-      + (weeks.length ? ', vikur ' + weekRangesText(weeks) : '')
+    lines.push(sessionLabel(session) + ' → '
+      + (next.typeCode !== session.typeCode ? next.type + ' ' : '') + sessionTimeText(next)
+      + (weeks.length ? ', almanaksvikur ' + weekRangesText(weeks) : '')
       + (change.note ? ' - ' + change.note : ''));
   });
   proposal.added.forEach((item) => {
     const next = proposedSession({ typeCode: item.type, weeks: [], teachers: [] }, item);
     const weeks = parseWeeksText(item.weeksText);
     lines.push('Nýr tími: ' + next.type + ' ' + sessionTimeText(next)
-      + (weeks.length ? ', vikur ' + weekRangesText(weeks) : '')
+      + (weeks.length ? ', almanaksvikur ' + weekRangesText(weeks) : '')
       + (item.note ? ' - ' + item.note : ''));
   });
   return lines;
@@ -780,7 +817,7 @@ function sessionChangesPayload() {
     if (change.op === 'remove') {
       out.push({ op: 'remove', session_id: id, note: change.note });
     } else {
-      out.push({ op: 'change', session_id: id, slot: change.slot, n_timeslot: change.n_timeslot,
+      out.push({ op: 'change', session_id: id, type: change.type, slot: change.slot, n_timeslot: change.n_timeslot,
         weeks: parseWeeksText(change.weeksText), note: change.note });
     }
   });
@@ -798,7 +835,8 @@ function renderPlanView() {
     ? 'Tímar námskeiðsins eins og þeir standa núna í Spóa' + (updated ? ' (drög frá ' + updated + ')' : '')
       + '. Geta enn breyst - athugasemdir þínar hér fyrir neðan eru teknar með.'
     : 'Engir tímar skráðir fyrir námskeiðið í Spóa enn.')
-    + ' Þú getur lagt til breytingar á tímunum, eða nýjan tíma - stundatöfluhaldari fer yfir þær.';
+    + ' Þú getur lagt til breytingar á tímunum, eða nýjan tíma - stundatöfluhaldari fer yfir þær.'
+    + ' Vikurnar eru almanaksvikur, ekki kennsluvikur - dagsetningar hverrar viku eru í 3. Vikur.';
 
   // What the grid draws: each session as it is (faded when the teacher
   // changes or drops it), and each proposed session dashed.
@@ -885,7 +923,7 @@ function renderPlanView() {
       block.title = (session.variant === 'proposed' ? 'Tillaga: ' : '')
         + sessionTimeText(session) + ' · ' + session.type
         + (session.room ? ' · ' + session.room : '')
-        + (session.weeks.length ? ' · vikur ' + weekRangesText(session.weeks) : '');
+        + (session.weeks.length ? ' · almanaksvikur ' + weekRangesText(session.weeks) : '');
       grid.appendChild(block);
     });
   }
@@ -907,7 +945,7 @@ function renderPlanView() {
         session.type,
         session.teachers.length ? session.teachers.join(', ') : 'enginn kennari skráður',
         session.room,
-        session.weeks.length ? 'vikur ' + weekRangesText(session.weeks) : ''
+        session.weeks.length ? 'almanaksvikur ' + weekRangesText(session.weeks) : ''
       ].filter(Boolean).join(' · ');
       item.appendChild(text);
       if (change) {
@@ -915,8 +953,9 @@ function renderPlanView() {
         line.className = 'plan-item-proposal';
         line.textContent = change.op === 'remove'
           ? 'Tillaga: fella niður'
-          : 'Tillaga: ' + sessionTimeText(proposedSession(session, change))
-            + (parseWeeksText(change.weeksText).length ? ', vikur ' + weekRangesText(parseWeeksText(change.weeksText)) : '');
+          : 'Tillaga: ' + (change.type && change.type !== session.typeCode ? TYPE_LABELS[change.type] + ' · ' : '')
+            + sessionTimeText(proposedSession(session, change))
+            + (parseWeeksText(change.weeksText).length ? ', almanaksvikur ' + weekRangesText(parseWeeksText(change.weeksText)) : '');
         item.appendChild(line);
       }
       if (session.id) {
@@ -936,7 +975,7 @@ function renderPlanView() {
     line.className = 'plan-item-proposal';
     const next = proposedSession({ typeCode: added.type, weeks: [], teachers: [] }, added);
     line.textContent = 'Nýr tími (tillaga): ' + next.type + ' · ' + sessionTimeText(next)
-      + (next.weeks.length ? ' · vikur ' + weekRangesText(next.weeks) : '');
+      + (next.weeks.length ? ' · almanaksvikur ' + weekRangesText(next.weeks) : '');
     item.appendChild(line);
     item.appendChild(planButton('Breyta', () => openEditor({ kind: 'add', index })));
     item.appendChild(planButton('Eyða', () => {
@@ -982,8 +1021,8 @@ function openEditor(target) {
     entry = proposal.added[target.index];
   } else {
     entry = proposal.changes.get(target.id) || {
-      op: 'change', slot: slotToken(base.dayIndex, base.start), n_timeslot: base.length,
-      weeksText: '', note: ''
+      op: 'change', type: base.typeCode, slot: slotToken(base.dayIndex, base.start),
+      n_timeslot: base.length, weeksText: '', note: ''
     };
   }
 
@@ -1015,9 +1054,13 @@ function openEditor(target) {
     return control;
   };
 
+  // Any teaching type, for a new session and for an existing one (a
+  // lecture that should be a dæmatími). A session of some other kind
+  // (an exam) keeps its type.
   let typeSelect = null;
-  if (isAdd) {
-    typeSelect = field('Tegund', select(Object.keys(TYPE_LABELS).map((code) => [code, TYPE_LABELS[code]]), entry.type));
+  if (isAdd || TYPE_LABELS[base.typeCode]) {
+    typeSelect = field('Tegund', select(Object.keys(TYPE_LABELS).map((code) => [code, TYPE_LABELS[code]]),
+      entry.type || (base && base.typeCode)));
   }
   let removeBox = null;
   if (!isAdd) {
@@ -1034,9 +1077,11 @@ function openEditor(target) {
     [n, n + (n === 1 ? ' tími' : ' tímar') + ' (' + (n * 50 - 10) + ' mín)']), entry.n_timeslot));
   const weeksInput = document.createElement('input');
   weeksInput.type = 'text';
-  weeksInput.placeholder = isAdd ? 't.d. 35-46' : 'autt = óbreytt, t.d. 35-40, 42';
+  weeksInput.placeholder = isAdd ? 't.d. ' + weekRangeText(weekRangeFromQuery())
+    : 'autt = óbreytt, t.d. ' + weekRangeText(weekRangeFromQuery());
   weeksInput.value = entry.weeksText;
-  field('Vikur', weeksInput);
+  field('Almanaksvikur', weeksInput);
+  box.appendChild(calendarWeeksHint());
   const noteInput = document.createElement('input');
   noteInput.type = 'text';
   noteInput.maxLength = 500;
@@ -1061,20 +1106,23 @@ function openEditor(target) {
 
   const update = () => {
     const removing = removeBox && removeBox.checked;
-    [daySelect, startSelect, lengthSelect, weeksInput].forEach((control) => { control.disabled = removing; });
+    [typeSelect, daySelect, startSelect, lengthSelect, weeksInput].filter(Boolean)
+      .forEach((control) => { control.disabled = removing; });
     startSelect.disabled = removing || Number(daySelect.value) < 0;
     const next = {
       op: removing ? 'remove' : 'change',
+      type: typeSelect ? typeSelect.value : base.typeCode,
       slot: Number(daySelect.value) < 0 ? '' : slotToken(Number(daySelect.value), Number(startSelect.value)),
       n_timeslot: Number(lengthSelect.value),
       weeksText: weeksInput.value,
       note: noteInput.value.trim()
     };
     if (isAdd) {
-      proposal.added[target.index] = Object.assign(next, { type: typeSelect.value });
+      proposal.added[target.index] = next;
       delete proposal.added[target.index].op;
     } else {
-      const unchanged = next.op === 'change' && next.slot === slotToken(base.dayIndex, base.start)
+      const unchanged = next.op === 'change' && next.type === base.typeCode
+        && next.slot === slotToken(base.dayIndex, base.start)
         && next.n_timeslot === base.length && !parseWeeksText(next.weeksText).length && !next.note;
       if (unchanged) proposal.changes.delete(target.id);
       else proposal.changes.set(target.id, next);
@@ -1367,7 +1415,7 @@ function renderSummary() {
 
   const rows = [
     ['Misseri', termLabel(state.term)],
-    ['Vikur', Array.from(state.weeks).sort((a, b) => a - b).join(', ')],
+    ['Vikur', chosenWeeks().length ? weekRangesText(chosenWeeks()) : (state.weeks.size ? 'Allar' : '')],
     ['Tímar sem henta', keysWith(state.slots, 'prefer').join(', ')],
     ['Tímar sem henta ekki', keysWith(state.slots, 'avoid').join(', ')],
     ['Stofur sem henta', roomNames(keysWith(state.rooms, 'prefer'))],
@@ -1508,7 +1556,7 @@ function applyTerm() {
   allRooms.clear();
   extraRooms.clear();
   state.rooms.clear();
-  state.weeks.clear();
+  selectAllWeeks();
   el('courseSearch').value = '';
   el('course').value = '';
   renderCourseResults(false);
@@ -1591,7 +1639,7 @@ async function submit() {
     avoid_rooms: keysWith(state.rooms, 'avoid'),
     prefer_times: keysWith(state.slots, 'prefer'),
     avoid_times: keysWith(state.slots, 'avoid'),
-    weeks: Array.from(state.weeks).sort((a, b) => a - b),
+    weeks: chosenWeeks(),
     note: el('note').value.trim(),
     // Only this course's own initials: a set left over from another
     // course would name teachers the course does not have.

@@ -415,6 +415,8 @@ textarea { resize: vertical; }
 .plan-editor h3 { margin: 0 0 4px; font-size: 1em; }
 .plan-field { display: grid; grid-template-columns: 9em minmax(0, 1fr); align-items: center; gap: 8px; }
 .plan-field input[type="checkbox"] { justify-self: start; width: 18px; height: 18px; }
+.plan-weeks-hint { margin: -2px 0 0 calc(9em + 8px); }
+@media (max-width: 560px) { .plan-weeks-hint { margin-left: 0; } }
 .plan-done { justify-self: start; }
 @media (max-width: 560px) { .plan-field { grid-template-columns: 1fr; gap: 2px; } }
 @media (max-width: 560px) { .scroll-hint { display: block; } }
