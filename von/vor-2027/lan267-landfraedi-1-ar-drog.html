@@ -65,6 +65,7 @@
   .tt-list th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
   .card + .card { margin-top: 14px; }
   .print-only { display: none; }
+  @media print { .tt-key.print-only { display: flex; } }
 
   /* A phone: the whole week, scrolled sideways rather than squeezed; the
      times stay on the left. */
@@ -122,10 +123,10 @@
 <main>
   <section class="hero compact">
     <div class="wrap wide">
-      <a class="crumb" href="../">← VoN</a><br>
+      <p class="crumb"><a href="../">← VoN</a></p>
       <h1>LAN267 - Landfræði 1 ár - Drög</h1>
       <p class="lede"><span class="term">Vor 2027</span> ·
-        <span class="i18n" lang="is">Síðast uppfært 2026-10-20 · Birt úr Spóa; breytingar geta orðið.</span><span class="i18n" lang="en">Last updated 2026-10-20 · Published from Spói; changes may occur.</span></p>
+        <span class="i18n" lang="is">Síðast uppfært 2026-10-31 · Birt úr Spóa; breytingar geta orðið.</span><span class="i18n" lang="en">Last updated 2026-10-31 · Published from Spói; changes may occur.</span></p>
     </div>
   </section>
 
@@ -139,7 +140,9 @@
         <button type="button" id="print"></button>
       </div>
       <p id="printWeek" class="print-only"></p>
-      <div class="tt-key" id="key"></div>
+      <!-- The course key: on paper only - on screen "Allir tímar" below
+           names every course, in its colour. -->
+      <div class="tt-key print-only" id="key"></div>
       <div class="tt-scroll"><div id="grid"></div></div>
     </section>
     <section class="card no-print">
@@ -158,7 +161,7 @@
     <div><strong>Spói</strong><span class="tagline">Scheduling Planning Optimization Interface</span></div>
   </div>
 </footer>
-<script id="tt-data" type="application/json">{"name": "LAN267 - Landfræði 1 ár - Drög", "isoYear": 2027, "weeks": [{"week": 2, "monday": "2027-01-11"}, {"week": 3, "monday": "2027-01-18"}, {"week": 4, "monday": "2027-01-25"}, {"week": 5, "monday": "2027-02-01"}, {"week": 6, "monday": "2027-02-08"}, {"week": 7, "monday": "2027-02-15"}, {"week": 8, "monday": "2027-02-22"}, {"week": 9, "monday": "2027-03-01"}, {"week": 10, "monday": "2027-03-08"}, {"week": 11, "monday": "2027-03-15"}, {"week": 12, "monday": "2027-03-22"}, {"week": 13, "monday": "2027-03-29"}, {"week": 14, "monday": "2027-04-05"}, {"week": 15, "monday": "2027-04-12"}, {"week": 16, "monday": "2027-04-19"}], "courses": [{"id": "JAR202G", "name": "Ytri öfl jarðar", "color": ""}, {"id": "LAN221G", "name": "Umhverfislandfræði: Náttúra, samfélag og sjálfbærni", "color": ""}, {"id": "LAN222G", "name": "Landfræði og hnattræn tengsl", "color": ""}, {"id": "UMV401G", "name": "Landfræðileg upplýsingakerfi 1", "color": ""}], "sessions": [{"course": "JAR202G", "kind": "Fyrirlestur 1", "day": 0, "start": "10:00", "end": "11:30", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16], "room": "Askja130"}, {"course": "JAR202G", "kind": "Fyrirlestur 2", "day": 2, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16], "room": "Askja131"}, {"course": "LAN221G", "kind": "Fyrirlestur 1", "day": 0, "start": "14:10", "end": "15:40", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16], "room": "N-120"}, {"course": "LAN221G", "kind": "Fyrirlestur 2", "day": 2, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16], "room": "N-121"}, {"course": "LAN222G", "kind": "Fyrirlestur 1", "day": 0, "start": "08:20", "end": "09:50", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16], "room": "Annað"}, {"course": "LAN222G", "kind": "Fyrirlestur-A", "day": 3, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], "room": "Annað"}, {"course": "UMV401G", "kind": "Fyrirlestur", "day": 1, "start": "13:20", "end": "15:40", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16], "room": "G-136A"}], "holidays": [{"name": "Páskar", "start": "2027-03-24", "end": "2027-03-30"}, {"name": "Skírdagur", "start": "2027-03-25", "end": "2027-03-25"}, {"name": "Föstudagurinn langi", "start": "2027-03-26", "end": "2027-03-26"}, {"name": "Annar í páskum", "start": "2027-03-29", "end": "2027-03-29"}, {"name": "Sumardagurinn fyrsti", "start": "2027-04-22", "end": "2027-04-22"}], "school": "VoN", "layout": 2}</script>
+<script id="tt-data" type="application/json">{"name": "LAN267 - Landfræði 1 ár - Drög", "isoYear": 2027, "weeks": [{"week": 2, "monday": "2027-01-11"}, {"week": 3, "monday": "2027-01-18"}, {"week": 4, "monday": "2027-01-25"}, {"week": 5, "monday": "2027-02-01"}, {"week": 6, "monday": "2027-02-08"}, {"week": 7, "monday": "2027-02-15"}, {"week": 8, "monday": "2027-02-22"}, {"week": 9, "monday": "2027-03-01"}, {"week": 10, "monday": "2027-03-08"}, {"week": 11, "monday": "2027-03-15"}, {"week": 12, "monday": "2027-03-22"}, {"week": 13, "monday": "2027-03-29"}, {"week": 14, "monday": "2027-04-05"}, {"week": 15, "monday": "2027-04-12"}, {"week": 16, "monday": "2027-04-19"}], "courses": [{"id": "JAR202G", "name": "Ytri öfl jarðar", "color": ""}, {"id": "LAN221G", "name": "Umhverfislandfræði: Náttúra, samfélag og sjálfbærni", "color": ""}, {"id": "LAN222G", "name": "Landfræði og hnattræn tengsl", "color": ""}, {"id": "UMV401G", "name": "Landfræðileg upplýsingakerfi 1", "color": ""}], "sessions": [{"course": "JAR202G", "kind": "Fyrirlestur 1", "day": 0, "start": "10:00", "end": "11:30", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16], "room": "N-130", "teachers": ["HN", "ERG"]}, {"course": "JAR202G", "kind": "Fyrirlestur 2", "day": 2, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16], "room": "Askja131", "teachers": ["HN", "ERG"]}, {"course": "LAN221G", "kind": "Fyrirlestur 1", "day": 0, "start": "14:10", "end": "15:40", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16], "room": "N-120", "teachers": ["BDH", "KB", "MBJ"]}, {"course": "LAN221G", "kind": "Fyrirlestur 2", "day": 2, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16], "room": "N-121", "teachers": ["BDH", "KB", "MBJ"]}, {"course": "LAN222G", "kind": "Fyrirlestur 1", "day": 0, "start": "08:20", "end": "09:50", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16], "room": "Annað", "teachers": ["JTW", "AK"]}, {"course": "LAN222G", "kind": "Fyrirlestur-A", "day": 3, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], "room": "Annað", "teachers": ["JTW", "AK"]}, {"course": "UMV401G", "kind": "Fyrirlestur", "day": 1, "start": "13:20", "end": "15:40", "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16], "room": "G-136A - Tölvuver", "teachers": ["GFÚ"]}], "holidays": [{"name": "Páskar", "start": "2027-03-24", "end": "2027-03-30"}, {"name": "Skírdagur", "start": "2027-03-25", "end": "2027-03-25"}, {"name": "Föstudagurinn langi", "start": "2027-03-26", "end": "2027-03-26"}, {"name": "Annar í páskum", "start": "2027-03-29", "end": "2027-03-29"}, {"name": "Sumardagurinn fyrsti", "start": "2027-04-22", "end": "2027-04-22"}], "teachers": [{"initials": "AK", "names": ["Anna Karlsdóttir"]}, {"initials": "BDH", "names": ["Benjamin David Hennig"]}, {"initials": "ERG", "names": ["Esther Ruth Guðmundsdóttir"]}, {"initials": "GFÚ", "names": ["Guðmundur Freyr Úlfarsson"]}, {"initials": "HN", "names": ["Hreggviður Norðdahl"]}, {"initials": "JTW", "names": ["Johannes Theodorus Welling"]}, {"initials": "KB", "names": ["Karl Benediktsson"]}, {"initials": "MBJ", "names": ["Magnfríður Birnu Júlíusdóttir"]}], "school": "VoN", "layout": 4}</script>
 <script>
 (function () {
   var DATA = JSON.parse(document.getElementById('tt-data').textContent);
@@ -167,12 +170,12 @@
   var TEXT = {
     is: { days: ['Mán', 'Þri', 'Mið', 'Fim', 'Fös', 'Lau', 'Sun'], week: 'Vika', prev: 'Fyrri vika',
       next: 'Næsta vika', print: 'Prenta', noWeeks: 'Engir tímar birtir.', noSessions: 'Engir tímar þessa viku.',
-      list: 'Öll námskeið', teachers: 'Kennarar', course: 'Námskeið', kind: 'Tegund', time: 'Tími',
+      list: 'Allir tímar', teachers: 'Kennarar', course: 'Námskeið', kind: 'Tegund', time: 'Tími',
       room: 'Stofa', weeks: 'Vikur', initials: 'Upphafsstafir', teacher: 'Kennari',
       terms: {} },
     en: { days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], week: 'Week', prev: 'Previous week',
       next: 'Next week', print: 'Print', noWeeks: 'No sessions published.', noSessions: 'No sessions this week.',
-      list: 'All courses', teachers: 'Teachers', course: 'Course', kind: 'Type', time: 'Time',
+      list: 'All sessions', teachers: 'Teachers', course: 'Course', kind: 'Type', time: 'Time',
       room: 'Room', weeks: 'Weeks', initials: 'Initials', teacher: 'Teacher',
       terms: { Vor: 'Spring', Haust: 'Autumn', Sumar: 'Summer' } }
   };
