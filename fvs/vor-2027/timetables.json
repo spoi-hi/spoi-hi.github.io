@@ -3,249 +3,242 @@
   "label": "Vor 2027",
   "timetables": [
     {
-      "name": "1. ár í félagsfræði",
-      "file": "1-ar-i-felagsfraedi.html",
-      "source": "0bbe706c",
-      "hash": "2dd26f7602a4fe98",
-      "updated": "2026-10-26"
-    },
-    {
       "name": "1. ár í félagsráðgjöf",
       "file": "1-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
-      "hash": "0c08cc870c6edbbd",
-      "updated": "2026-10-26"
+      "hash": "e3deea113a1fa6db",
+      "updated": "2026-10-31"
     },
     {
       "name": "1. ár í mannfræði",
       "file": "1-ar-i-mannfraedi.html",
       "source": "0bbe706c",
-      "hash": "81bef3fc455d4d34",
-      "updated": "2026-10-26"
+      "hash": "07db1359c30dacb8",
+      "updated": "2026-10-31"
     },
     {
       "name": "1. ár í stjórnmálafræði",
       "file": "1-ar-i-stjornmalafraedi.html",
       "source": "0bbe706c",
-      "hash": "573ad6e052c1ad2c",
-      "updated": "2026-10-26"
+      "hash": "bf659e311acefc9b",
+      "updated": "2026-10-31"
     },
     {
       "name": "1. ár í þjóðfræði",
       "file": "1-ar-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "b2147f3ddbcaa544",
-      "updated": "2026-10-26"
+      "hash": "0709f4f34a761c9a",
+      "updated": "2026-10-31"
     },
     {
       "name": "2. og 3. ár í félagsfræði",
       "file": "2-og-3-ar-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "7288bf7454374493",
-      "updated": "2026-10-26"
+      "hash": "d1b748b3ed302a58",
+      "updated": "2026-10-31"
     },
     {
       "name": "2. og 3. ár í mannfræði",
       "file": "2-og-3-ar-i-mannfraedi.html",
       "source": "0bbe706c",
-      "hash": "278ff9e635ed916a",
-      "updated": "2026-10-26"
+      "hash": "70371abcf9760bf5",
+      "updated": "2026-10-31"
     },
     {
       "name": "2. og 3. ár í stjórnmálafræði",
       "file": "2-og-3-ar-i-stjornmalafraedi.html",
       "source": "0bbe706c",
-      "hash": "be608fe9cb68cef8",
-      "updated": "2026-10-26"
+      "hash": "19ebc0e3be3e252c",
+      "updated": "2026-10-31"
     },
     {
       "name": "2. og 3. ár í þjóðfræði",
       "file": "2-og-3-ar-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "dc30347de16d43d4",
-      "updated": "2026-10-26"
+      "hash": "c09a48ef5a9a0715",
+      "updated": "2026-10-31"
     },
     {
       "name": "2. ár í félagsráðgjöf",
       "file": "2-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
-      "hash": "9a756616578d45e8",
-      "updated": "2026-10-26"
+      "hash": "b7e76125731ca9e8",
+      "updated": "2026-10-31"
     },
     {
       "name": "3. ár í félagsráðgjöf",
       "file": "3-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
-      "hash": "decd5d3b07ee3758",
-      "updated": "2026-10-26"
+      "hash": "6b25be863dc6c311",
+      "updated": "2026-10-31"
     },
     {
       "name": "BA í blaðamennsku",
       "file": "ba-i-bladamennsku.html",
       "source": "0bbe706c",
-      "hash": "a813bccdc769ca1e",
-      "updated": "2026-10-26"
+      "hash": "0d1713270570453b",
+      "updated": "2026-10-31"
     },
     {
       "name": "Fjölmiðlafræði, aukagrein",
       "file": "fjolmidlafraedi-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "c3b18d8d63311a57",
-      "updated": "2026-10-26"
+      "hash": "422a0a95f4d5177e",
+      "updated": "2026-10-31"
     },
     {
       "name": "Hagfræði 1. ár",
       "file": "hagfraedi-1-ar.html",
       "source": "0bbe706c",
-      "hash": "d74d759f7c40db8c",
-      "updated": "2026-10-26"
+      "hash": "ec0852a966ca11f6",
+      "updated": "2026-10-31"
     },
     {
       "name": "Hagfræði 2. ár",
       "file": "hagfraedi-2-ar.html",
       "source": "0bbe706c",
-      "hash": "40f559ab6892b1a2",
-      "updated": "2026-10-26"
+      "hash": "823ed8886e5bb7c0",
+      "updated": "2026-10-31"
     },
     {
       "name": "Hagfræði 3. ár",
       "file": "hagfraedi-3-ar.html",
       "source": "0bbe706c",
-      "hash": "c167b635bb93e441",
-      "updated": "2026-10-26"
+      "hash": "3d6d6d7204dd4d03",
+      "updated": "2026-10-31"
     },
     {
       "name": "Hagfræði meistaranám, lota III",
       "file": "hagfraedi-meistaranam-lota-iii.html",
       "source": "0bbe706c",
-      "hash": "131e87880f8e188e",
-      "updated": "2026-10-26"
+      "hash": "afbba20757d28c1a",
+      "updated": "2026-10-31"
     },
     {
       "name": "Hagfræði meistaranám, lota IV",
       "file": "hagfraedi-meistaranam-lota-iv.html",
       "source": "0bbe706c",
-      "hash": "74830a5289821d90",
-      "updated": "2026-10-26"
+      "hash": "7003d4a72cf71b67",
+      "updated": "2026-10-31"
     },
     {
       "name": "Kjörgreinar í meistaranámi í lögfræði",
       "file": "kjorgreinar-i-meistaranami-i-logfraedi.html",
       "source": "0bbe706c",
-      "hash": "72a46503037a91df",
-      "updated": "2026-10-26"
+      "hash": "284624f8c958e1c2",
+      "updated": "2026-10-31"
     },
     {
       "name": "Kynjafræði, 60 eininga aukagrein",
       "file": "kynjafraedi-60-eininga-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "6b6204aa546a08bb",
-      "updated": "2026-10-26"
+      "hash": "2187a0e234ac5f56",
+      "updated": "2026-10-31"
     },
     {
       "name": "Lögfræði 1. ár",
       "file": "logfraedi-1-ar.html",
       "source": "0bbe706c",
-      "hash": "49fa3e147383414e",
-      "updated": "2026-10-26"
+      "hash": "c38d012223e2ea80",
+      "updated": "2026-10-31"
     },
     {
       "name": "Lögfræði 2. ár",
       "file": "logfraedi-2-ar.html",
       "source": "0bbe706c",
-      "hash": "29a4c2a40c1feda2",
-      "updated": "2026-10-26"
+      "hash": "c586be619626fb96",
+      "updated": "2026-10-31"
     },
     {
       "name": "Lögfræði 3. ár",
       "file": "logfraedi-3-ar.html",
       "source": "0bbe706c",
-      "hash": "ea1f6270f464b86a",
-      "updated": "2026-10-26"
+      "hash": "8fec3fa71c95ed37",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA og örnám í afbrotafræði",
       "file": "ma-og-ornam-i-afbrotafraedi.html",
       "source": "0bbe706c",
-      "hash": "a6209e9d91f5662e",
-      "updated": "2026-10-26"
+      "hash": "f516b1a785a24ceb",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA og örnám í alþjóðasamskiptum",
       "file": "ma-og-ornam-i-althjodasamskiptum.html",
       "source": "0bbe706c",
-      "hash": "b0b6fcd82dead688",
-      "updated": "2026-10-26"
+      "hash": "067966f41ec2e298",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA og örnám í félagsfræði",
       "file": "ma-og-ornam-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "1a27744ab42069cd",
-      "updated": "2026-10-26"
+      "hash": "3f2925de14f822c2",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA og örnám í þjóðfræði",
       "file": "ma-og-ornam-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "e40f83aca9d9ba2d",
-      "updated": "2026-10-26"
+      "hash": "b4039363f5d5f425",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA í aðferðafræði",
       "file": "ma-i-adferdafraedi.html",
       "source": "0bbe706c",
-      "hash": "8c71ba130786df56",
-      "updated": "2026-10-26"
+      "hash": "8ccbf497a2491379",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA í kynjafræði og örnám í hagnýtri jafnréttisfræði",
       "file": "ma-i-kynjafraedi-og-ornam-i-hagnytri-jafnrettisfraedi.html",
       "source": "0bbe706c",
-      "hash": "24917a8ccd2bd0b6",
-      "updated": "2026-10-26"
+      "hash": "06360a8466b6790b",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA í mannfræði og í hnattrænum fræðum",
       "file": "ma-i-mannfraedi-og-i-hnattraenum-fraedum.html",
       "source": "0bbe706c",
-      "hash": "546189bd78a2422e",
-      "updated": "2026-10-26"
+      "hash": "2e9cc983c2751f37",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA í náms- og starfsráðgjöf, 1. ár",
       "file": "ma-i-nams-og-starfsradgjof-1-ar.html",
       "source": "0bbe706c",
-      "hash": "aa8fb9be500618bc",
-      "updated": "2026-10-26"
+      "hash": "48157c33e6e94f99",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA í náms- og starfsráðgjöf, 2. ár",
       "file": "ma-i-nams-og-starfsradgjof-2-ar.html",
       "source": "0bbe706c",
-      "hash": "ade0245ad4944fd8",
-      "updated": "2026-10-26"
+      "hash": "a43d3133cefe28a2",
+      "updated": "2026-10-31"
     },
     {
       "name": "MA, MIS og örnám í upplýsingafræði",
       "file": "ma-mis-og-ornam-i-upplysingafraedi.html",
       "source": "0bbe706c",
-      "hash": "6f5cc27961a7c900",
-      "updated": "2026-10-26"
+      "hash": "0588cee8ae0e5a0b",
+      "updated": "2026-10-31"
     },
     {
       "name": "MPA og örnám í opinberri stjórnsýslu",
       "file": "mpa-og-ornam-i-opinberri-stjornsyslu.html",
       "source": "0bbe706c",
-      "hash": "cc2ef4f0a79934ad",
-      "updated": "2026-10-26"
+      "hash": "081dbeacc7c2f22c",
+      "updated": "2026-10-31"
     },
     {
       "name": "Safnafræði, 60 eininga aukagrein",
       "file": "safnafraedi-60-eininga-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "bd7105861e296c3d",
-      "updated": "2026-10-26"
+      "hash": "19b5d40075c63b91",
+      "updated": "2026-10-31"
     }
   ]
 }
