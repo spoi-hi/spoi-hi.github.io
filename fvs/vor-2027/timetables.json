@@ -3,6 +3,13 @@
   "label": "Vor 2027",
   "timetables": [
     {
+      "name": "1. ár í félagsfræði",
+      "file": "1-ar-i-felagsfraedi.html",
+      "source": "0bbe706c",
+      "hash": "67c752dd6875265c",
+      "updated": "2026-10-31"
+    },
+    {
       "name": "1. ár í félagsráðgjöf",
       "file": "1-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
