@@ -8,7 +8,8 @@
  */
 (function () {
   var KEY = 'spoi-lang';
-  var TERMS = { Vor: 'Spring', Haust: 'Autumn', Sumar: 'Summer' };
+  // "Annað": a svið's or deild's timetables filed under no level below it.
+  var TERMS = { Vor: 'Spring', Haust: 'Autumn', Sumar: 'Summer', 'Annað': 'Other' };
 
   function stored() {
     try { return window.localStorage.getItem(KEY); } catch (e) { return null; }
