@@ -202,8 +202,11 @@
       "name": "MA og örnám í félagsfræði",
       "file": "ma-og-ornam-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "beff050310c6cef4",
-      "updated": "2026-11-04"
+      "hash": "76a6acd49230309d",
+      "updated": "2026-11-04",
+      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
+      "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
+      "program": ""
     },
     {
       "name": "MA og örnám í þjóðfræði",
