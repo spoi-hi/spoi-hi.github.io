@@ -259,8 +259,11 @@
       "name": "Safnafræði, 60 eininga aukagrein",
       "file": "safnafraedi-60-eininga-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "24127546937f410c",
-      "updated": "2026-11-04"
+      "hash": "7738ee202927bd07",
+      "updated": "2026-11-04",
+      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
+      "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
+      "program": ""
     }
   ]
 }
