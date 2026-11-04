@@ -191,8 +191,11 @@
       "name": "Lögfræði 1. ár",
       "file": "logfraedi-1-ar.html",
       "source": "0bbe706c",
-      "hash": "2887eb979503b6e8",
-      "updated": "2026-11-04"
+      "hash": "12dfa1a6f474831c",
+      "updated": "2026-11-04",
+      "dir": "lagadeild",
+      "faculty": "Lagadeild",
+      "program": ""
     },
     {
       "name": "Lögfræði 2. ár",
