@@ -90,15 +90,21 @@
       "name": "2. ár í félagsráðgjöf",
       "file": "2-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
-      "hash": "a5b67240a1bf83ab",
-      "updated": "2026-11-04"
+      "hash": "31b598b62913f1a7",
+      "updated": "2026-11-04",
+      "dir": "felagsradgjafardeild/felagsradgjof",
+      "faculty": "Félagsráðgjafardeild",
+      "program": "Félagsráðgjöf"
     },
     {
       "name": "3. ár í félagsráðgjöf",
       "file": "3-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
-      "hash": "fb6c05ae7ef5352b",
-      "updated": "2026-11-04"
+      "hash": "c34137ab2d1aba11",
+      "updated": "2026-11-04",
+      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/felagsradgjof",
+      "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
+      "program": "Félagsráðgjöf"
     },
     {
       "name": "BA í blaðamennsku",
