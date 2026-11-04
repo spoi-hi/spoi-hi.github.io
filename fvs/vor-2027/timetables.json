@@ -47,8 +47,11 @@
       "name": "2. og 3. ár í félagsfræði",
       "file": "2-og-3-ar-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "d7c29482c58bb8aa",
-      "updated": "2026-11-04"
+      "hash": "e94bafe662c578c6",
+      "updated": "2026-11-04",
+      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
+      "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
+      "program": ""
     },
     {
       "name": "2. og 3. ár í mannfræði",
@@ -71,7 +74,7 @@
       "name": "2. og 3. ár í þjóðfræði",
       "file": "2-og-3-ar-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "c879f8a58212564c",
+      "hash": "c6b9f3fc431992de",
       "updated": "2026-11-04"
     },
     {
@@ -176,7 +179,7 @@
       "name": "MA og örnám í afbrotafræði",
       "file": "ma-og-ornam-i-afbrotafraedi.html",
       "source": "0bbe706c",
-      "hash": "66df09d52d5847e2",
+      "hash": "31d6087dda5a6765",
       "updated": "2026-11-04"
     },
     {
@@ -190,21 +193,21 @@
       "name": "MA og örnám í félagsfræði",
       "file": "ma-og-ornam-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "a10c9e6a44c78316",
+      "hash": "beff050310c6cef4",
       "updated": "2026-11-04"
     },
     {
       "name": "MA og örnám í þjóðfræði",
       "file": "ma-og-ornam-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "c9afb4da04771b05",
+      "hash": "d16d00facf8d3acc",
       "updated": "2026-11-04"
     },
     {
       "name": "MA í aðferðafræði",
       "file": "ma-i-adferdafraedi.html",
       "source": "0bbe706c",
-      "hash": "d0014f937802f69e",
+      "hash": "481eac3085e20369",
       "updated": "2026-11-04"
     },
     {
