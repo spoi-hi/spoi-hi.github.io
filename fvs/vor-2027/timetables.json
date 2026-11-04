@@ -156,7 +156,7 @@
       "name": "Hagfræði 3. ár",
       "file": "hagfraedi-3-ar.html",
       "source": "0bbe706c",
-      "hash": "74a7412ed565185e",
+      "hash": "a35fb253f6f332ea",
       "updated": "2026-11-04",
       "dir": "hagfraedideild/hagfraedi",
       "faculty": "Hagfræðideild",
@@ -361,6 +361,16 @@
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/safnafraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Safnafræði"
+    },
+    {
+      "name": "Viðskiptafræði 2. ár (öll kjörsvið)",
+      "file": "vidskiptafraedi-2-ar-oll-kjorsvid.html",
+      "source": "0bbe706c",
+      "hash": "c518c066f465cdb9",
+      "updated": "2026-11-04",
+      "dir": "vidskiptafraedideild/vidskiptafraedi",
+      "faculty": "Viðskiptafræðideild",
+      "program": "Viðskiptafræði"
     }
   ]
 }
