@@ -16,8 +16,11 @@
       "name": "1. ár í félagsráðgjöf",
       "file": "1-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
-      "hash": "05181f7b975985a0",
-      "updated": "2026-11-04"
+      "hash": "667284f6559c1a1d",
+      "updated": "2026-11-04",
+      "dir": "felagsradgjafardeild/felagsradgjof",
+      "faculty": "Félagsráðgjafardeild",
+      "program": "Félagsráðgjöf"
     },
     {
       "name": "1. ár í mannfræði",
@@ -215,11 +218,11 @@
       "name": "MA og örnám í þjóðfræði",
       "file": "ma-og-ornam-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "39db487a8788a0d4",
+      "hash": "d7186d68572baef5",
       "updated": "2026-11-04",
-      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
+      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/thjodfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": ""
+      "program": "Þjóðfræði"
     },
     {
       "name": "MA í aðferðafræði",
