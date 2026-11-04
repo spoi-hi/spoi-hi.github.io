@@ -76,11 +76,11 @@
       "name": "2. og 3. ár í stjórnmálafræði",
       "file": "2-og-3-ar-i-stjornmalafraedi.html",
       "source": "0bbe706c",
-      "hash": "b4974fab79e84d4b",
+      "hash": "f48a583060c2ff5f",
       "updated": "2026-11-04",
-      "dir": "stjornmalafraedideild",
+      "dir": "stjornmalafraedideild/stjornmalafraedi",
       "faculty": "Stjórnmálafræðideild",
-      "program": ""
+      "program": "Stjórnmálafræði"
     },
     {
       "name": "2. og 3. ár í þjóðfræði",
@@ -116,8 +116,11 @@
       "name": "BA í blaðamennsku",
       "file": "ba-i-bladamennsku.html",
       "source": "0bbe706c",
-      "hash": "7bd55bbd208359b5",
-      "updated": "2026-11-04"
+      "hash": "91c55f05244a4a76",
+      "updated": "2026-11-04",
+      "dir": "stjornmalafraedideild/bladamennska",
+      "faculty": "Stjórnmálafræðideild",
+      "program": "Blaðamennska"
     },
     {
       "name": "Fjölmiðlafræði, aukagrein",
@@ -193,8 +196,11 @@
       "name": "Kynjafræði, 60 eininga aukagrein",
       "file": "kynjafraedi-60-eininga-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "d4273c3149b4610a",
-      "updated": "2026-11-04"
+      "hash": "139bd668d0db3ff1",
+      "updated": "2026-11-04",
+      "dir": "stjornmalafraedideild",
+      "faculty": "Stjórnmálafræðideild",
+      "program": ""
     },
     {
       "name": "Lögfræði 1. ár",
@@ -240,8 +246,11 @@
       "name": "MA og örnám í alþjóðasamskiptum",
       "file": "ma-og-ornam-i-althjodasamskiptum.html",
       "source": "0bbe706c",
-      "hash": "01086a09cbd7a624",
-      "updated": "2026-11-04"
+      "hash": "17d6c9420c2f2d2a",
+      "updated": "2026-11-04",
+      "dir": "stjornmalafraedideild",
+      "faculty": "Stjórnmálafræðideild",
+      "program": ""
     },
     {
       "name": "MA og örnám í félagsfræði",
@@ -277,8 +286,11 @@
       "name": "MA í kynjafræði og örnám í hagnýtri jafnréttisfræði",
       "file": "ma-i-kynjafraedi-og-ornam-i-hagnytri-jafnrettisfraedi.html",
       "source": "0bbe706c",
-      "hash": "d19029bce458ae99",
-      "updated": "2026-11-04"
+      "hash": "645bd704664184ff",
+      "updated": "2026-11-04",
+      "dir": "stjornmalafraedideild",
+      "faculty": "Stjórnmálafræðideild",
+      "program": ""
     },
     {
       "name": "MA í mannfræði og í hnattrænum fræðum",
