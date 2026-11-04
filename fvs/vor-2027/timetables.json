@@ -177,8 +177,11 @@
       "name": "Kjörgreinar í meistaranámi í lögfræði",
       "file": "kjorgreinar-i-meistaranami-i-logfraedi.html",
       "source": "0bbe706c",
-      "hash": "baa150e097ccdb68",
-      "updated": "2026-11-04"
+      "hash": "19a76ec57360106a",
+      "updated": "2026-11-04",
+      "dir": "lagadeild",
+      "faculty": "Lagadeild",
+      "program": ""
     },
     {
       "name": "Kynjafræði, 60 eininga aukagrein",
@@ -211,11 +214,11 @@
       "name": "Lögfræði 3. ár",
       "file": "logfraedi-3-ar.html",
       "source": "0bbe706c",
-      "hash": "d43dfc377b77586e",
+      "hash": "71a1826af164bf87",
       "updated": "2026-11-04",
-      "dir": "lagadeild",
+      "dir": "lagadeild/logfraedi",
       "faculty": "Lagadeild",
-      "program": ""
+      "program": "Lögfræði"
     },
     {
       "name": "MA og örnám í afbrotafræði",
