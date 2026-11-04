@@ -36,8 +36,11 @@
       "name": "1. ár í stjórnmálafræði",
       "file": "1-ar-i-stjornmalafraedi.html",
       "source": "0bbe706c",
-      "hash": "477894e089381646",
-      "updated": "2026-11-04"
+      "hash": "6ad7f74c51e572b8",
+      "updated": "2026-11-04",
+      "dir": "stjornmalafraedideild/stjornmalafraedi",
+      "faculty": "Stjórnmálafræðideild",
+      "program": "Stjórnmálafræði"
     },
     {
       "name": "1. ár í þjóðfræði",
@@ -73,8 +76,11 @@
       "name": "2. og 3. ár í stjórnmálafræði",
       "file": "2-og-3-ar-i-stjornmalafraedi.html",
       "source": "0bbe706c",
-      "hash": "ee6cca5c13d5be99",
-      "updated": "2026-11-04"
+      "hash": "b4974fab79e84d4b",
+      "updated": "2026-11-04",
+      "dir": "stjornmalafraedideild",
+      "faculty": "Stjórnmálafræðideild",
+      "program": ""
     },
     {
       "name": "2. og 3. ár í þjóðfræði",
