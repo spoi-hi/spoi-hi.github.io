@@ -167,8 +167,11 @@
       "name": "Hagfræði meistaranám, lota IV",
       "file": "hagfraedi-meistaranam-lota-iv.html",
       "source": "0bbe706c",
-      "hash": "772e1e6f8b64bf73",
-      "updated": "2026-11-04"
+      "hash": "c557e930c3307b39",
+      "updated": "2026-11-04",
+      "dir": "hagfraedideild",
+      "faculty": "Hagfræðideild",
+      "program": ""
     },
     {
       "name": "Kjörgreinar í meistaranámi í lögfræði",
