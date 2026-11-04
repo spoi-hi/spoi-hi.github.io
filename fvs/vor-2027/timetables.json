@@ -239,8 +239,11 @@
       "name": "MA í mannfræði og í hnattrænum fræðum",
       "file": "ma-i-mannfraedi-og-i-hnattraenum-fraedum.html",
       "source": "0bbe706c",
-      "hash": "3c99bf7989a240b2",
-      "updated": "2026-11-04"
+      "hash": "9f489618f15a65a0",
+      "updated": "2026-11-04",
+      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
+      "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
+      "program": ""
     },
     {
       "name": "MA í náms- og starfsráðgjöf, 1. ár",
