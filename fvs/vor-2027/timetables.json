@@ -381,6 +381,16 @@
       "dir": "vidskiptafraedideild/vidskiptafraedi",
       "faculty": "Viðskiptafræðideild",
       "program": "Viðskiptafræði"
+    },
+    {
+      "name": "Viðskiptafræði 3. ár (öll kjörsvið)",
+      "file": "vidskiptafraedi-3-ar-oll-kjorsvid.html",
+      "source": "0bbe706c",
+      "hash": "48db8ab07a2c90e3",
+      "updated": "2026-11-04",
+      "dir": "vidskiptafraedideild/vidskiptafraedi",
+      "faculty": "Viðskiptafræðideild",
+      "program": "Viðskiptafræði"
     }
   ]
 }
