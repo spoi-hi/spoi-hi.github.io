@@ -236,11 +236,11 @@
       "name": "MA og örnám í afbrotafræði",
       "file": "ma-og-ornam-i-afbrotafraedi.html",
       "source": "0bbe706c",
-      "hash": "bd7fe6da29e39103",
+      "hash": "e7bb8f9c5ddb9ba3",
       "updated": "2026-11-04",
-      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/afbrotafraedi",
+      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Afbrotafræði"
+      "program": ""
     },
     {
       "name": "MA og örnám í alþjóðasamskiptum",
@@ -256,11 +256,11 @@
       "name": "MA og örnám í félagsfræði",
       "file": "ma-og-ornam-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "8445a3c45cf1ff02",
+      "hash": "76a6acd49230309d",
       "updated": "2026-11-04",
-      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/felagsfraedi",
+      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Félagsfræði"
+      "program": ""
     },
     {
       "name": "MA og örnám í þjóðfræði",
