@@ -1570,16 +1570,18 @@ function applyTerm() {
     if (term && rowYear && rowSemester && !sameTerm({ year: rowYear, semester: rowSemester }, term)) {
       return;
     }
+    // The same row indexed a second way. A room appears once per course
+    // that uses it, so the first sighting wins and the rest collapse
+    // onto it - this index is about the room, not the course. Rows with
+    // no course are the school's whole rooms sheet, there for this index
+    // alone: "Finna aðra stofu" finds any room, prefilled or not.
+    const roomId = String(row.room_id || '').trim();
+    if (roomId && !allRooms.has(roomId)) allRooms.set(roomId, row);
+
     const courseId = String(row.course_id || '').trim();
     if (!courseId) return;
     if (!catalog.has(courseId)) catalog.set(courseId, []);
     catalog.get(courseId).push(row);
-
-    // The same row indexed a second way. A room appears once per course
-    // that uses it, so the first sighting wins and the rest collapse
-    // onto it - this index is about the room, not the course.
-    const roomId = String(row.room_id || '').trim();
-    if (roomId && !allRooms.has(roomId)) allRooms.set(roomId, row);
   });
 
   select.innerHTML = '<option value="">Veldu námskeið…</option>';
