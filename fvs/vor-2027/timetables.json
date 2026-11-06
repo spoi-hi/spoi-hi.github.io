@@ -123,6 +123,16 @@
       "program": "Blaðamennska"
     },
     {
+      "name": "Fjármál (M.Fin), lota III",
+      "file": "fjarmal-m-fin-lota-iii.html",
+      "source": "0bbe706c",
+      "hash": "f3f07507a272bc6c",
+      "updated": "2026-11-06",
+      "dir": "vidskiptafraedideild",
+      "faculty": "Viðskiptafræðideild",
+      "program": ""
+    },
+    {
       "name": "Fjölmiðlafræði, aukagrein",
       "file": "fjolmidlafraedi-aukagrein.html",
       "source": "0bbe706c",
