@@ -26,8 +26,8 @@
       "name": "1. ár í mannfræði",
       "file": "1-ar-i-mannfraedi.html",
       "source": "0bbe706c",
-      "hash": "bff6f9017b4c718f",
-      "updated": "2026-11-06",
+      "hash": "32a42305de7c5159",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/mannfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Mannfræði"
@@ -36,8 +36,8 @@
       "name": "1. ár í stjórnmálafræði",
       "file": "1-ar-i-stjornmalafraedi.html",
       "source": "0bbe706c",
-      "hash": "7b4c6589e4500d7f",
-      "updated": "2026-11-06",
+      "hash": "73789faa05128f7a",
+      "updated": "2026-11-09",
       "dir": "stjornmalafraedideild/stjornmalafraedi",
       "faculty": "Stjórnmálafræðideild",
       "program": "Stjórnmálafræði"
@@ -46,8 +46,8 @@
       "name": "1. ár í þjóðfræði",
       "file": "1-ar-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "e3a65743fa564db2",
-      "updated": "2026-11-06",
+      "hash": "759a4f53fcff4a01",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/thjodfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Þjóðfræði"
@@ -56,8 +56,8 @@
       "name": "2. og 3. ár í félagsfræði",
       "file": "2-og-3-ar-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "fdcc556cbd09e139",
-      "updated": "2026-11-06",
+      "hash": "f2edefb93b8aff29",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/felagsfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Félagsfræði"
@@ -66,8 +66,8 @@
       "name": "2. og 3. ár í mannfræði",
       "file": "2-og-3-ar-i-mannfraedi.html",
       "source": "0bbe706c",
-      "hash": "b8fa611243448046",
-      "updated": "2026-11-06",
+      "hash": "a423db62547d889a",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/mannfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Mannfræði"
@@ -76,8 +76,8 @@
       "name": "2. og 3. ár í stjórnmálafræði",
       "file": "2-og-3-ar-i-stjornmalafraedi.html",
       "source": "0bbe706c",
-      "hash": "ddaae011350b3cc5",
-      "updated": "2026-11-06",
+      "hash": "6aa97d0783c08847",
+      "updated": "2026-11-09",
       "dir": "stjornmalafraedideild/stjornmalafraedi",
       "faculty": "Stjórnmálafræðideild",
       "program": "Stjórnmálafræði"
@@ -86,8 +86,8 @@
       "name": "2. og 3. ár í þjóðfræði",
       "file": "2-og-3-ar-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "ea21b6ab00337943",
-      "updated": "2026-11-06",
+      "hash": "46a162cfff921d82",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/thjodfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Þjóðfræði"
@@ -136,8 +136,8 @@
       "name": "Fjármál (M.Fin), lota IV",
       "file": "fjarmal-m-fin-lota-iv.html",
       "source": "0bbe706c",
-      "hash": "65121680c284059b",
-      "updated": "2026-11-06"
+      "hash": "1c392255bf8e3e85",
+      "updated": "2026-11-09"
     },
     {
       "name": "Fjölmiðlafræði, aukagrein",
@@ -193,8 +193,8 @@
       "name": "Hagfræði meistaranám, lota IV",
       "file": "hagfraedi-meistaranam-lota-iv.html",
       "source": "0bbe706c",
-      "hash": "caf8d165f8bed6fe",
-      "updated": "2026-11-06",
+      "hash": "c3e1a23b65040465",
+      "updated": "2026-11-09",
       "dir": "hagfraedideild",
       "faculty": "Hagfræðideild",
       "program": ""
@@ -213,8 +213,8 @@
       "name": "Kynjafræði, 60 eininga aukagrein",
       "file": "kynjafraedi-60-eininga-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "2c51f3c60045c51f",
-      "updated": "2026-11-06",
+      "hash": "8dfa6b8dd4ce53be",
+      "updated": "2026-11-09",
       "dir": "stjornmalafraedideild",
       "faculty": "Stjórnmálafræðideild",
       "program": ""
@@ -253,8 +253,8 @@
       "name": "MA og örnám í afbrotafræði",
       "file": "ma-og-ornam-i-afbrotafraedi.html",
       "source": "0bbe706c",
-      "hash": "1f0efbdbc6dbb5d3",
-      "updated": "2026-11-06",
+      "hash": "65910994eeebf558",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": ""
@@ -273,8 +273,8 @@
       "name": "MA og örnám í félagsfræði",
       "file": "ma-og-ornam-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "7f29ae5c2da034e7",
-      "updated": "2026-11-06",
+      "hash": "5a1c24bc7968f2f8",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": ""
@@ -283,8 +283,8 @@
       "name": "MA og örnám í þjóðfræði",
       "file": "ma-og-ornam-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "e0cb2f896313ee33",
-      "updated": "2026-11-06",
+      "hash": "cf1571147f643ee6",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/thjodfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Þjóðfræði"
@@ -293,8 +293,8 @@
       "name": "MA í aðferðafræði",
       "file": "ma-i-adferdafraedi.html",
       "source": "0bbe706c",
-      "hash": "cba213488c64900b",
-      "updated": "2026-11-06",
+      "hash": "3d5bf11cb54752b6",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": ""
@@ -303,8 +303,8 @@
       "name": "MA í kynjafræði og örnám í hagnýtri jafnréttisfræði",
       "file": "ma-i-kynjafraedi-og-ornam-i-hagnytri-jafnrettisfraedi.html",
       "source": "0bbe706c",
-      "hash": "d9c48fc17d93bb4b",
-      "updated": "2026-11-06",
+      "hash": "62ce8914320638a9",
+      "updated": "2026-11-09",
       "dir": "stjornmalafraedideild",
       "faculty": "Stjórnmálafræðideild",
       "program": ""
@@ -313,8 +313,8 @@
       "name": "MA í mannfræði og í hnattrænum fræðum",
       "file": "ma-i-mannfraedi-og-i-hnattraenum-fraedum.html",
       "source": "0bbe706c",
-      "hash": "a781862a2c254e4c",
-      "updated": "2026-11-06",
+      "hash": "ae5f254e97d8bbc7",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": ""
@@ -323,8 +323,8 @@
       "name": "MA í náms- og starfsráðgjöf, 1. ár",
       "file": "ma-i-nams-og-starfsradgjof-1-ar.html",
       "source": "0bbe706c",
-      "hash": "0c50ca7170340ab6",
-      "updated": "2026-11-04",
+      "hash": "f2ff5e6ccaea0526",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": ""
@@ -333,8 +333,8 @@
       "name": "MA í náms- og starfsráðgjöf, 2. ár",
       "file": "ma-i-nams-og-starfsradgjof-2-ar.html",
       "source": "0bbe706c",
-      "hash": "2a7d490aab21baca",
-      "updated": "2026-11-04",
+      "hash": "a57d6e14e67170b0",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": ""
@@ -353,8 +353,8 @@
       "name": "MA, MIS og örnám í upplýsingafræði",
       "file": "ma-mis-og-ornam-i-upplysingafraedi.html",
       "source": "0bbe706c",
-      "hash": "8509793541e144f2",
-      "updated": "2026-11-04",
+      "hash": "df7ce4b03890d333",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": ""
@@ -383,8 +383,8 @@
       "name": "MPA og örnám í opinberri stjórnsýslu",
       "file": "mpa-og-ornam-i-opinberri-stjornsyslu.html",
       "source": "0bbe706c",
-      "hash": "62014edd83b6d241",
-      "updated": "2026-11-06",
+      "hash": "320d8722416dc52e",
+      "updated": "2026-11-09",
       "dir": "stjornmalafraedideild",
       "faculty": "Stjórnmálafræðideild",
       "program": ""
@@ -393,8 +393,8 @@
       "name": "MS í reikningsskilum og endurskoðun, lotur III og IV",
       "file": "ms-i-reikningsskilum-og-endurskodun-lotur-iii-og-iv.html",
       "source": "0bbe706c",
-      "hash": "22a6ba3687672635",
-      "updated": "2026-11-06",
+      "hash": "545c6d2e4e43e297",
+      "updated": "2026-11-09",
       "dir": "vidskiptafraedideild",
       "faculty": "Viðskiptafræðideild",
       "program": ""
@@ -403,8 +403,8 @@
       "name": "Safnafræði, 60 eininga aukagrein",
       "file": "safnafraedi-60-eininga-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "56a9d7811937ae78",
-      "updated": "2026-11-06",
+      "hash": "ae21cbb952ce1c6d",
+      "updated": "2026-11-09",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/safnafraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Safnafræði"
@@ -413,8 +413,8 @@
       "name": "Viðskiptafræði 1. ár (öll kjörsvið)",
       "file": "vidskiptafraedi-1-ar-oll-kjorsvid.html",
       "source": "0bbe706c",
-      "hash": "4e6de1b53d41386a",
-      "updated": "2026-11-04",
+      "hash": "3df9f67c31bdc1f2",
+      "updated": "2026-11-09",
       "dir": "vidskiptafraedideild/vidskiptafraedi",
       "faculty": "Viðskiptafræðideild",
       "program": "Viðskiptafræði"
@@ -438,6 +438,16 @@
       "dir": "vidskiptafraedideild/vidskiptafraedi",
       "faculty": "Viðskiptafræðideild",
       "program": "Viðskiptafræði"
+    },
+    {
+      "name": "Örnám í félagsráðgjöf (staðlotur)",
+      "file": "ornam-i-felagsradgjof-stadlotur.html",
+      "source": "0bbe706c",
+      "hash": "6470dcbe804ef3e7",
+      "updated": "2026-11-09",
+      "dir": "felagsradgjafardeild",
+      "faculty": "Félagsráðgjafardeild",
+      "program": ""
     }
   ]
 }
