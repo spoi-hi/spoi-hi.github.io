@@ -424,3 +424,22 @@ textarea { resize: vertical; }
 .teacher-table tbody th { text-align: left; font-weight: 700; position: sticky; left: 0; background: var(--surface); }
 .teacher-table tr.not-teaching th, .teacher-table tr.not-teaching td { opacity: 0.55; }
 .teacher-table input { width: 18px; height: 18px; margin: 0; cursor: pointer; }
+
+/* The teachers' video under the lede, folded until asked for. */
+.help-video { margin: -8px 0 20px; max-width: 62ch; }
+.help-video > summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+  list-style: none;
+}
+.help-video > summary::-webkit-details-marker { display: none; }
+.help-video > summary::before { content: '\25B6\FE0E  '; font-size: .8em; }
+.help-video[open] > summary::before { content: '\25BC\FE0E  '; }
+.help-video video {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 8px;
+  background: #000;
+}
