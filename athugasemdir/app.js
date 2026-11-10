@@ -17,11 +17,12 @@ const CONFIG = {
   apiUrl: 'https://script.google.com/macros/s/AKfycbzgHtN6imSwNb9QPJBMKMC7IonETyfbCZ3vAyGTyfBg3DiqW5Ls5Ocm4zsRT-WN1hW9/exec',
 
   schools: [
-    { value: 'von', label: 'VoN - Verkfræði- og náttúruvísindasvið' },
-    { value: 'fvs', label: 'FVS - Félagsvísindasvið' },
-    { value: 'hug', label: 'HUG - Hugvísindasvið' },
-    { value: 'mvs', label: 'MVS - Menntavísindasvið' },
-    { value: 'hvs', label: 'HVS - Heilbrigðisvísindasvið' }
+    { value: 'von', label: 'VoN - Verkfræði- og náttúruvísindasvið',
+      en: 'VoN - School of Engineering and Natural Sciences' },
+    { value: 'fvs', label: 'FVS - Félagsvísindasvið', en: 'FVS - School of Social Sciences' },
+    { value: 'hug', label: 'HUG - Hugvísindasvið', en: 'HUG - School of Humanities' },
+    { value: 'mvs', label: 'MVS - Menntavísindasvið', en: 'MVS - School of Education' },
+    { value: 'hvs', label: 'HVS - Heilbrigðisvísindasvið', en: 'HVS - School of Health Sciences' }
   ],
 
   // ISO weeks, per semester. The selected term picks the range, and
@@ -43,12 +44,13 @@ const CONFIG = {
   firstSlot: 0,
   lastSlot: 8,
 
+  // token is what is sent and never changes with the page's language.
   days: [
-    { token: 'mán', label: 'Mán' },
-    { token: 'þri', label: 'Þri' },
-    { token: 'mið', label: 'Mið' },
-    { token: 'fim', label: 'Fim' },
-    { token: 'fös', label: 'Fös' }
+    { token: 'mán', label: 'Mán', en: 'Mon' },
+    { token: 'þri', label: 'Þri', en: 'Tue' },
+    { token: 'mið', label: 'Mið', en: 'Wed' },
+    { token: 'fim', label: 'Fim', en: 'Thu' },
+    { token: 'fös', label: 'Fös', en: 'Fri' }
   ],
 
   // No caps on how many rooms or times a teacher marks: an answer is a
@@ -104,6 +106,31 @@ const state = {
 
 const el = (id) => document.getElementById(id);
 
+/* ---------- language ---------------------------------------------- */
+
+// Icelandic unless ?lang=en, or the switch in the header (remembered in
+// this browser), asks for English. Only what the page SHOWS changes: what
+// it sends - day tokens, session-type codes, room ids, the teacher's own
+// words - is the same in both, so the office reads one kind of answer.
+// The script's own error replies stay Icelandic.
+// The site's own key (assets/site.js), so a language chosen on the front
+// page carries over here and back.
+const LANG_KEY = 'spoi-lang';
+
+function initialLang() {
+  const asked = new URLSearchParams(location.search).get('lang');
+  if (asked === 'en' || asked === 'is') return asked;
+  try {
+    const saved = localStorage.getItem(LANG_KEY);
+    if (saved === 'en' || saved === 'is') return saved;
+  } catch (error) { /* storage blocked: Icelandic */ }
+  return 'is';
+}
+
+let lang = initialLang();
+const tr = (is, en) => (lang === 'en' ? en : is);
+const dayLabel = (day) => (lang === 'en' ? day.en : day.label);
+
 // "V", "v", "vor" all name one semester; the query string is typed by a
 // person and the sheet is filled in by another, so neither is guaranteed
 // to be the bare letter this compares on.
@@ -122,7 +149,9 @@ const semesterLetter = (value) => {
 function termLabel(term) {
   if (!term || !term.year) return '';
   const year = Number(term.year);
-  const names = { H: 'Haust', V: 'Vor', S: 'Sumar' };
+  const names = lang === 'en'
+    ? { H: 'Autumn', V: 'Spring', S: 'Summer' }
+    : { H: 'Haust', V: 'Vor', S: 'Sumar' };
   const name = names[term.semester] || term.semester;
   return name + ' ' + (term.semester === 'H' ? year : year + 1);
 }
@@ -231,13 +260,25 @@ function mondayOfIsoWeek(year, week) {
 
 const MONTHS_IS = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí',
                    'ágúst', 'september', 'október', 'nóvember', 'desember'];
+const MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+                   'August', 'September', 'October', 'November', 'December'];
 
 function shortDate(date) {
-  return date.getUTCDate() + '.' + (date.getUTCMonth() + 1) + '.';
+  return lang === 'en'
+    ? date.getUTCDate() + '/' + (date.getUTCMonth() + 1)
+    : date.getUTCDate() + '.' + (date.getUTCMonth() + 1) + '.';
 }
 
 function longDate(date) {
-  return date.getUTCDate() + '. ' + MONTHS_IS[date.getUTCMonth()];
+  return lang === 'en'
+    ? date.getUTCDate() + ' ' + MONTHS_EN[date.getUTCMonth()]
+    : date.getUTCDate() + '. ' + MONTHS_IS[date.getUTCMonth()];
+}
+
+// "Vika 34 hefst mánudaginn 17. ágúst" / "Week 34 starts on Monday 17 August".
+function weekStartsText(week, monday) {
+  return tr('Vika ' + week + ' hefst mánudaginn ', 'Week ' + week + ' starts on Monday ')
+    + longDate(monday);
 }
 
 function setStatus(message, kind) {
@@ -290,14 +331,16 @@ function keysWith(map, value) {
 
 function renderSchools() {
   const select = el('school');
+  // Redrawn when the language changes: the school already chosen stays.
+  const current = select.value;
   select.innerHTML = '';
   CONFIG.schools.forEach((school) => {
     const option = document.createElement('option');
     option.value = school.value;
-    option.textContent = school.label;
+    option.textContent = lang === 'en' ? school.en : school.label;
     select.appendChild(option);
   });
-  const preset = new URLSearchParams(location.search).get('school');
+  const preset = current || new URLSearchParams(location.search).get('school');
   if (preset) select.value = preset;
 }
 
@@ -330,10 +373,15 @@ function calendarWeeksHint() {
   hint.className = 'hint plan-weeks-hint';
   const link = document.createElement('a');
   link.href = '#weeksCard';
-  link.textContent = '3. Vikur';
-  hint.append('Almanaksvikur, ekki kennsluvikur: vika ' + range.from + ' hefst mánudaginn '
-    + longDate(mondayOfIsoWeek(calendarYearForWeeks(), range.from))
-    + '. Í ', link, ' hér fyrir neðan sést dagsetning hverrar viku.');
+  link.textContent = tr('3. Vikur', '3. Weeks');
+  const start = weekStartsText(range.from, mondayOfIsoWeek(calendarYearForWeeks(), range.from));
+  if (lang === 'en') {
+    hint.append('Calendar weeks, not teaching weeks: ' + start.charAt(0).toLowerCase() + start.slice(1)
+      + '. ', link, ' below shows the date of every week.');
+  } else {
+    hint.append('Almanaksvikur, ekki kennsluvikur: ' + start.charAt(0).toLowerCase() + start.slice(1)
+      + '. Í ', link, ' hér fyrir neðan sést dagsetning hverrar viku.');
+  }
   return hint;
 }
 
@@ -359,7 +407,7 @@ function renderWeeks() {
     date.className = 'week-date';
     date.textContent = shortDate(monday);
     button.append(number, date);
-    button.title = 'Vika ' + week + ' hefst mánudaginn ' + longDate(monday);
+    button.title = weekStartsText(week, monday);
 
     button.onclick = () => {
       if (state.weeks.has(week)) state.weeks.delete(week);
@@ -371,8 +419,8 @@ function renderWeeks() {
   }
 
   el('weekAnchor').textContent =
-    'Almanaksvikur (ekki kennsluvikur). Vika ' + range.from + ' hefst mánudaginn '
-    + longDate(mondayOfIsoWeek(year, range.from)) + '.';
+    tr('Almanaksvikur (ekki kennsluvikur). ', 'Calendar weeks (not teaching weeks). ')
+    + weekStartsText(range.from, mondayOfIsoWeek(year, range.from)) + '.';
 }
 
 function renderSlots() {
@@ -383,7 +431,7 @@ function renderSlots() {
   CONFIG.days.forEach((day) => {
     const head = document.createElement('div');
     head.className = 'slot-head';
-    head.textContent = day.label;
+    head.textContent = dayLabel(day);
     target.appendChild(head);
   });
 
@@ -401,8 +449,9 @@ function renderSlots() {
       button.className = 'slot-btn'
         + (value === 'prefer' ? ' preferred' : '')
         + (value === 'avoid' ? ' blocked' : '');
-      button.textContent = value === 'prefer' ? 'Hentar' : (value === 'avoid' ? 'Ekki' : '');
-      button.title = day.label + ' ' + slotLabel(slot);
+      button.textContent = value === 'prefer' ? tr('Hentar', 'Suits')
+        : (value === 'avoid' ? tr('Ekki', 'Not') : '');
+      button.title = dayLabel(day) + ' ' + slotLabel(slot);
       button.onclick = () => {
         cycle(state.slots, token, null, null);
         setStatus('');
@@ -465,8 +514,8 @@ function renderCourseResults(open) {
     const empty = document.createElement('li');
     empty.className = 'combo-empty';
     empty.textContent = !catalog.size
-      ? 'Engin námskeið skráð fyrir þetta svið enn.'
-      : (visibleCourseIds().length ? 'Ekkert námskeið fannst.' : courseHintText());
+      ? tr('Engin námskeið skráð fyrir þetta svið enn.', 'No courses listed for this school yet.')
+      : (visibleCourseIds().length ? tr('Ekkert námskeið fannst.', 'No course found.') : courseHintText());
     list.appendChild(empty);
   } else {
     courseMatches.forEach((courseId, index) => {
@@ -504,21 +553,43 @@ function visibleCourseIds() {
 }
 
 function courseHintText() {
-  const forTerm = state.term ? ' á ' + termLabel(state.term).toLowerCase() : '';
-  if (!catalog.size) return 'Engin námskeið skráð fyrir þetta svið' + forTerm + ' enn.';
-  if (state.myCoursesError) return 'Villa: ' + state.myCoursesError;
+  const en = lang === 'en';
+  const forTerm = state.term
+    ? (en ? ' for ' : ' á ') + termLabel(state.term).toLowerCase() : '';
+  if (!catalog.size) {
+    return en ? 'No courses listed for this school' + forTerm + ' yet.'
+      : 'Engin námskeið skráð fyrir þetta svið' + forTerm + ' enn.';
+  }
+  if (state.myCoursesError) {
+    return en ? 'Error: could not fetch your courses (' + state.myCoursesError + ').'
+      : 'Villa: Tókst ekki að sækja námskeiðin þín (' + state.myCoursesError + ').';
+  }
   if (state.myCourses === null) {
-    return validSsn() ? 'Sæki námskeiðin þín…' : 'Sláðu inn kennitölu til að sjá námskeiðin þín.';
+    if (validSsn()) return tr('Sæki námskeiðin þín…', 'Fetching your courses…');
+    return tr('Sláðu inn kennitölu til að sjá námskeiðin þín.',
+      'Type your kennitala to see your courses.');
   }
   const count = visibleCourseIds().length;
-  if (!state.myCoursesEnforced) return count + ' námskeið í boði fyrir þetta svið' + forTerm + '.';
+  if (!state.myCoursesEnforced) {
+    return en ? count + (count === 1 ? ' course' : ' courses') + ' offered for this school' + forTerm + '.'
+      : count + ' námskeið í boði fyrir þetta svið' + forTerm + '.';
+  }
   if (count) {
-    return 'Þú ert skráð/ur á ' + count + ' námskeið' + forTerm + ' á þessu sviði.';
+    return en ? 'You are registered on ' + count + (count === 1 ? ' course' : ' courses') + forTerm
+        + ' in this school.'
+      : 'Þú ert skráð/ur á ' + count + ' námskeið' + forTerm + ' á þessu sviði.';
   }
   const school = el('school').value.toLowerCase();
   const elsewhere = Array.from(new Set(state.myCourses
     .map((c) => String(c.school || '').toUpperCase())
     .filter((name) => name && name.toLowerCase() !== school)));
+  if (en) {
+    return elsewhere.length
+      ? 'You are not registered on a course in this school' + forTerm + ', but in '
+        + elsewhere.join(', ') + '. Choose that school above.'
+      : 'You are not registered as a teacher on any course' + forTerm
+        + '. Contact your school\'s office to be registered in Ugla.';
+  }
   return elsewhere.length
     ? 'Þú ert ekki skráð/ur á námskeið á þessu sviði' + forTerm + ', en á ' + elsewhere.join(', ')
       + '. Veldu það svið hér að ofan.'
@@ -565,14 +636,14 @@ async function loadMyCourses() {
     });
     const body = await response.json();
     if (request !== myCoursesRequest) return;  // a newer kennitala or term won
-    if (!body.ok) throw new Error(body.error || 'Óþekkt villa');
+    if (!body.ok) throw new Error(body.error || tr('Óþekkt villa', 'Unknown error'));
     // A script deployed before this lookup existed answers as if it were a
     // wish; without "enforced" in the reply, nothing is filtered.
     state.myCoursesEnforced = body.enforced !== false && Array.isArray(body.courses);
     state.myCourses = Array.isArray(body.courses) ? body.courses : [];
   } catch (error) {
     if (request !== myCoursesRequest) return;
-    state.myCoursesError = 'Tókst ekki að sækja námskeiðin þín (' + error.message + ').';
+    state.myCoursesError = error.message;
   }
   renderCourseHint();
 }
@@ -643,7 +714,8 @@ async function loadPlan() {
   el('planList').innerHTML = '';
   proposal.sessions = [];
   if (!courseId || !state.term) return;
-  el('planHint').textContent = 'Sæki drög…';
+  proposal.loaded = false;
+  el('planHint').textContent = tr('Sæki drög…', 'Fetching the draft…');
   try {
     const url = CONFIG.apiUrl + '?school=' + encodeURIComponent(el('school').value)
       + '&year=' + encodeURIComponent(state.term.year)
@@ -651,11 +723,12 @@ async function loadPlan() {
       + '&course=' + encodeURIComponent(courseId);
     const body = await (await fetch(url)).json();
     if (request !== planRequest) return;  // another course was picked since
-    if (!body.ok) throw new Error(body.error || 'Óþekkt villa');
+    if (!body.ok) throw new Error(body.error || tr('Óþekkt villa', 'Unknown error'));
     renderPlan(body.plan || []);
   } catch (error) {
     if (request !== planRequest) return;
-    el('planHint').textContent = 'Tókst ekki að sækja drögin (' + error.message + ').';
+    el('planHint').textContent = tr('Tókst ekki að sækja drögin (', 'Could not fetch the draft (')
+      + error.message + ').';
   }
 }
 
@@ -689,7 +762,6 @@ function planSessions(rows) {
       start: Number.isFinite(start) ? start : -1,
       length: length,
       typeCode: type,
-      type: TYPE_LABELS[type] || 'Óskilgreind tegund',
       room: String(row.room || ''),
       teachers: String(row.teachers || '').split('::').filter(Boolean),
       weeks: String(row.weeks || '').split('::').map(Number).filter((week) => week > 0)
@@ -698,8 +770,8 @@ function planSessions(rows) {
 }
 
 function sessionTimeText(session) {
-  if (session.start < 0) return 'Ekki tímasett';
-  const day = CONFIG.days[session.dayIndex].label;
+  if (session.start < 0) return tr('Ekki tímasett', 'No time set');
+  const day = dayLabel(CONFIG.days[session.dayIndex]);
   const end = CONFIG.slotZeroStartMinutes + (session.start + session.length) * CONFIG.slotStepMinutes - 10;
   return day + ' ' + slotLabel(session.start) + '\u2013'
     + String(Math.floor(end / 60)).padStart(2, '0') + ':' + String(end % 60).padStart(2, '0');
@@ -713,6 +785,8 @@ function sessionTimeText(session) {
 const proposal = {
   sessions: [],
   updated: '',
+  // The plan has been fetched and drawn for the chosen course.
+  loaded: false,
   // session_id -> { op: 'change'|'remove', slot, n_timeslot, weeksText, note }
   changes: new Map(),
   // [{ type, slot, n_timeslot, weeksText, note }]
@@ -731,6 +805,7 @@ function resetProposal() {
 function renderPlan(rows) {
   proposal.sessions = planSessions(rows);
   proposal.updated = rows.length ? String(rows[0].updated || '') : '';
+  proposal.loaded = true;
   renderPlanView();
 }
 
@@ -772,13 +847,19 @@ function proposedSession(base, change) {
     start: where.start,
     length: change.n_timeslot,
     typeCode: typeCode,
-    type: TYPE_LABELS[typeCode] || base.type || 'Óskilgreind tegund',
     weeks: weeks.length ? weeks : (base.weeks || [])
   });
 }
 
+// A session type's name in the page's language; a code Spoi has no
+// teaching name for (a test, a blank) is "Óskilgreind tegund".
+function typeName(code) {
+  if (!TYPE_LABELS[code]) return tr('Óskilgreind tegund', 'Unspecified type');
+  return lang === 'en' ? TYPE_LABELS_EN[code] : TYPE_LABELS[code];
+}
+
 function sessionLabel(session) {
-  return (session.name || session.type) + ' (' + sessionTimeText(session) + ')';
+  return (session.name || typeName(session.typeCode)) + ' (' + sessionTimeText(session) + ')';
 }
 
 // One line per proposed change, for the list, the summary and the
@@ -789,21 +870,21 @@ function proposalLines() {
     const change = proposal.changes.get(session.id);
     if (!change) return;
     if (change.op === 'remove') {
-      lines.push('Fella niður: ' + sessionLabel(session) + (change.note ? ' - ' + change.note : ''));
+      lines.push(tr('Fella niður: ', 'Cancel: ') + sessionLabel(session) + (change.note ? ' - ' + change.note : ''));
       return;
     }
     const next = proposedSession(session, change);
     const weeks = parseWeeksText(change.weeksText);
     lines.push(sessionLabel(session) + ' → '
-      + (next.typeCode !== session.typeCode ? next.type + ' ' : '') + sessionTimeText(next)
-      + (weeks.length ? ', almanaksvikur ' + weekRangesText(weeks) : '')
+      + (next.typeCode !== session.typeCode ? typeName(next.typeCode) + ' ' : '') + sessionTimeText(next)
+      + (weeks.length ? tr(', almanaksvikur ', ', calendar weeks ') + weekRangesText(weeks) : '')
       + (change.note ? ' - ' + change.note : ''));
   });
   proposal.added.forEach((item) => {
     const next = proposedSession({ typeCode: item.type, weeks: [], teachers: [] }, item);
     const weeks = parseWeeksText(item.weeksText);
-    lines.push('Nýr tími: ' + next.type + ' ' + sessionTimeText(next)
-      + (weeks.length ? ', almanaksvikur ' + weekRangesText(weeks) : '')
+    lines.push(tr('Nýr tími: ', 'New session: ') + typeName(next.typeCode) + ' ' + sessionTimeText(next)
+      + (weeks.length ? tr(', almanaksvikur ', ', calendar weeks ') + weekRangesText(weeks) : '')
       + (item.note ? ' - ' + item.note : ''));
   });
   return lines;
@@ -831,12 +912,19 @@ function sessionChangesPayload() {
 function renderPlanView() {
   const sessions = proposal.sessions;
   const updated = proposal.updated;
-  el('planHint').textContent = (sessions.length
-    ? 'Tímar námskeiðsins eins og þeir standa núna í Spóa' + (updated ? ' (drög frá ' + updated + ')' : '')
-      + '. Geta enn breyst - athugasemdir þínar hér fyrir neðan eru teknar með.'
-    : 'Engir tímar skráðir fyrir námskeiðið í Spóa enn.')
-    + ' Þú getur lagt til breytingar á tímunum, eða nýjan tíma - stundatöfluhaldari fer yfir þær.'
-    + ' Vikurnar eru almanaksvikur, ekki kennsluvikur - dagsetningar hverrar viku eru í 3. Vikur.';
+  el('planHint').textContent = lang === 'en'
+    ? (sessions.length
+      ? 'The course\'s sessions as they stand in Spói now' + (updated ? ' (draft of ' + updated + ')' : '')
+        + '. They may still change - your answers below are taken into account.'
+      : 'No sessions registered for the course in Spói yet.')
+      + ' You can propose changes to the sessions, or a new session - the timetabler reviews them.'
+      + ' The weeks are calendar weeks, not teaching weeks - the date of every week is in 3. Weeks.'
+    : (sessions.length
+      ? 'Tímar námskeiðsins eins og þeir standa núna í Spóa' + (updated ? ' (drög frá ' + updated + ')' : '')
+        + '. Geta enn breyst - athugasemdir þínar hér fyrir neðan eru teknar með.'
+      : 'Engir tímar skráðir fyrir námskeiðið í Spóa enn.')
+      + ' Þú getur lagt til breytingar á tímunum, eða nýjan tíma - stundatöfluhaldari fer yfir þær.'
+      + ' Vikurnar eru almanaksvikur, ekki kennsluvikur - dagsetningar hverrar viku eru í 3. Vikur.';
 
   // What the grid draws: each session as it is (faded when the teacher
   // changes or drops it), and each proposed session dashed.
@@ -884,7 +972,7 @@ function renderPlanView() {
     CONFIG.days.forEach((day, index) => {
       const head = document.createElement('div');
       head.className = 'plan-head';
-      head.textContent = day.label;
+      head.textContent = dayLabel(day);
       head.style.gridColumn = dayColumn[index] + ' / span ' + Math.max(1, lanesByDay[index].length);
       head.style.gridRow = '1';
       grid.appendChild(head);
@@ -912,18 +1000,19 @@ function renderPlanView() {
       // (style.css) - the list below spells everything out either way.
       const long = document.createElement('span');
       long.className = 'plan-long';
-      long.textContent = (session.variant === 'proposed' ? 'Tillaga: ' : '') + session.type;
+      long.textContent = (session.variant === 'proposed' ? tr('Tillaga: ', 'Proposal: ') : '')
+        + typeName(session.typeCode);
       const short = document.createElement('span');
       short.className = 'plan-short';
-      short.textContent = TYPE_SHORT[session.typeCode] || '?';
+      short.textContent = (lang === 'en' ? TYPE_SHORT_EN : TYPE_SHORT)[session.typeCode] || '?';
       const who = document.createElement('span');
       who.className = 'plan-who';
       who.textContent = (session.teachers || []).join(', ');
       block.append(long, short, who);
-      block.title = (session.variant === 'proposed' ? 'Tillaga: ' : '')
-        + sessionTimeText(session) + ' · ' + session.type
+      block.title = (session.variant === 'proposed' ? tr('Tillaga: ', 'Proposal: ') : '')
+        + sessionTimeText(session) + ' · ' + typeName(session.typeCode)
         + (session.room ? ' · ' + session.room : '')
-        + (session.weeks.length ? ' · almanaksvikur ' + weekRangesText(session.weeks) : '');
+        + (session.weeks.length ? tr(' · almanaksvikur ', ' · calendar weeks ') + weekRangesText(session.weeks) : '');
       grid.appendChild(block);
     });
   }
@@ -942,26 +1031,29 @@ function renderPlanView() {
       text.textContent = [
         session.name,
         sessionTimeText(session),
-        session.type,
-        session.teachers.length ? session.teachers.join(', ') : 'enginn kennari skráður',
+        typeName(session.typeCode),
+        session.teachers.length ? session.teachers.join(', ') : tr('enginn kennari skráður', 'no teacher registered'),
         session.room,
-        session.weeks.length ? 'almanaksvikur ' + weekRangesText(session.weeks) : ''
+        session.weeks.length ? tr('almanaksvikur ', 'calendar weeks ') + weekRangesText(session.weeks) : ''
       ].filter(Boolean).join(' · ');
       item.appendChild(text);
       if (change) {
         const line = document.createElement('span');
         line.className = 'plan-item-proposal';
         line.textContent = change.op === 'remove'
-          ? 'Tillaga: fella niður'
-          : 'Tillaga: ' + (change.type && change.type !== session.typeCode ? TYPE_LABELS[change.type] + ' · ' : '')
+          ? tr('Tillaga: fella niður', 'Proposal: cancel')
+          : tr('Tillaga: ', 'Proposal: ')
+            + (change.type && change.type !== session.typeCode ? typeName(change.type) + ' · ' : '')
             + sessionTimeText(proposedSession(session, change))
-            + (parseWeeksText(change.weeksText).length ? ', almanaksvikur ' + weekRangesText(parseWeeksText(change.weeksText)) : '');
+            + (parseWeeksText(change.weeksText).length
+              ? tr(', almanaksvikur ', ', calendar weeks ') + weekRangesText(parseWeeksText(change.weeksText)) : '');
         item.appendChild(line);
       }
       if (session.id) {
-        item.appendChild(planButton(change ? 'Breyta tillögu' : 'Leggja til breytingu',
+        item.appendChild(planButton(change ? tr('Breyta tillögu', 'Edit proposal')
+          : tr('Leggja til breytingu', 'Propose a change'),
           () => openEditor({ kind: 'change', id: session.id })));
-        if (change) item.appendChild(planButton('Afturkalla', () => {
+        if (change) item.appendChild(planButton(tr('Afturkalla', 'Undo'), () => {
           proposal.changes.delete(session.id);
           closeEditor();
         }));
@@ -974,17 +1066,18 @@ function renderPlanView() {
     const line = document.createElement('span');
     line.className = 'plan-item-proposal';
     const next = proposedSession({ typeCode: added.type, weeks: [], teachers: [] }, added);
-    line.textContent = 'Nýr tími (tillaga): ' + next.type + ' · ' + sessionTimeText(next)
-      + (next.weeks.length ? ' · almanaksvikur ' + weekRangesText(next.weeks) : '');
+    line.textContent = tr('Nýr tími (tillaga): ', 'New session (proposal): ') + typeName(next.typeCode)
+      + ' · ' + sessionTimeText(next)
+      + (next.weeks.length ? tr(' · almanaksvikur ', ' · calendar weeks ') + weekRangesText(next.weeks) : '');
     item.appendChild(line);
-    item.appendChild(planButton('Breyta', () => openEditor({ kind: 'add', index })));
-    item.appendChild(planButton('Eyða', () => {
+    item.appendChild(planButton(tr('Breyta', 'Edit'), () => openEditor({ kind: 'add', index })));
+    item.appendChild(planButton(tr('Eyða', 'Delete'), () => {
       proposal.added.splice(index, 1);
       closeEditor();
     }));
     list.appendChild(item);
   });
-  const add = planButton('+ Leggja til nýjan tíma', () => {
+  const add = planButton(tr('+ Leggja til nýjan tíma', '+ Propose a new session'), () => {
     proposal.added.push({ type: 'du', slot: '', n_timeslot: 1, weeksText: '', note: '' });
     openEditor({ kind: 'add', index: proposal.added.length - 1 });
   });
@@ -1011,7 +1104,8 @@ function closeEditor() {
 // The editor for one change or one new session. Built once per opening and
 // not redrawn while typing (that would take the cursor away); each input
 // updates the proposal and redraws only the grid and list.
-function openEditor(target) {
+// quiet: redrawn in place (the language changed), so no scrolling to it.
+function openEditor(target, quiet) {
   proposal.editing = target;
   const isAdd = target.kind === 'add';
   const base = isAdd ? null : proposal.sessions.find((session) => session.id === target.id);
@@ -1030,7 +1124,8 @@ function openEditor(target) {
   box.innerHTML = '';
   box.hidden = false;
   const title = document.createElement('h3');
-  title.textContent = isAdd ? 'Nýr tími (tillaga)' : 'Tillaga um ' + sessionLabel(base);
+  title.textContent = isAdd ? tr('Nýr tími (tillaga)', 'New session (proposal)')
+    : tr('Tillaga um ', 'Proposal for ') + sessionLabel(base);
   box.appendChild(title);
 
   const field = (labelText, control) => {
@@ -1057,35 +1152,38 @@ function openEditor(target) {
   // Any teaching type, for a new session and for an existing one (a
   // lecture that should be a dæmatími). A session of some other or no
   // type (a test, "Óskilgreind tegund") offers its own first, as Óbreytt.
-  const typeOptions = Object.keys(TYPE_LABELS).map((code) => [code, TYPE_LABELS[code]]);
-  if (!isAdd && !TYPE_LABELS[base.typeCode]) typeOptions.unshift([base.typeCode, 'Óbreytt (' + base.type + ')']);
-  const typeSelect = field('Tegund', select(typeOptions, isAdd ? entry.type : entry.type || base.typeCode));
+  const typeOptions = Object.keys(TYPE_LABELS).map((code) => [code, typeName(code)]);
+  if (!isAdd && !TYPE_LABELS[base.typeCode]) {
+    typeOptions.unshift([base.typeCode, tr('Óbreytt (', 'Unchanged (') + typeName(base.typeCode) + ')']);
+  }
+  const typeSelect = field(tr('Tegund', 'Type'), select(typeOptions, isAdd ? entry.type : entry.type || base.typeCode));
   let removeBox = null;
   if (!isAdd) {
     removeBox = document.createElement('input');
     removeBox.type = 'checkbox';
     removeBox.checked = entry.op === 'remove';
-    field('Fella tímann niður', removeBox);
+    field(tr('Fella tímann niður', 'Cancel the session'), removeBox);
   }
   const where = parseSlotToken(entry.slot);
-  const daySelect = field('Dagur', select([[-1, 'Ekki tímasett']].concat(
-    CONFIG.days.map((day, index) => [index, day.label])), where.dayIndex));
-  const startSelect = field('Byrjar', select([], 0));
-  const lengthSelect = field('Lengd', select([1, 2, 3, 4].map((n) =>
-    [n, n + (n === 1 ? ' tími' : ' tímar') + ' (' + (n * 50 - 10) + ' mín)']), entry.n_timeslot));
+  const daySelect = field(tr('Dagur', 'Day'), select([[-1, tr('Ekki tímasett', 'No time set')]].concat(
+    CONFIG.days.map((day, index) => [index, dayLabel(day)])), where.dayIndex));
+  const startSelect = field(tr('Byrjar', 'Starts'), select([], 0));
+  const lengthSelect = field(tr('Lengd', 'Length'), select([1, 2, 3, 4].map((n) =>
+    [n, n + (n === 1 ? tr(' tími', ' period') : tr(' tímar', ' periods'))
+      + ' (' + (n * 50 - 10) + tr(' mín)', ' min)')]), entry.n_timeslot));
   const weeksInput = document.createElement('input');
   weeksInput.type = 'text';
-  weeksInput.placeholder = isAdd ? 't.d. ' + weekRangeText(weekRangeFromQuery())
-    : 'autt = óbreytt, t.d. ' + weekRangeText(weekRangeFromQuery());
+  weeksInput.placeholder = isAdd ? tr('t.d. ', 'e.g. ') + weekRangeText(weekRangeFromQuery())
+    : tr('autt = óbreytt, t.d. ', 'blank = unchanged, e.g. ') + weekRangeText(weekRangeFromQuery());
   weeksInput.value = entry.weeksText;
-  field('Almanaksvikur', weeksInput);
+  field(tr('Almanaksvikur', 'Calendar weeks'), weeksInput);
   box.appendChild(calendarWeeksHint());
   const noteInput = document.createElement('input');
   noteInput.type = 'text';
   noteInput.maxLength = 500;
-  noteInput.placeholder = 'Af hverju? (valfrjálst)';
+  noteInput.placeholder = tr('Af hverju? (valfrjálst)', 'Why? (optional)');
   noteInput.value = entry.note;
-  field('Skýring', noteInput);
+  field(tr('Skýring', 'Reason'), noteInput);
 
   // Start times that leave the session inside the day's grid.
   const fillStarts = (keep) => {
@@ -1132,11 +1230,11 @@ function openEditor(target) {
     .forEach((control) => control.addEventListener('change', update));
   [weeksInput, noteInput].forEach((control) => control.addEventListener('input', update));
 
-  const done = planButton('Lokið', closeEditor);
+  const done = planButton(tr('Lokið', 'Done'), closeEditor);
   done.classList.add('plan-done');
   box.appendChild(done);
   update();
-  box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  if (!quiet) box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
 // Every room this course may be given: the prefill's own list plus
@@ -1167,10 +1265,11 @@ function roomButton(row, isExtra) {
 
   const meta = document.createElement('span');
   meta.className = 'room-meta';
-  const bits = [row.building, row.capacity ? row.capacity + ' sæti' : ''].filter(Boolean);
+  const bits = [row.building, row.capacity ? row.capacity + tr(' sæti', ' seats') : ''].filter(Boolean);
   meta.textContent = bits.join(' · ')
-    + (isExtra ? ' · utan lista' : '')
-    + (value === 'prefer' ? ' — hentar vel' : (value === 'avoid' ? ' — hentar ekki' : ''));
+    + (isExtra ? tr(' · utan lista', ' · not on the list') : '')
+    + (value === 'prefer' ? tr(' — hentar vel', ' — suits well')
+      : (value === 'avoid' ? tr(' — hentar ekki', ' — does not suit') : ''));
 
   button.append(name, meta);
   button.onclick = () => {
@@ -1192,7 +1291,8 @@ function renderRooms() {
   if (rows.length === 0) {
     const empty = document.createElement('p');
     empty.className = 'hint';
-    empty.textContent = 'Engar stofur skráðar fyrir þetta námskeið enn. Leitaðu að stofu hér fyrir neðan.';
+    empty.textContent = tr('Engar stofur skráðar fyrir þetta námskeið enn. Leitaðu að stofu hér fyrir neðan.',
+      'No rooms listed for this course yet. Search for a room below.');
     target.appendChild(empty);
     el('roomCount').textContent = '';
     return;
@@ -1211,8 +1311,8 @@ function renderRooms() {
 
   const node = el('roomCount');
   node.className = 'hint';
-  node.textContent = countOf(state.rooms, 'prefer') + ' henta vel, '
-    + countOf(state.rooms, 'avoid') + ' henta ekki.';
+  node.textContent = countOf(state.rooms, 'prefer') + tr(' henta vel, ', ' suit well, ')
+    + countOf(state.rooms, 'avoid') + tr(' henta ekki.', ' do not suit.');
 }
 
 // Rooms anywhere in the school matching the query, minus the ones this
@@ -1242,8 +1342,8 @@ function renderRoomSearch() {
     // for a room that is already above - which is exactly what happens
     // right after adding one, since the query is still in the box.
     empty.textContent = alreadyListed
-      ? 'Sú stofa er þegar á listanum að ofan.'
-      : 'Engin stofa fannst.';
+      ? tr('Sú stofa er þegar á listanum að ofan.', 'That room is already on the list above.')
+      : tr('Engin stofa fannst.', 'No room found.');
     target.appendChild(empty);
     return;
   }
@@ -1296,6 +1396,16 @@ const TYPE_HEADINGS = {
   tt: 'Tölvu\u00adtímar'
 };
 
+// English, for ?lang=en. Codes stay what is sent.
+const TYPE_LABELS_EN = {
+  fl: 'Lectures', du: 'Problem sessions', ae: 'Practice sessions', vl: 'Lab work',
+  ut: 'Discussion sessions', hp: 'Project sessions', ms: 'Seminar', vs: 'Workshop', tt: 'Computer sessions'
+};
+
+const TYPE_SHORT_EN = {
+  fl: 'Le', du: 'Pr', ae: 'Pc', vl: 'Lb', ut: 'Di', hp: 'Pj', ms: 'Se', vs: 'Ws', tt: 'Co'
+};
+
 // The kinds of session the course has today, from the catalog's types
 // column - what a ticked teacher starts with. Every type is OFFERED either
 // way (TYPE_LABELS); this only decides which are pre-ticked.
@@ -1338,7 +1448,8 @@ function renderTeachers() {
   if (!labels.length) {
     const empty = document.createElement('p');
     empty.className = 'hint';
-    empty.textContent = 'Engir kennarar skráðir á námskeiðið í Uglu.';
+    empty.textContent = tr('Engir kennarar skráðir á námskeiðið í Uglu.',
+      'No teachers registered on the course in Ugla.');
     target.appendChild(empty);
     return;
   }
@@ -1346,7 +1457,9 @@ function renderTeachers() {
   const table = document.createElement('table');
   table.className = 'teacher-table';
   const head = document.createElement('tr');
-  ['Kennari', 'Kennir'].concat(codes.map((code) => TYPE_HEADINGS[code])).forEach((text) => {
+  // English names break at their spaces; the Icelandic need soft hyphens.
+  const headings = lang === 'en' ? TYPE_LABELS_EN : TYPE_HEADINGS;
+  [tr('Kennari', 'Teacher'), tr('Kennir', 'Teaches')].concat(codes.map((code) => headings[code])).forEach((text) => {
     const th = document.createElement('th');
     th.textContent = text;
     head.appendChild(th);
@@ -1367,7 +1480,7 @@ function renderTeachers() {
       state.typesOn.delete(label);
       renderTeachers();
       renderSummary();
-    }, label + ' kennir námskeiðið'));
+    }, label + tr(' kennir námskeiðið', ' teaches the course')));
     const on = teacherTypesOn(label);
     codes.forEach((code) => {
       row.appendChild(checkboxCell(on.indexOf(code) >= 0, (checked) => {
@@ -1377,7 +1490,7 @@ function renderTeachers() {
         state.typesOn.set(label, types);
         renderTeachers();
         renderSummary();
-      }, label + ': ' + TYPE_LABELS[code]));
+      }, label + ': ' + typeName(code)));
     });
     body.appendChild(row);
   });
@@ -1389,7 +1502,8 @@ function renderTeachers() {
   // Shown on a phone only (style.css), where the table scrolls sideways.
   const scrollHint = document.createElement('p');
   scrollHint.className = 'hint scroll-hint';
-  scrollHint.textContent = 'Strjúktu töfluna til hliðar til að sjá allar tegundir tíma.';
+  scrollHint.textContent = tr('Strjúktu töfluna til hliðar til að sjá allar tegundir tíma.',
+    'Swipe the table sideways to see every kind of session.');
   target.appendChild(scrollHint);
 }
 
@@ -1412,29 +1526,33 @@ function renderSummary() {
     .filter((id) => !state.rooms.has(id));
 
   const rows = [
-    ['Misseri', termLabel(state.term)],
-    ['Vikur', chosenWeeks().length ? weekRangesText(chosenWeeks()) : (state.weeks.size ? 'Allar' : '')],
-    ['Tímar sem henta', keysWith(state.slots, 'prefer').join(', ')],
-    ['Tímar sem henta ekki', keysWith(state.slots, 'avoid').join(', ')],
-    ['Stofur sem henta', roomNames(keysWith(state.rooms, 'prefer'))],
-    ['Stofur sem henta ekki', roomNames(keysWith(state.rooms, 'avoid'))],
-    ['Aðrar stofur', others.length
+    [tr('Misseri', 'Term'), termLabel(state.term)],
+    [tr('Vikur', 'Weeks'), chosenWeeks().length ? weekRangesText(chosenWeeks())
+      : (state.weeks.size ? tr('Allar', 'All') : '')],
+    [tr('Tímar sem henta', 'Times that suit'), slotNames(keysWith(state.slots, 'prefer'))],
+    [tr('Tímar sem henta ekki', 'Times that do not suit'), slotNames(keysWith(state.slots, 'avoid'))],
+    [tr('Stofur sem henta', 'Rooms that suit'), roomNames(keysWith(state.rooms, 'prefer'))],
+    [tr('Stofur sem henta ekki', 'Rooms that do not suit'), roomNames(keysWith(state.rooms, 'avoid'))],
+    [tr('Aðrar stofur', 'Other rooms'), others.length
       ? others.length + ': ' + roomNames(others)
       : ''],
     // Nobody unticked is an answer ("they all teach"), not a gap.
-    ['Kenna ekki á misserinu', courseTeacherLabels()
+    [tr('Kenna ekki á misserinu', 'Not teaching this term'), courseTeacherLabels()
       .filter((label) => state.notTeaching.has(label)).join(', ')
-      || (courseTeacherLabels().length ? 'allir kenna' : '')]
+      || (courseTeacherLabels().length ? tr('allir kenna', 'all teach') : '')]
   ];
   if (courseTeacherLabels().length) {
-    rows.push(['Hver kennir hvað', courseTeacherLabels()
+    rows.push([tr('Hver kennir hvað', 'Who teaches what'), courseTeacherLabels()
       .filter((label) => !state.notTeaching.has(label))
       .map((label) => label + ': '
-        + (teacherTypesOn(label).map((code) => TYPE_LABELS[code]).join(', ') || 'tegund ekki tilgreind'))
+        + (teacherTypesOn(label).map((code) => typeName(code)).join(', ')
+          || tr('tegund ekki tilgreind', 'type not given')))
       .join('; ')]);
   }
-  if (el('teachersNote').value.trim()) rows.push(['Um kennara', el('teachersNote').value.trim()]);
-  rows.push(['Tillögur að tímum', proposalLines().join('; ')]);
+  if (el('teachersNote').value.trim()) {
+    rows.push([tr('Um kennara', 'About teachers'), el('teachersNote').value.trim()]);
+  }
+  rows.push([tr('Tillögur að tímum', 'Proposed sessions'), proposalLines().join('; ')]);
   const target = el('summary');
   target.innerHTML = '';
   rows.forEach(([label, value]) => {
@@ -1445,10 +1563,19 @@ function renderSummary() {
     l.textContent = label;
     const v = document.createElement('span');
     v.className = 'summary-value' + (value ? '' : ' empty');
-    v.textContent = value || 'ekkert valið';
+    v.textContent = value || tr('ekkert valið', 'nothing chosen');
     row.append(l, v);
     target.appendChild(row);
   });
+}
+
+// "mán-0" -> "Mán 08:20": the tokens are what is sent, not what a reader
+// recognises.
+function slotNames(tokens) {
+  return tokens.map((token) => {
+    const where = parseSlotToken(token);
+    return where.dayIndex < 0 ? token : dayLabel(CONFIG.days[where.dayIndex]) + ' ' + slotLabel(where.start);
+  }).join(', ');
 }
 
 // Room ids are what gets submitted, but they mean nothing to a reader -
@@ -1468,7 +1595,7 @@ function roomNames(roomIds) {
 async function loadCatalog() {
   const school = el('school').value;
   const select = el('course');
-  select.innerHTML = '<option value="">Sæki námskeið…</option>';
+  select.innerHTML = '<option value="">' + tr('Sæki námskeið…', 'Fetching courses…') + '</option>';
   catalogRows = [];
 
   try {
@@ -1478,7 +1605,7 @@ async function loadCatalog() {
     // rather than asking again.
     const response = await fetch(CONFIG.apiUrl + '?school=' + encodeURIComponent(school));
     const body = await response.json();
-    if (!body.ok) throw new Error(body.error || 'Óþekkt villa');
+    if (!body.ok) throw new Error(body.error || tr('Óþekkt villa', 'Unknown error'));
     catalogRows = body.rows || [];
     renderTerms();
     applyTerm();
@@ -1494,8 +1621,9 @@ async function loadCatalog() {
     extraRooms.clear();
     state.rooms.clear();
     state.term = null;
-    select.innerHTML = '<option value="">Tókst ekki að sækja námskeið</option>';
-    el('courseHint').textContent = 'Villa: ' + error.message;
+    select.innerHTML = '<option value="">' + tr('Tókst ekki að sækja námskeið', 'Could not fetch courses')
+      + '</option>';
+    el('courseHint').textContent = tr('Villa: ', 'Error: ') + error.message;
     showStepsForCourse();
   }
 }
@@ -1539,8 +1667,8 @@ function renderTerms() {
   const hint = el('termHint');
   if (hint) {
     hint.textContent = chosen
-      ? 'Athugasemdirnar gilda fyrir ' + termLabel(chosen) + '.'
-      : 'Ekkert misseri skráð í námsframboði.';
+      ? tr('Athugasemdirnar gilda fyrir ', 'Your answers are for ') + termLabel(chosen) + '.'
+      : tr('Ekkert misseri skráð í námsframboði.', 'No term listed in the course catalogue.');
   }
 }
 
@@ -1584,7 +1712,7 @@ function applyTerm() {
     catalog.get(courseId).push(row);
   });
 
-  select.innerHTML = '<option value="">Veldu námskeið…</option>';
+  select.innerHTML = '<option value="">' + tr('Veldu námskeið…', 'Choose a course…') + '</option>';
   Array.from(catalog.keys()).sort().forEach((courseId) => {
     const first = catalog.get(courseId)[0] || {};
     const option = document.createElement('option');
@@ -1610,7 +1738,7 @@ function onTermChange() {
 
 async function submit() {
   const courseId = el('course').value;
-  if (!courseId) { setStatus('Veldu námskeið fyrst.', 'err'); return; }
+  if (!courseId) { setStatus(tr('Veldu námskeið fyrst.', 'Choose a course first.'), 'err'); return; }
 
   // Ten digits, no separators. Spoi joins a wish to a teacher through the
   // kennitala embedded in teachers.username - without it the submission
@@ -1618,12 +1746,13 @@ async function submit() {
   // a successful answer that quietly never arrives.
   const ssn = el('ssn').value.replace(/[\s-]/g, '');
   if (!/^\d{10}$/.test(ssn)) {
-    setStatus('Sláðu inn kennitölu (10 tölustafir) - án hennar rata athugasemdirnar ekki á rétt námskeið.', 'err');
+    setStatus(tr('Sláðu inn kennitölu (10 tölustafir) - án hennar rata athugasemdirnar ekki á rétt námskeið.',
+      'Type your kennitala (10 digits) - without it your answers cannot reach the right course.'), 'err');
     el('ssn').focus();
     return;
   }
 
-  if (!state.term) { setStatus('Ekkert misseri valið.', 'err'); return; }
+  if (!state.term) { setStatus(tr('Ekkert misseri valið.', 'No term chosen.'), 'err'); return; }
 
   const payload = {
     school: el('school').value,
@@ -1652,7 +1781,7 @@ async function submit() {
   };
 
   el('submitBtn').disabled = true;
-  setStatus('Sendi…');
+  setStatus(tr('Sendi…', 'Sending…'));
   try {
     // text/plain keeps this a "simple request", so the browser skips the
     // CORS preflight - Apps Script cannot answer an OPTIONS call. The body
@@ -1663,22 +1792,104 @@ async function submit() {
       body: JSON.stringify(payload)
     });
     const body = await response.json();
-    if (!body.ok) throw new Error(body.error || 'Óþekkt villa');
-    setStatus('Athugasemdir vistaðar fyrir ' + termLabel(state.term) + '. Takk!', 'ok');
+    if (!body.ok) throw new Error(body.error || tr('Óþekkt villa', 'Unknown error'));
+    setStatus(tr('Athugasemdir vistaðar fyrir ', 'Answers saved for ') + termLabel(state.term)
+      + tr('. Takk!', '. Thank you!'), 'ok');
   } catch (error) {
     // The write may well have landed even when the reply cannot be read -
     // say so rather than implying the answer was lost.
     setStatus(
-      'Ekki tókst að staðfesta sendingu (' + error.message + '). '
-        + 'Athugaðu hvort athugasemdirnar skiluðu sér áður en þú sendir aftur.',
+      tr('Ekki tókst að staðfesta sendingu (', 'Could not confirm the answer was received (')
+        + error.message + '). '
+        + tr('Athugaðu hvort athugasemdirnar skiluðu sér áður en þú sendir aftur.',
+          'Check whether it arrived before sending again.'),
       'err'
     );
   }
   el('submitBtn').disabled = false;
 }
 
+/* ---------- switching language ------------------------------------ */
+
+// The page's fixed text: an element with data-en has its English as HTML
+// there, and its Icelandic is kept on first switch; data-en-placeholder
+// does the same for a placeholder.
+function applyStaticText() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en]').forEach((node) => {
+    if (node.dataset.is == null) node.dataset.is = node.innerHTML;
+    node.innerHTML = lang === 'en' ? node.dataset.en : node.dataset.is;
+  });
+  document.querySelectorAll('[data-en-placeholder]').forEach((node) => {
+    if (node.dataset.isPlaceholder == null) node.dataset.isPlaceholder = node.placeholder;
+    node.placeholder = lang === 'en' ? node.dataset.enPlaceholder : node.dataset.isPlaceholder;
+  });
+  document.title = tr('Athugasemdir kennara', 'Teacher feedback');
+  document.querySelectorAll('.lang-switch button').forEach((button) => {
+    button.setAttribute('aria-pressed', String(button.dataset.lang === lang));
+  });
+  applyVideoLanguage();
+}
+
+// The help video: two recordings of the same walk-through, one of the page
+// in Icelandic (data-clip-is) and one in English (data-clip-en), each with
+// IS and EN subtitles on the site's kennsla/video/. The page's language
+// picks the recording and which subtitles are on.
+function applyVideoLanguage() {
+  const video = document.querySelector('.help-video video');
+  if (!video) return;
+  const clip = video.dataset[lang === 'en' ? 'clipEn' : 'clipIs'];
+  if (!clip || video.dataset.clip === clip) return;
+  video.dataset.clip = clip;
+  const base = video.dataset.dir + clip;
+  video.poster = base + '.jpg';
+  video.innerHTML = '';
+  const source = document.createElement('source');
+  source.src = base + '.mp4';
+  source.type = 'video/mp4';
+  video.appendChild(source);
+  [['is', 'Íslenska'], ['en', 'English']].forEach(([code, label]) => {
+    const track = document.createElement('track');
+    track.kind = 'subtitles';
+    track.srclang = code;
+    track.label = label;
+    track.src = base + '.' + code + '.vtt';
+    track.default = code === lang;
+    video.appendChild(track);
+  });
+  video.load();
+}
+
+// Everything already on screen is redrawn in the new language; nothing the
+// teacher has chosen or typed is lost.
+function setLang(next) {
+  lang = next;
+  try { localStorage.setItem(LANG_KEY, lang); } catch (error) { /* not remembered */ }
+  const params = new URLSearchParams(location.search);
+  params.set('lang', lang);
+  history.replaceState(null, '', location.pathname + '?' + params.toString() + location.hash);
+  applyStaticText();
+  renderSchools();
+  if (catalogRows.length) renderTerms();
+  const placeholder = el('course').querySelector('option[value=""]');
+  if (placeholder && catalogRows.length) placeholder.textContent = tr('Veldu námskeið…', 'Choose a course…');
+  renderWeeks();
+  renderSlots();
+  renderCourseHint();
+  setStatus('');
+  if (el('course').value) {
+    if (proposal.loaded) renderPlanView();
+    if (proposal.editing) openEditor(proposal.editing, true);
+    showStepsForCourse();
+  }
+}
+
 /* ---------- wiring ------------------------------------------------ */
 
+applyStaticText();
+document.querySelectorAll('.lang-switch button').forEach((button) => {
+  button.addEventListener('click', () => { if (button.dataset.lang !== lang) setLang(button.dataset.lang); });
+});
 renderSchools();
 renderWeeks();
 renderSlots();

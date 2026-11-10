@@ -64,6 +64,37 @@ body {
 
 main, .page-head { max-width: 900px; margin: 0 auto; }
 
+/* The language switch, top right: the same IS | EN pill as the site's
+   front page (assets/site.css .lang-switch). */
+.page-head { position: relative; }
+.lang-switch {
+  float: right;
+  margin: 2px 0 8px 12px;
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+.lang-switch button {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--muted);
+  border: 0;
+  background: transparent;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lang-switch button[aria-pressed="true"] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-md);
+}
+
 .page-head h1 { margin: 0 0 6px; font-size: clamp(22px, 4vw, 28px); letter-spacing: -.02em; }
 .lede { margin: 0 0 20px; color: var(--muted); max-width: 62ch; }
 
@@ -426,7 +457,9 @@ textarea { resize: vertical; }
 .teacher-table input { width: 18px; height: 18px; margin: 0; cursor: pointer; }
 
 /* The teachers' video under the lede, folded until asked for. */
-.help-video { margin: -8px 0 20px; max-width: 62ch; }
+/* Full width, so the two-language line fits on one line; the video itself
+   is centred under it. */
+.help-video { margin: -8px 0 20px; }
 .help-video > summary {
   cursor: pointer;
   color: var(--accent);
@@ -439,7 +472,8 @@ textarea { resize: vertical; }
 .help-video video {
   display: block;
   width: 100%;
-  margin-top: 10px;
+  max-width: 720px;
+  margin: 10px auto 0;
   border-radius: 8px;
   background: #000;
 }

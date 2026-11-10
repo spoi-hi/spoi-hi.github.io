@@ -4,20 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Athugasemdir kennara</title>
-<link rel="stylesheet" href="style.css">
+<!-- ?v= changes with every change to style.css or app.js, so a browser
+     holding the old file cannot pair it with this page. -->
+<link rel="stylesheet" href="style.css?v=2026-11-10b">
 </head>
 <body>
 
 <header class="page-head">
-  <h1>Athugasemdir kennara</h1>
-  <p class="lede">
+  <!-- Icelandic or English (app.js setLang); what is sent is the same. -->
+  <div class="lang-switch" role="group" aria-label="Tungumál / Language">
+    <button type="button" data-lang="is" aria-pressed="true">IS</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+  <h1 data-en="Teacher feedback">Athugasemdir kennara</h1>
+  <p class="lede" data-en="Your wishes about weeks, times and rooms. They are taken into account, but not guaranteed.">
     Athugasemdir um vikur, tíma og stofur. Hafðar til hliðsjónar, en ekki trygging.
   </p>
   <!-- The teachers' clip (docs/tutorials/clips/5a-filling-in-the-survey.json),
        published on the site's kennsla/ page by scripts/tutorial_site.py. -->
   <details class="help-video">
-    <summary>Óviss hvernig á að fylla út? Stutt myndband (undir 2 mín) · Unsure? A short video (under 2 min)</summary>
+    <summary data-en="Unsure how to fill it in? A short video (under 2 min)">Óviss hvernig á að fylla út? Stutt myndband (undir 2 mín) · Unsure? A short video (under 2 min)</summary>
+    <!-- app.js swaps in the English recording (data-clip-en) when the
+         page is in English. -->
     <video controls preload="none" playsinline
+           data-dir="../kennsla/video/" data-clip="5a-filling-in-the-survey"
+           data-clip-is="5a-filling-in-the-survey" data-clip-en="5b-the-form-in-english"
            poster="../kennsla/video/5a-filling-in-the-survey.jpg">
       <source src="../kennsla/video/5a-filling-in-the-survey.mp4" type="video/mp4">
       <track kind="subtitles" srclang="is" label="Íslenska"
@@ -31,10 +42,10 @@
 <main>
   <!-- Step 1 ------------------------------------------------------------ -->
   <section class="card">
-    <h2><span class="step">1</span> Hver ert þú?</h2>
+    <h2 data-en='<span class="step">1</span> Who are you?'><span class="step">1</span> Hver ert þú?</h2>
     <div class="field-row">
       <label class="field">
-        <span>Svið</span>
+        <span data-en="School">Svið</span>
         <select id="school"></select>
       </label>
       <label class="field">
@@ -43,19 +54,20 @@
              shown here so the teacher can see it; a select rather than
              a label because a school can be planning two terms at once
              and a wrong guess wastes the whole form. -->
-        <span>Misseri</span>
+        <span data-en="Term">Misseri</span>
         <select id="term"></select>
       </label>
       <label class="field">
-        <span>Netfang</span>
-        <input id="email" type="email" placeholder="nafn@hi.is" autocomplete="email">
+        <span data-en="Email">Netfang</span>
+        <input id="email" type="email" placeholder="nafn@hi.is" data-en-placeholder="name@hi.is"
+               autocomplete="email">
       </label>
       <label class="field">
         <!-- Required, not politeness: teachers.username embeds the
              kennitala, so it is the only thing that ties a wish to a
              teacher and their sessions. A wish without one cannot be
              imported into Spoi at all. -->
-        <span>Kennitala</span>
+        <span data-en="Kennitala (Icelandic ID number)">Kennitala</span>
         <input id="ssn" type="text" inputmode="numeric" required
                pattern="[0-9]{10}" maxlength="10" placeholder="DDMMYYXXXX">
       </label>
@@ -65,9 +77,9 @@
 
   <!-- Step 2 ------------------------------------------------------------ -->
   <section class="card">
-    <h2><span class="step">2</span> Námskeið</h2>
+    <h2 data-en='<span class="step">2</span> Course'><span class="step">2</span> Námskeið</h2>
     <div class="field combo">
-      <span>Leitaðu að námskeiði</span>
+      <span data-en="Search for a course">Leitaðu að námskeiði</span>
       <!-- The select stays as the value itself, so everything downstream
            reads el('course').value exactly as before. It is only hidden
            because 196 courses is a lot of scrolling, not because a
@@ -76,7 +88,8 @@
       <input id="courseSearch" type="search" autocomplete="off"
              role="combobox" aria-expanded="false" aria-autocomplete="list"
              aria-controls="courseResults"
-             placeholder="Númer eða heiti, t.d. IÐN508M eða aðgerða">
+             placeholder="Númer eða heiti, t.d. IÐN508M eða aðgerða"
+             data-en-placeholder="Course number or name, e.g. IÐN508M">
       <ul id="courseResults" class="combo-results" role="listbox" hidden></ul>
     </div>
     <p class="hint" id="courseHint"></p>
@@ -84,7 +97,7 @@
 
   <!-- The course as Spoi has it now, and the teacher's proposed changes -->
   <section class="card" id="planCard" hidden>
-    <h2>Núverandi drög</h2>
+    <h2 data-en="Current draft">Núverandi drög</h2>
     <p class="hint" id="planHint"></p>
     <div id="planGrid" class="plan-grid"></div>
     <div id="planList" class="plan-list"></div>
@@ -93,19 +106,20 @@
 
   <!-- Step 3 ------------------------------------------------------------ -->
   <section class="card" id="weeksCard" hidden>
-    <h2><span class="step">3</span> Vikur</h2>
+    <h2 data-en='<span class="step">3</span> Weeks'><span class="step">3</span> Vikur</h2>
     <p class="hint" id="weekAnchor"></p>
     <div id="weekGrid" class="week-grid"></div>
     <div class="toolbar">
-      <button type="button" class="link-btn" data-weeks="all">Velja allar</button>
-      <button type="button" class="link-btn" data-weeks="none">Hreinsa</button>
+      <button type="button" class="link-btn" data-weeks="all" data-en="Select all">Velja allar</button>
+      <button type="button" class="link-btn" data-weeks="none" data-en="Clear">Hreinsa</button>
     </div>
   </section>
 
   <!-- Step 4 ------------------------------------------------------------ -->
   <section class="card" id="timesCard" hidden>
-    <h2><span class="step">4</span> Tímar</h2>
-    <p class="hint">
+    <h2 data-en='<span class="step">4</span> Times'><span class="step">4</span> Tímar</h2>
+    <p class="hint" data-en='One click = <b class="swatch-prefer">suits well</b>, two =
+      <b class="swatch-avoid">does not suit</b>, three clear it.'>
       Einn smellur = <b class="swatch-prefer">hentar vel</b>, tveir =
       <b class="swatch-avoid">hentar ekki</b>, þrír hreinsa.
     </p>
@@ -114,8 +128,11 @@
 
   <!-- Step 5 ------------------------------------------------------------ -->
   <section class="card" id="roomsCard" hidden>
-    <h2><span class="step">5</span> Stofur</h2>
-    <p class="hint">
+    <h2 data-en='<span class="step">5</span> Rooms'><span class="step">5</span> Stofur</h2>
+    <p class="hint" data-en='Click as above. &ldquo;Does not suit&rdquo; does not rule the room out,
+      it is put last.
+      <a href="https://hi.is/haskolinn/adalbygging" target="_blank" rel="noopener">
+        Building maps</a> (in Icelandic).'>
       Smellt eins og að ofan. &bdquo;Hentar ekki&ldquo; útilokar ekki stofuna,
       hún er sett aftast.
       <a href="https://hi.is/haskolinn/adalbygging" target="_blank" rel="noopener">
@@ -125,46 +142,51 @@
     <p class="hint" id="roomCount"></p>
 
     <details class="more-rooms">
-      <summary>Finna aðra stofu</summary>
-      <p class="hint">
+      <summary data-en="Find another room">Finna aðra stofu</summary>
+      <p class="hint" data-en="The list above covers the buildings the course is in now.">
         Listinn að ofan nær yfir byggingarnar sem námskeiðið er í núna.
       </p>
-      <input id="roomSearch" type="search" placeholder="Sláðu inn stofu eða byggingu, t.d. Oddi eða HT-104">
+      <input id="roomSearch" type="search" placeholder="Sláðu inn stofu eða byggingu, t.d. Oddi eða HT-104"
+             data-en-placeholder="Type a room or building, e.g. Oddi or HT-104">
       <div id="roomSearchResults" class="room-list"></div>
     </details>
   </section>
 
   <!-- Step 6 ------------------------------------------------------------ -->
   <section class="card" id="teachersCard" hidden>
-    <h2><span class="step">6</span> Kennarar námskeiðsins</h2>
-    <p class="hint">
+    <h2 data-en='<span class="step">6</span> The course&rsquo;s teachers'><span class="step">6</span> Kennarar námskeiðsins</h2>
+    <p class="hint" data-en='The teachers registered on the course in Ugla, by initials. Untick
+      &ldquo;Teaches&rdquo; for anyone who does <b>not</b> teach the course this term,
+      and tick what kind of sessions each one teaches.'>
       Kennarar skráðir á námskeiðið í Uglu, með upphafsstöfum. Taktu hakið af
       &bdquo;Kennir&ldquo; hjá þeim sem kenna <b>ekki</b> námskeiðið á þessu misseri,
       og merktu hvers konar tíma hver og einn kennir.
     </p>
     <div id="teacherList" class="teacher-list"></div>
     <textarea id="teachersNote" rows="2"
-      placeholder="Vantar kennara? T.d. &bdquo;Kennari með kennitölu … kennir líka, vantar í Uglu&ldquo;"></textarea>
+      placeholder="Vantar kennara? T.d. &bdquo;Kennari með kennitölu … kennir líka, vantar í Uglu&ldquo;"
+      data-en-placeholder="Teacher missing? E.g. &ldquo;The teacher with kennitala … also teaches, not in Ugla&rdquo;"></textarea>
   </section>
 
   <!-- Step 7 ------------------------------------------------------------ -->
   <section class="card" id="noteCard" hidden>
-    <h2><span class="step">7</span> Athugasemd</h2>
-    <textarea id="note" rows="3" placeholder="Frjáls texti til stjórnar…"></textarea>
+    <h2 data-en='<span class="step">7</span> Note'><span class="step">7</span> Athugasemd</h2>
+    <textarea id="note" rows="3" placeholder="Frjáls texti til stjórnar…"
+      data-en-placeholder="Anything else, in your own words…"></textarea>
   </section>
 
   <section class="card" id="summaryCard" hidden>
-    <h2>Yfirlit</h2>
-    <p class="hint">Þetta verður sent.</p>
+    <h2 data-en="Summary">Yfirlit</h2>
+    <p class="hint" data-en="This is what will be sent.">Þetta verður sent.</p>
     <div id="summary" class="summary"></div>
   </section>
 
   <section class="card submit-card" id="submitCard" hidden>
-    <button id="submitBtn" type="button" class="primary">Senda athugasemdir</button>
+    <button id="submitBtn" type="button" class="primary" data-en="Send">Senda athugasemdir</button>
     <p class="status" id="status" role="status" aria-live="polite"></p>
   </section>
 </main>
 
-<script src="app.js"></script>
+<script src="app.js?v=2026-11-10b"></script>
 </body>
 </html>
