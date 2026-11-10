@@ -383,6 +383,16 @@
       "program": ""
     },
     {
+      "name": "Meistaranám í fjármálum fyrirtækja, lota III",
+      "file": "meistaranam-i-fjarmalum-fyrirtaekja-lota-iii.html",
+      "source": "0bbe706c",
+      "hash": "f36b67d5bee63070",
+      "updated": "2026-11-10",
+      "dir": "vidskiptafraedideild/fjarmal-fyrirtaekja",
+      "faculty": "Viðskiptafræðideild",
+      "program": "Fjármál fyrirtækja"
+    },
+    {
       "name": "Meistaranám í viðskiptafræði, lota III",
       "file": "meistaranam-i-vidskiptafraedi-lota-iii.html",
       "source": "0bbe706c",
