@@ -46,8 +46,8 @@
       "name": "1. ár í þjóðfræði",
       "file": "1-ar-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "759a4f53fcff4a01",
-      "updated": "2026-11-09",
+      "hash": "0e7d93bde6ec06f1",
+      "updated": "2026-11-10",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/thjodfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Þjóðfræði"
@@ -56,8 +56,8 @@
       "name": "2. og 3. ár í félagsfræði",
       "file": "2-og-3-ar-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "f2edefb93b8aff29",
-      "updated": "2026-11-09",
+      "hash": "de86b5476efb8d83",
+      "updated": "2026-11-10",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/felagsfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Félagsfræði"
@@ -66,8 +66,8 @@
       "name": "2. og 3. ár í mannfræði",
       "file": "2-og-3-ar-i-mannfraedi.html",
       "source": "0bbe706c",
-      "hash": "a423db62547d889a",
-      "updated": "2026-11-09",
+      "hash": "5c70980c14de3c35",
+      "updated": "2026-11-10",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/mannfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Mannfræði"
@@ -296,11 +296,11 @@
       "name": "MA og örnám í þjóðfræði",
       "file": "ma-og-ornam-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "cf1571147f643ee6",
-      "updated": "2026-11-09",
-      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/thjodfraedi",
+      "hash": "01a2f46ea2ececfe",
+      "updated": "2026-11-10",
+      "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Þjóðfræði"
+      "program": ""
     },
     {
       "name": "MA í aðferðafræði",
@@ -336,8 +336,8 @@
       "name": "MA í mannfræði og í hnattrænum fræðum",
       "file": "ma-i-mannfraedi-og-i-hnattraenum-fraedum.html",
       "source": "0bbe706c",
-      "hash": "ae5f254e97d8bbc7",
-      "updated": "2026-11-09",
+      "hash": "9f1dd1f4c92274ef",
+      "updated": "2026-11-10",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": ""
@@ -426,8 +426,8 @@
       "name": "Safnafræði, 60 eininga aukagrein",
       "file": "safnafraedi-60-eininga-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "ae21cbb952ce1c6d",
-      "updated": "2026-11-09",
+      "hash": "b568ea058e70addd",
+      "updated": "2026-11-10",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/safnafraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
       "program": "Safnafræði"
