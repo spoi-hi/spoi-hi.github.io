@@ -878,6 +878,7 @@ function proposalLines() {
     lines.push(sessionLabel(session) + ' → '
       + (next.typeCode !== session.typeCode ? typeName(next.typeCode) + ' ' : '') + sessionTimeText(next)
       + (weeks.length ? tr(', almanaksvikur ', ', calendar weeks ') + weekRangesText(weeks) : '')
+      + remoteText(change)
       + (change.note ? ' - ' + change.note : ''));
   });
   proposal.added.forEach((item) => {
@@ -885,9 +886,14 @@ function proposalLines() {
     const weeks = parseWeeksText(item.weeksText);
     lines.push(tr('Nýr tími: ', 'New session: ') + typeName(next.typeCode) + ' ' + sessionTimeText(next)
       + (weeks.length ? tr(', almanaksvikur ', ', calendar weeks ') + weekRangesText(weeks) : '')
+      + remoteText(item)
       + (item.note ? ' - ' + item.note : ''));
   });
   return lines;
+}
+
+function remoteText(entry) {
+  return entry && entry.remote ? tr(', fjarkennsla', ', remote') : '';
 }
 
 // What the answer carries: see cleanSessionChanges_ in the survey script,
@@ -899,12 +905,12 @@ function sessionChangesPayload() {
       out.push({ op: 'remove', session_id: id, note: change.note });
     } else {
       out.push({ op: 'change', session_id: id, type: change.type, slot: change.slot, n_timeslot: change.n_timeslot,
-        weeks: parseWeeksText(change.weeksText), note: change.note });
+        weeks: parseWeeksText(change.weeksText), note: change.note, remote: Boolean(change.remote) });
     }
   });
   proposal.added.forEach((item) => {
     out.push({ op: 'add', type: item.type, slot: item.slot, n_timeslot: item.n_timeslot,
-      weeks: parseWeeksText(item.weeksText), note: item.note });
+      weeks: parseWeeksText(item.weeksText), note: item.note, remote: Boolean(item.remote) });
   });
   return out;
 }
@@ -1046,7 +1052,8 @@ function renderPlanView() {
             + (change.type && change.type !== session.typeCode ? typeName(change.type) + ' · ' : '')
             + sessionTimeText(proposedSession(session, change))
             + (parseWeeksText(change.weeksText).length
-              ? tr(', almanaksvikur ', ', calendar weeks ') + weekRangesText(parseWeeksText(change.weeksText)) : '');
+              ? tr(', almanaksvikur ', ', calendar weeks ') + weekRangesText(parseWeeksText(change.weeksText)) : '')
+            + remoteText(change);
         item.appendChild(line);
       }
       if (session.id) {
@@ -1068,7 +1075,8 @@ function renderPlanView() {
     const next = proposedSession({ typeCode: added.type, weeks: [], teachers: [] }, added);
     line.textContent = tr('Nýr tími (tillaga): ', 'New session (proposal): ') + typeName(next.typeCode)
       + ' · ' + sessionTimeText(next)
-      + (next.weeks.length ? tr(' · almanaksvikur ', ' · calendar weeks ') + weekRangesText(next.weeks) : '');
+      + (next.weeks.length ? tr(' · almanaksvikur ', ' · calendar weeks ') + weekRangesText(next.weeks) : '')
+      + remoteText(added);
     item.appendChild(line);
     item.appendChild(planButton(tr('Breyta', 'Edit'), () => openEditor({ kind: 'add', index })));
     item.appendChild(planButton(tr('Eyða', 'Delete'), () => {
@@ -1078,7 +1086,7 @@ function renderPlanView() {
     list.appendChild(item);
   });
   const add = planButton(tr('+ Leggja til nýjan tíma', '+ Propose a new session'), () => {
-    proposal.added.push({ type: 'du', slot: '', n_timeslot: 1, weeksText: '', note: '' });
+    proposal.added.push({ type: 'du', slot: '', n_timeslot: 1, weeksText: '', note: '', remote: false });
     openEditor({ kind: 'add', index: proposal.added.length - 1 });
   });
   add.classList.add('plan-add');
@@ -1116,7 +1124,7 @@ function openEditor(target, quiet) {
   } else {
     entry = proposal.changes.get(target.id) || {
       op: 'change', type: base.typeCode, slot: slotToken(base.dayIndex, base.start),
-      n_timeslot: base.length, weeksText: '', note: ''
+      n_timeslot: base.length, weeksText: '', note: '', remote: false
     };
   }
 
@@ -1178,6 +1186,19 @@ function openEditor(target, quiet) {
   weeksInput.value = entry.weeksText;
   field(tr('Almanaksvikur', 'Calendar weeks'), weeksInput);
   box.appendChild(calendarWeeksHint());
+  // Fjarkennsla only says HOW the session is taught - it keeps the time
+  // grid: start and length stay whole periods as Spói and Besta use them.
+  const remoteBox = document.createElement('input');
+  remoteBox.type = 'checkbox';
+  remoteBox.checked = Boolean(entry.remote);
+  field(tr('Fjarkennsla', 'Remote teaching'), remoteBox);
+  const remoteHint = document.createElement('p');
+  remoteHint.className = 'hint plan-weeks-hint';
+  remoteHint.textContent = tr('Kennt í fjarkennslu (t.d. Zoom), í sömu tímum stundatöflunnar. '
+    + 'Annan tíma má semja um beint við nemendur.',
+  'Taught remotely (e.g. Zoom), in the same timetable periods. '
+    + 'A different time can be agreed directly with the students.');
+  box.appendChild(remoteHint);
   const noteInput = document.createElement('input');
   noteInput.type = 'text';
   noteInput.maxLength = 500;
@@ -1202,7 +1223,7 @@ function openEditor(target, quiet) {
 
   const update = () => {
     const removing = removeBox && removeBox.checked;
-    [typeSelect, daySelect, startSelect, lengthSelect, weeksInput].filter(Boolean)
+    [typeSelect, daySelect, startSelect, lengthSelect, weeksInput, remoteBox].filter(Boolean)
       .forEach((control) => { control.disabled = removing; });
     startSelect.disabled = removing || Number(daySelect.value) < 0;
     const next = {
@@ -1211,7 +1232,8 @@ function openEditor(target, quiet) {
       slot: Number(daySelect.value) < 0 ? '' : slotToken(Number(daySelect.value), Number(startSelect.value)),
       n_timeslot: Number(lengthSelect.value),
       weeksText: weeksInput.value,
-      note: noteInput.value.trim()
+      note: noteInput.value.trim(),
+      remote: !removing && remoteBox.checked
     };
     if (isAdd) {
       proposal.added[target.index] = next;
@@ -1219,14 +1241,15 @@ function openEditor(target, quiet) {
     } else {
       const unchanged = next.op === 'change' && next.type === base.typeCode
         && next.slot === slotToken(base.dayIndex, base.start)
-        && next.n_timeslot === base.length && !parseWeeksText(next.weeksText).length && !next.note;
+        && next.n_timeslot === base.length && !parseWeeksText(next.weeksText).length && !next.note
+        && !next.remote;
       if (unchanged) proposal.changes.delete(target.id);
       else proposal.changes.set(target.id, next);
     }
     renderPlanView();
   };
   lengthSelect.addEventListener('change', () => { fillStarts(Number(startSelect.value)); update(); });
-  [typeSelect, removeBox, daySelect, startSelect].filter(Boolean)
+  [typeSelect, removeBox, daySelect, startSelect, remoteBox].filter(Boolean)
     .forEach((control) => control.addEventListener('change', update));
   [weeksInput, noteInput].forEach((control) => control.addEventListener('input', update));
 
