@@ -363,6 +363,16 @@
       "program": ""
     },
     {
+      "name": "MA í skattarétti og reikningsskilum",
+      "file": "ma-i-skattaretti-og-reikningsskilum.html",
+      "source": "0bbe706c",
+      "hash": "f05c6fd8c2db9e4b",
+      "updated": "2026-11-11",
+      "dir": "lagadeild/skattarettur-og-reikningsskil",
+      "faculty": "Lagadeild",
+      "program": "Skattaréttur og reikningsskil"
+    },
+    {
       "name": "MA í skattarétti og reikningsskilum, 1. ár",
       "file": "ma-i-skattaretti-og-reikningsskilum-1-ar.html",
       "source": "0bbe706c",
