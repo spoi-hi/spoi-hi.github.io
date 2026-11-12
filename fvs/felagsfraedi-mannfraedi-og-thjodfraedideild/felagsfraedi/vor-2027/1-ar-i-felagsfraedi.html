@@ -37,6 +37,7 @@
   .tt-key { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0 0 14px; font-size: 13px; color: var(--muted); }
   .tt-key span { display: inline-flex; align-items: center; gap: 6px; }
   .tt-key b { color: var(--text); font-weight: 600; }
+  .tt-comment { white-space: pre-wrap; margin: 0; overflow-wrap: anywhere; }
   .tt-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; flex: none; }
 
   .tt-grid { display: grid; grid-template-columns: 52px repeat(var(--days), minmax(0, 1fr));
@@ -126,7 +127,7 @@
       <p class="crumb"><a href="../../../">← FVS</a> › <a href="../../../felagsfraedi-mannfraedi-og-thjodfraedideild/">Félagsfræði-, mannfræði- og þjóðfræðideild</a> › <a href="../../../felagsfraedi-mannfraedi-og-thjodfraedideild/felagsfraedi/">Félagsfræði</a></p>
       <h1>1. ár í félagsfræði</h1>
       <p class="lede"><span class="term">Vor 2027</span> ·
-        <span class="i18n" lang="is">Síðast uppfært 2026-11-11 · Birt úr Spóa; breytingar geta orðið.</span><span class="i18n" lang="en">Last updated 2026-11-11 · Published from Spói; changes may occur.</span></p>
+        <span class="i18n" lang="is">Síðast uppfært 2026-11-12 · Birt úr Spóa; breytingar geta orðið.</span><span class="i18n" lang="en">Last updated 2026-11-12 · Published from Spói; changes may occur.</span></p>
     </div>
   </section>
 
@@ -145,6 +146,11 @@
       <div class="tt-key print-only" id="key"></div>
       <div class="tt-scroll"><div id="grid"></div></div>
     </section>
+    <!-- "Athugasemd á vef" from Stundatöflur - only when there is one. -->
+    <section class="card" id="commentCard" hidden>
+      <h2 id="commentTitle"></h2>
+      <p id="comment" class="tt-comment"></p>
+    </section>
     <section class="card no-print">
       <h2 id="listTitle"></h2>
       <div style="overflow-x:auto"><table class="tt-list" id="list"></table></div>
@@ -161,7 +167,7 @@
     <div><strong>Spói</strong><span class="tagline">Scheduling Planning Optimization Interface</span></div>
   </div>
 </footer>
-<script id="tt-data" type="application/json">{"name": "1. ár í félagsfræði", "isoYear": 2027, "weeks": [{"week": 2, "monday": "2027-01-11"}, {"week": 3, "monday": "2027-01-18"}, {"week": 4, "monday": "2027-01-25"}, {"week": 5, "monday": "2027-02-01"}, {"week": 6, "monday": "2027-02-08"}, {"week": 7, "monday": "2027-02-15"}, {"week": 9, "monday": "2027-03-01"}, {"week": 10, "monday": "2027-03-08"}, {"week": 11, "monday": "2027-03-15"}, {"week": 12, "monday": "2027-03-22"}, {"week": 13, "monday": "2027-03-29"}, {"week": 14, "monday": "2027-04-05"}, {"week": 15, "monday": "2027-04-12"}, {"week": 16, "monday": "2027-04-19"}], "courses": [{"id": "FÉL204G", "name": "Aðferðafræði: Rannsóknaraðferðir félagsvísinda", "color": "#EB24AC"}, {"id": "FÉL262G", "name": "Frávik, félagslegt taumhald og jaðarsetning", "color": "#24EB94"}, {"id": "FÉL264G", "name": "Ójöfnuður: Efnahagur, kyn og minnihlutahópar", "color": "#2563EB"}], "sessions": [{"course": "FÉL204G", "kind": "Fyrirlestur 1", "day": 2, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16], "room": "HT103", "teachers": ["VH"]}, {"course": "FÉL204G", "kind": "Fyrirlestur 2", "day": 4, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16], "room": "HT103", "teachers": ["VH"]}, {"course": "FÉL262G", "kind": "Fyrirlestur 1", "day": 1, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16], "room": "L102", "teachers": ["ÞB"]}, {"course": "FÉL262G", "kind": "Fyrirlestur 2", "day": 3, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "L102", "teachers": ["ÞB"]}, {"course": "FÉL264G", "kind": "Fyrirlestur 1", "day": 0, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16], "room": "A-220", "teachers": ["SÓ"]}, {"course": "FÉL264G", "kind": "Fyrirlestur 2", "day": 2, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "O-202", "teachers": ["SÓ"]}], "holidays": [{"name": "Páskar", "start": "2027-03-24", "end": "2027-03-30"}, {"name": "Skírdagur", "start": "2027-03-25", "end": "2027-03-25"}, {"name": "Föstudagurinn langi", "start": "2027-03-26", "end": "2027-03-26"}, {"name": "Annar í páskum", "start": "2027-03-29", "end": "2027-03-29"}, {"name": "Sumardagurinn fyrsti", "start": "2027-04-22", "end": "2027-04-22"}], "place": {"faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild", "program": "Félagsfræði"}, "teachers": [{"initials": "SÓ", "names": ["Sigrún Ólafsdóttir"]}, {"initials": "VH", "names": ["Viðar Halldórsson"]}, {"initials": "ÞB", "names": ["Þóroddur Bjarnason"]}], "school": "FVS", "layout": 4}</script>
+<script id="tt-data" type="application/json">{"name": "1. ár í félagsfræði", "isoYear": 2027, "weeks": [{"week": 2, "monday": "2027-01-11"}, {"week": 3, "monday": "2027-01-18"}, {"week": 4, "monday": "2027-01-25"}, {"week": 5, "monday": "2027-02-01"}, {"week": 6, "monday": "2027-02-08"}, {"week": 7, "monday": "2027-02-15"}, {"week": 9, "monday": "2027-03-01"}, {"week": 10, "monday": "2027-03-08"}, {"week": 11, "monday": "2027-03-15"}, {"week": 12, "monday": "2027-03-22"}, {"week": 13, "monday": "2027-03-29"}, {"week": 14, "monday": "2027-04-05"}, {"week": 15, "monday": "2027-04-12"}, {"week": 16, "monday": "2027-04-19"}], "courses": [{"id": "FÉL204G", "name": "Aðferðafræði: Rannsóknaraðferðir félagsvísinda", "color": "#EB24AC"}, {"id": "FÉL262G", "name": "Frávik, félagslegt taumhald og jaðarsetning", "color": "#24EB94"}, {"id": "FÉL264G", "name": "Ójöfnuður: Efnahagur, kyn og minnihlutahópar", "color": "#2563EB"}], "sessions": [{"course": "FÉL204G", "kind": "Fyrirlestur 1", "day": 2, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16], "room": "HT103", "teachers": ["VH"]}, {"course": "FÉL204G", "kind": "Fyrirlestur 2", "day": 4, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16], "room": "HT103", "teachers": ["VH"]}, {"course": "FÉL262G", "kind": "Fyrirlestur 1", "day": 1, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16], "room": "L102", "teachers": ["ÞB"]}, {"course": "FÉL262G", "kind": "Fyrirlestur 2", "day": 3, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "L102", "teachers": ["ÞB"]}, {"course": "FÉL264G", "kind": "Fyrirlestur 1", "day": 0, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16], "room": "A-220", "teachers": ["SÓ"]}, {"course": "FÉL264G", "kind": "Fyrirlestur 2", "day": 2, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "O-202", "teachers": ["SÓ"]}], "holidays": [{"name": "Páskar", "start": "2027-03-24", "end": "2027-03-30"}, {"name": "Skírdagur", "start": "2027-03-25", "end": "2027-03-25"}, {"name": "Föstudagurinn langi", "start": "2027-03-26", "end": "2027-03-26"}, {"name": "Annar í páskum", "start": "2027-03-29", "end": "2027-03-29"}, {"name": "Sumardagurinn fyrsti", "start": "2027-04-22", "end": "2027-04-22"}], "comment": "Prufa", "place": {"faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild", "program": "Félagsfræði"}, "teachers": [{"initials": "SÓ", "names": ["Sigrún Ólafsdóttir"]}, {"initials": "VH", "names": ["Viðar Halldórsson"]}, {"initials": "ÞB", "names": ["Þóroddur Bjarnason"]}], "school": "FVS", "layout": 4}</script>
 <script>
 (function () {
   var DATA = JSON.parse(document.getElementById('tt-data').textContent);
@@ -171,12 +177,12 @@
     is: { days: ['Mán', 'Þri', 'Mið', 'Fim', 'Fös', 'Lau', 'Sun'], week: 'Vika', prev: 'Fyrri vika',
       next: 'Næsta vika', print: 'Prenta', noWeeks: 'Engir tímar birtir.', noSessions: 'Engir tímar þessa viku.',
       list: 'Allir tímar', teachers: 'Kennarar', course: 'Námskeið', kind: 'Tegund', time: 'Tími',
-      room: 'Stofa', weeks: 'Vikur', initials: 'Upphafsstafir', teacher: 'Kennari',
+      room: 'Stofa', weeks: 'Vikur', initials: 'Upphafsstafir', teacher: 'Kennari', comment: 'Athugasemd',
       terms: {} },
     en: { days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], week: 'Week', prev: 'Previous week',
       next: 'Next week', print: 'Print', noWeeks: 'No sessions published.', noSessions: 'No sessions this week.',
       list: 'All sessions', teachers: 'Teachers', course: 'Course', kind: 'Type', time: 'Time',
-      room: 'Room', weeks: 'Weeks', initials: 'Initials', teacher: 'Teacher',
+      room: 'Room', weeks: 'Weeks', initials: 'Initials', teacher: 'Teacher', comment: 'Comment',
       terms: { Vor: 'Spring', Haust: 'Autumn', Sumar: 'Summer' } }
   };
   function lang() { return document.documentElement.dataset.lang === 'en' ? 'en' : 'is'; }
@@ -380,6 +386,15 @@
     drawKey();
     draw();
     drawLists();
+    drawComment();
+  }
+
+  // The admin's note, as plain text (textContent: never HTML).
+  function drawComment() {
+    if (!DATA.comment) return;
+    document.getElementById('commentTitle').textContent = T().comment;
+    document.getElementById('comment').textContent = DATA.comment;
+    document.getElementById('commentCard').hidden = false;
   }
 
   function step(delta) {
