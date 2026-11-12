@@ -21,7 +21,9 @@
   /* body is a flex column (site.css): without this a wide timetable
      stretches the whole page instead of scrolling inside its card. */
   main, .tt-card { min-width: 0; }
-  .hero.compact { padding: 32px 0 8px; }
+  .hero.compact { padding: 20px 0 8px; }
+  .tt-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .tt-top .crumb { margin: 0; }
   .hero.compact h1 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 8px; }
   .hero.compact p.lede { font-size: 15px; }
 
@@ -106,25 +108,20 @@
 </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="wrap">
-    <a class="brand" href="../../../../"><img src="../../../../spoi.png" alt=""><span class="i18n" lang="is">Stundatöflur</span><span class="i18n" lang="en">Timetables</span></a>
-    <nav class="nav">
-      <a href="../../../../#svid" aria-current="page"><span class="i18n" lang="is">Svið</span><span class="i18n" lang="en">Schools</span></a>
-      <a href="../../../../athugasemdir/"><span class="i18n" lang="is">Athugasemdir kennara</span><span class="i18n" lang="en">Teacher comments</span></a>
-      <a href="../../../../kennsla/"><span class="i18n" lang="is">Kennslumyndbönd</span><span class="i18n" lang="en">Tutorials</span></a>
-    </nav>
-    <div class="lang-switch" role="group" aria-label="Tungumál / Language">
-      <button type="button" data-lang="is" aria-pressed="true">IS</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
-    </div>
-  </div>
-</header>
 
 <main>
   <section class="hero compact">
     <div class="wrap wide">
-      <p class="crumb"><a href="../../../">← FVS</a> › <a href="../../../felagsfraedi-mannfraedi-og-thjodfraedideild/">Félagsfræði-, mannfræði- og þjóðfræðideild</a> › <a href="../../../felagsfraedi-mannfraedi-og-thjodfraedideild/felagsfraedi/">Félagsfræði</a></p>
+      <!-- No site menu here: a teacher or student reads this page, and the
+           crumbs lead back up. The language switch stays - course, deild
+           and námsbraut names come in English too. -->
+      <div class="tt-top">
+        <p class="crumb"><a href="../../../">← FVS</a> › <a href="../../../felagsfraedi-mannfraedi-og-thjodfraedideild/"><span class="i18n" lang="is">Félagsfræði-, mannfræði- og þjóðfræðideild</span><span class="i18n" lang="en">Faculty of Sociology, Anthropology and Folkloristics</span></a> › <a href="../../../felagsfraedi-mannfraedi-og-thjodfraedideild/felagsfraedi/"><span class="i18n" lang="is">Félagsfræði</span><span class="i18n" lang="en">Sociology BA</span></a></p>
+        <div class="lang-switch" role="group" aria-label="Tungumál / Language">
+          <button type="button" data-lang="is" aria-pressed="true">IS</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
       <h1>1. ár í félagsfræði</h1>
       <p class="lede"><span class="term">Vor 2027</span> ·
         <span class="i18n" lang="is">Síðast uppfært 2026-11-12 · Birt úr Spóa; breytingar geta orðið.</span><span class="i18n" lang="en">Last updated 2026-11-12 · Published from Spói; changes may occur.</span></p>
@@ -167,7 +164,7 @@
     <div><strong>Spói</strong><span class="tagline">Scheduling Planning Optimization Interface</span></div>
   </div>
 </footer>
-<script id="tt-data" type="application/json">{"name": "1. ár í félagsfræði", "isoYear": 2027, "weeks": [{"week": 2, "monday": "2027-01-11"}, {"week": 3, "monday": "2027-01-18"}, {"week": 4, "monday": "2027-01-25"}, {"week": 5, "monday": "2027-02-01"}, {"week": 6, "monday": "2027-02-08"}, {"week": 7, "monday": "2027-02-15"}, {"week": 9, "monday": "2027-03-01"}, {"week": 10, "monday": "2027-03-08"}, {"week": 11, "monday": "2027-03-15"}, {"week": 12, "monday": "2027-03-22"}, {"week": 13, "monday": "2027-03-29"}, {"week": 14, "monday": "2027-04-05"}, {"week": 15, "monday": "2027-04-12"}, {"week": 16, "monday": "2027-04-19"}], "courses": [{"id": "FÉL204G", "name": "Aðferðafræði: Rannsóknaraðferðir félagsvísinda", "color": "#EB24AC"}, {"id": "FÉL262G", "name": "Frávik, félagslegt taumhald og jaðarsetning", "color": "#24EB94"}, {"id": "FÉL264G", "name": "Ójöfnuður: Efnahagur, kyn og minnihlutahópar", "color": "#2563EB"}], "sessions": [{"course": "FÉL204G", "kind": "Fyrirlestur 1", "day": 2, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16], "room": "HT103", "teachers": ["VH"]}, {"course": "FÉL204G", "kind": "Fyrirlestur 2", "day": 4, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16], "room": "HT103", "teachers": ["VH"]}, {"course": "FÉL262G", "kind": "Fyrirlestur 1", "day": 1, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16], "room": "L102", "teachers": ["ÞB"]}, {"course": "FÉL262G", "kind": "Fyrirlestur 2", "day": 3, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "L102", "teachers": ["ÞB"]}, {"course": "FÉL264G", "kind": "Fyrirlestur 1", "day": 0, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16], "room": "A-220", "teachers": ["SÓ"]}, {"course": "FÉL264G", "kind": "Fyrirlestur 2", "day": 2, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "O-202", "teachers": ["SÓ"]}], "holidays": [{"name": "Páskar", "start": "2027-03-24", "end": "2027-03-30"}, {"name": "Skírdagur", "start": "2027-03-25", "end": "2027-03-25"}, {"name": "Föstudagurinn langi", "start": "2027-03-26", "end": "2027-03-26"}, {"name": "Annar í páskum", "start": "2027-03-29", "end": "2027-03-29"}, {"name": "Sumardagurinn fyrsti", "start": "2027-04-22", "end": "2027-04-22"}], "place": {"faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild", "program": "Félagsfræði"}, "teachers": [{"initials": "SÓ", "names": ["Sigrún Ólafsdóttir"]}, {"initials": "VH", "names": ["Viðar Halldórsson"]}, {"initials": "ÞB", "names": ["Þóroddur Bjarnason"]}], "school": "FVS", "layout": 4}</script>
+<script id="tt-data" type="application/json">{"name": "1. ár í félagsfræði", "isoYear": 2027, "weeks": [{"week": 2, "monday": "2027-01-11"}, {"week": 3, "monday": "2027-01-18"}, {"week": 4, "monday": "2027-01-25"}, {"week": 5, "monday": "2027-02-01"}, {"week": 6, "monday": "2027-02-08"}, {"week": 7, "monday": "2027-02-15"}, {"week": 9, "monday": "2027-03-01"}, {"week": 10, "monday": "2027-03-08"}, {"week": 11, "monday": "2027-03-15"}, {"week": 12, "monday": "2027-03-22"}, {"week": 13, "monday": "2027-03-29"}, {"week": 14, "monday": "2027-04-05"}, {"week": 15, "monday": "2027-04-12"}, {"week": 16, "monday": "2027-04-19"}], "courses": [{"id": "FÉL204G", "name": "Aðferðafræði: Rannsóknaraðferðir félagsvísinda", "color": "#EB24AC", "nameEn": "Methodology: Research methods in social sciences"}, {"id": "FÉL262G", "name": "Frávik, félagslegt taumhald og jaðarsetning", "color": "#24EB94", "nameEn": "Sociology of Deviance"}, {"id": "FÉL264G", "name": "Ójöfnuður: Efnahagur, kyn og minnihlutahópar", "color": "#2563EB", "nameEn": "Inequality: Social status, gender and minority groups"}], "sessions": [{"course": "FÉL204G", "kind": "Fyrirlestur 1", "day": 2, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16], "room": "HT103", "teachers": ["VH"]}, {"course": "FÉL204G", "kind": "Fyrirlestur 2", "day": 4, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16], "room": "HT103", "teachers": ["VH"]}, {"course": "FÉL262G", "kind": "Fyrirlestur 1", "day": 1, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16], "room": "L102", "teachers": ["ÞB"]}, {"course": "FÉL262G", "kind": "Fyrirlestur 2", "day": 3, "start": "11:40", "end": "13:10", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "L102", "teachers": ["ÞB"]}, {"course": "FÉL264G", "kind": "Fyrirlestur 1", "day": 0, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16], "room": "A-220", "teachers": ["SÓ"]}, {"course": "FÉL264G", "kind": "Fyrirlestur 2", "day": 2, "start": "13:20", "end": "14:50", "weeks": [2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15], "room": "O-202", "teachers": ["SÓ"]}], "holidays": [{"name": "Páskar", "start": "2027-03-24", "end": "2027-03-30"}, {"name": "Skírdagur", "start": "2027-03-25", "end": "2027-03-25"}, {"name": "Föstudagurinn langi", "start": "2027-03-26", "end": "2027-03-26"}, {"name": "Annar í páskum", "start": "2027-03-29", "end": "2027-03-29"}, {"name": "Sumardagurinn fyrsti", "start": "2027-04-22", "end": "2027-04-22"}], "comment": "prufa2", "place": {"faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild", "program": "Félagsfræði", "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics", "programEn": "Sociology BA"}, "teachers": [{"initials": "SÓ", "names": ["Sigrún Ólafsdóttir"]}, {"initials": "VH", "names": ["Viðar Halldórsson"]}, {"initials": "ÞB", "names": ["Þóroddur Bjarnason"]}], "school": "FVS", "layout": 5}</script>
 <script>
 (function () {
   var DATA = JSON.parse(document.getElementById('tt-data').textContent);
@@ -193,7 +190,54 @@
   var colors = {};
   DATA.courses.forEach(function (c, i) { colors[c.id] = c.color || PALETTE[i % PALETTE.length]; });
   var names = {};
-  DATA.courses.forEach(function (c) { names[c.id] = c.name; });
+  var namesEn = {};
+  DATA.courses.forEach(function (c) { names[c.id] = c.name; namesEn[c.id] = c.nameEn || c.name; });
+  // A course's name in the chosen language (Ugla's English where it has one).
+  function courseName(id) { return (lang() === 'en' ? namesEn[id] : names[id]) || ''; }
+
+  // Session names start with their type ("Fyrirlestur-A", "Dæmatími 2"):
+  // that word in English, the rest as it is.
+  var KIND_EN = [
+    ['Fyrirlestrar', 'Lectures'], ['Fyrirlestur', 'Lecture'], ['Dæmatímar', 'Problem sessions'],
+    ['Dæmatími', 'Problem session'], ['Verklegt', 'Lab'], ['Verklegar æfingar', 'Lab'],
+    ['Hópur', 'Group'], ['Umræðutímar', 'Discussion sessions'], ['Umræðutími', 'Discussion session'],
+    ['Æfingatímar', 'Practice sessions'], ['Æfingatími', 'Practice session'],
+    ['Verkefnatímar', 'Project sessions'], ['Verkefnatími', 'Project session'],
+    ['Málstofa', 'Seminar'], ['Vinnustofa', 'Workshop'], ['Tölvutímar', 'Computer labs'],
+    ['Tölvutími', 'Computer lab'], ['Próf', 'Exam']
+  ];
+  function kindText(kind) {
+    var text = String(kind || '');
+    if (lang() !== 'en') return text;
+    for (var i = 0; i < KIND_EN.length; i++) {
+      var is = KIND_EN[i][0];
+      if (text.toLowerCase().indexOf(is.toLowerCase()) === 0) return KIND_EN[i][1] + text.slice(is.length);
+    }
+    return text;
+  }
+
+  // The university calendar's days off, in English where the name is a
+  // known one; any other stays as the calendar has it.
+  var HOLIDAY_EN = {
+    'nýársdagur': 'New Year\'s Day', 'skírdagur': 'Maundy Thursday',
+    'föstudagurinn langi': 'Good Friday', 'páskadagur': 'Easter Sunday',
+    'annar í páskum': 'Easter Monday', 'páskafrí': 'Easter break', 'páskaleyfi': 'Easter break',
+    'sumardagurinn fyrsti': 'First Day of Summer', 'verkalýðsdagurinn': 'Labour Day',
+    '1. maí': 'Labour Day', 'uppstigningardagur': 'Ascension Day',
+    'hvítasunnudagur': 'Whit Sunday', 'annar í hvítasunnu': 'Whit Monday',
+    'þjóðhátíðardagurinn': 'National Day', '17. júní': 'National Day',
+    'frídagur verslunarmanna': 'Commerce Day', 'fullveldisdagurinn': 'Sovereignty Day',
+    '1. desember': 'Sovereignty Day', 'aðfangadagur': 'Christmas Eve', 'jóladagur': 'Christmas Day',
+    'annar í jólum': 'Boxing Day', 'gamlársdagur': 'New Year\'s Eve', 'jólafrí': 'Christmas break',
+    'jólaleyfi': 'Christmas break', 'prófatímabil': 'Exam period', 'próftímabil': 'Exam period',
+    'námsmatsdagar': 'Assessment days', 'vetrarfrí': 'Winter break', 'haustfrí': 'Autumn break',
+    'kennsluhlé': 'Teaching break', 'frí': 'Holiday', 'lokað': 'Closed'
+  };
+  function holidayText(name) {
+    var text = String(name || '');
+    if (lang() !== 'en') return text;
+    return HOLIDAY_EN[text.trim().toLowerCase()] || text;
+  }
   var PX_PER_MIN = 0.9, DAY_START = 8 * 60 + 20, DAY_END = 19 * 60;
 
   function minutes(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
@@ -234,7 +278,8 @@
   function weekHolidays(monday) {
     var seen = [];
     for (var i = 0; i < 7; i++) {
-      (holidayNames[isoDate(monday, i)] || []).forEach(function (n) { if (seen.indexOf(n) < 0) seen.push(n); });
+      (holidayNames[isoDate(monday, i)] || []).map(holidayText)
+        .forEach(function (n) { if (seen.indexOf(n) < 0) seen.push(n); });
     }
     return seen;
   }
@@ -275,7 +320,7 @@
   function drawKey() {
     document.getElementById('key').innerHTML = DATA.courses.map(function (c) {
       return '<span><i class="tt-swatch" style="background:' + colors[c.id] + '"></i><b>' + esc(c.id) +
-        '</b>' + esc(c.name || '') + '</span>';
+        '</b>' + esc(courseName(c.id)) + '</span>';
     }).join('');
   }
 
@@ -294,7 +339,7 @@
     var h = '<div class="tt-grid" style="--days:' + days + '"><div class="tt-head"></div>';
     var dayHoliday = [];
     for (var d = 0; d < days; d++) {
-      dayHoliday[d] = monday ? (holidayNames[isoDate(monday, d)] || []).join(' · ') : '';
+      dayHoliday[d] = monday ? (holidayNames[isoDate(monday, d)] || []).map(holidayText).join(' · ') : '';
       h += '<div class="tt-head' + (dayHoliday[d] ? ' tt-holiday' : '') + '">' + T().days[d] +
         (monday ? ' ' + shortDate(monday, d) : '') +
         (dayHoliday[d] ? '<span class="tt-holiday-name">' + esc(dayHoliday[d]) + '</span>' : '') + '</div>';
@@ -331,12 +376,12 @@
           var top = (minutes(s.start) - DAY_START) * PX_PER_MIN;
           var hgt = (minutes(s.end) - minutes(s.start)) * PX_PER_MIN;
           // Course, then type, room and teachers each on a line of their own.
-          var lines = [s.kind, s.room, teacherText(s)].filter(Boolean)
+          var lines = [kindText(s.kind), s.room, teacherText(s)].filter(Boolean)
             .map(function (line) { return '<span>' + esc(line) + '</span>'; }).join('');
           h += '<div class="tt-ev" style="top:' + top + 'px;height:' + hgt + 'px;left:calc(' +
             (100 * s._lane / lanes) + '% + 1px);width:calc(' + (100 / lanes) + '% - 2px);background:' +
-            colors[s.course] + '" title="' + esc(s.course + ' ' + (names[s.course] || '') + '\n' +
-            s.kind + ' ' + s.start + '-' + s.end + '\n' + s.room +
+            colors[s.course] + '" title="' + esc(s.course + ' ' + courseName(s.course) + '\n' +
+            kindText(s.kind) + ' ' + s.start + '-' + s.end + '\n' + s.room +
             (teacherText(s, true) ? '\n' + teacherText(s, true) : '')) + '"><b>' + esc(s.course) + '</b>' +
             lines + '</div>';
         });
@@ -355,8 +400,8 @@
       T().room + '</th><th>' + T().weeks + '</th>' + (withTeachers ? '<th>' + T().teachers + '</th>' : '') + '</tr>';
     DATA.sessions.forEach(function (s) {
       rows += '<tr><td><span class="tt-swatch" style="background:' + colors[s.course] + ';margin-right:6px"></span>' +
-        esc(s.course) + (names[s.course] ? ' ' + esc(names[s.course]) : '') + '</td><td>' +
-        esc(s.kind) + '</td><td>' + T().days[s.day] + ' ' + s.start + '-' + s.end + '</td><td>' +
+        esc(s.course) + (courseName(s.course) ? ' ' + esc(courseName(s.course)) : '') + '</td><td>' +
+        esc(kindText(s.kind)) + '</td><td>' + T().days[s.day] + ' ' + s.start + '-' + s.end + '</td><td>' +
         esc(s.room) + '</td><td>' + ranges(s.weeks) + '</td>' +
         (withTeachers ? '<td>' + esc(teacherText(s)) + '</td>' : '') + '</tr>';
     });

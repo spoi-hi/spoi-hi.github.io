@@ -6,491 +6,566 @@
       "name": "1. ár í félagsfræði",
       "file": "1-ar-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "85999980b3d53591",
+      "hash": "4c5d5f81f53d78a8",
       "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/felagsfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Félagsfræði"
+      "program": "Félagsfræði",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics",
+      "programEn": "Sociology BA"
     },
     {
       "name": "1. ár í félagsráðgjöf",
       "file": "1-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
-      "hash": "667284f6559c1a1d",
-      "updated": "2026-11-04",
+      "hash": "4b37dbb366447975",
+      "updated": "2026-11-12",
       "dir": "felagsradgjafardeild/felagsradgjof",
       "faculty": "Félagsráðgjafardeild",
-      "program": "Félagsráðgjöf"
+      "program": "Félagsráðgjöf",
+      "facultyEn": "Faculty of Social Work",
+      "programEn": "Social Work BA"
     },
     {
       "name": "1. ár í mannfræði",
       "file": "1-ar-i-mannfraedi.html",
       "source": "0bbe706c",
-      "hash": "368a1212bec453e0",
-      "updated": "2026-11-11",
+      "hash": "b090423e76eec11f",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/mannfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Mannfræði"
+      "program": "Mannfræði",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics",
+      "programEn": "Anthropology BA"
     },
     {
       "name": "1. ár í stjórnmálafræði",
       "file": "1-ar-i-stjornmalafraedi.html",
       "source": "0bbe706c",
-      "hash": "7365ea82403c5432",
-      "updated": "2026-11-10",
+      "hash": "e193e3df36db2c4a",
+      "updated": "2026-11-12",
       "dir": "stjornmalafraedideild/stjornmalafraedi",
       "faculty": "Stjórnmálafræðideild",
-      "program": "Stjórnmálafræði"
+      "program": "Stjórnmálafræði",
+      "facultyEn": "Faculty of Political Science",
+      "programEn": "Political Science BA"
     },
     {
       "name": "1. ár í þjóðfræði",
       "file": "1-ar-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "b6a0349eb483b032",
-      "updated": "2026-11-10",
+      "hash": "35950b3dd0a9a4af",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/thjodfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Þjóðfræði"
+      "program": "Þjóðfræði",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics",
+      "programEn": "Folkloristics/Ethnology BA"
     },
     {
       "name": "2. og 3. ár í félagsfræði",
       "file": "2-og-3-ar-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "e81bbfe6bf7b0497",
-      "updated": "2026-11-11",
+      "hash": "52bc98e943233077",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/felagsfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Félagsfræði"
+      "program": "Félagsfræði",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics",
+      "programEn": "Sociology BA"
     },
     {
       "name": "2. og 3. ár í mannfræði",
       "file": "2-og-3-ar-i-mannfraedi.html",
       "source": "0bbe706c",
-      "hash": "8d409c4fad53e9ba",
-      "updated": "2026-11-11",
+      "hash": "4efeb8d8afecab07",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/mannfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Mannfræði"
+      "program": "Mannfræði",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics",
+      "programEn": "Anthropology BA"
     },
     {
       "name": "2. og 3. ár í stjórnmálafræði",
       "file": "2-og-3-ar-i-stjornmalafraedi.html",
       "source": "0bbe706c",
-      "hash": "6aa97d0783c08847",
-      "updated": "2026-11-09",
+      "hash": "cea1a1e9ce7fac38",
+      "updated": "2026-11-12",
       "dir": "stjornmalafraedideild/stjornmalafraedi",
       "faculty": "Stjórnmálafræðideild",
-      "program": "Stjórnmálafræði"
+      "program": "Stjórnmálafræði",
+      "facultyEn": "Faculty of Political Science",
+      "programEn": "Political Science BA"
     },
     {
       "name": "2. og 3. ár í þjóðfræði",
       "file": "2-og-3-ar-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "ac939a40f8d38ecd",
-      "updated": "2026-11-11",
+      "hash": "8496821318117b3d",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/thjodfraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Þjóðfræði"
+      "program": "Þjóðfræði",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics",
+      "programEn": "Folkloristics/Ethnology BA"
     },
     {
       "name": "2. ár í félagsráðgjöf",
       "file": "2-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
-      "hash": "abd44cd71c6835a6",
-      "updated": "2026-11-10",
+      "hash": "a5f2d561381a61ef",
+      "updated": "2026-11-12",
       "dir": "felagsradgjafardeild/felagsradgjof",
       "faculty": "Félagsráðgjafardeild",
-      "program": "Félagsráðgjöf"
+      "program": "Félagsráðgjöf",
+      "facultyEn": "Faculty of Social Work",
+      "programEn": "Social Work BA"
     },
     {
       "name": "3. ár í félagsráðgjöf",
       "file": "3-ar-i-felagsradgjof.html",
       "source": "0bbe706c",
-      "hash": "fb22781ea6d8f414",
-      "updated": "2026-11-10",
+      "hash": "28e0259ec379bd25",
+      "updated": "2026-11-12",
       "dir": "felagsradgjafardeild/felagsradgjof",
       "faculty": "Félagsráðgjafardeild",
-      "program": "Félagsráðgjöf"
+      "program": "Félagsráðgjöf",
+      "facultyEn": "Faculty of Social Work",
+      "programEn": "Social Work BA"
     },
     {
       "name": "BA í blaðamennsku",
       "file": "ba-i-bladamennsku.html",
       "source": "0bbe706c",
-      "hash": "91c55f05244a4a76",
-      "updated": "2026-11-04",
+      "hash": "274223788784b779",
+      "updated": "2026-11-12",
       "dir": "stjornmalafraedideild/bladamennska",
       "faculty": "Stjórnmálafræðideild",
-      "program": "Blaðamennska"
+      "program": "Blaðamennska",
+      "facultyEn": "Faculty of Political Science",
+      "programEn": "Journalism BA"
     },
     {
       "name": "Farsæld barna, áföll og samþætt þjónusta (staðlotur)",
       "file": "farsaeld-barna-afoll-og-samthaett-thjonusta-stadlotur.html",
       "source": "0bbe706c",
-      "hash": "218ed3cce27f8d32",
-      "updated": "2026-11-09",
+      "hash": "4d8be83715803939",
+      "updated": "2026-11-12",
       "dir": "felagsradgjafardeild",
       "faculty": "Félagsráðgjafardeild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Social Work"
     },
     {
       "name": "Fjármál (M.Fin), lota III",
       "file": "fjarmal-m-fin-lota-iii.html",
       "source": "0bbe706c",
-      "hash": "140f844f1ff361f5",
-      "updated": "2026-11-11",
+      "hash": "cf49625d05d46ac6",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/fjarmal",
       "faculty": "Viðskiptafræðideild",
-      "program": "Fjármál"
+      "program": "Fjármál",
+      "facultyEn": "Faculty of Business Administration"
     },
     {
       "name": "Fjármál (M.Fin), lota IV",
       "file": "fjarmal-m-fin-lota-iv.html",
       "source": "0bbe706c",
-      "hash": "622145e3a7e955ce",
-      "updated": "2026-11-11",
+      "hash": "eab908b33a6a5fd6",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/fjarmal",
       "faculty": "Viðskiptafræðideild",
-      "program": "Fjármál"
+      "program": "Fjármál",
+      "facultyEn": "Faculty of Business Administration"
     },
     {
       "name": "Fjölmiðlafræði, aukagrein",
       "file": "fjolmidlafraedi-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "476f15f0b06e903c",
-      "updated": "2026-11-06",
+      "hash": "e418876c18ab44ae",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/fjolmidlafraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Fjölmiðlafræði"
+      "program": "Fjölmiðlafræði",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics",
+      "programEn": "Media and Communication Studies Minor"
     },
     {
       "name": "Hagfræði 1. ár",
       "file": "hagfraedi-1-ar.html",
       "source": "0bbe706c",
-      "hash": "d2530914c285b8b3",
-      "updated": "2026-11-04",
+      "hash": "ecc9c148c5f91e80",
+      "updated": "2026-11-12",
       "dir": "hagfraedideild/hagfraedi",
       "faculty": "Hagfræðideild",
-      "program": "Hagfræði"
+      "program": "Hagfræði",
+      "facultyEn": "Faculty of Economics",
+      "programEn": "Economics BS"
     },
     {
       "name": "Hagfræði 2. ár",
       "file": "hagfraedi-2-ar.html",
       "source": "0bbe706c",
-      "hash": "5a942f51f41015e1",
-      "updated": "2026-11-10",
+      "hash": "ce104bd983ee9830",
+      "updated": "2026-11-12",
       "dir": "hagfraedideild/hagfraedi",
       "faculty": "Hagfræðideild",
-      "program": "Hagfræði"
+      "program": "Hagfræði",
+      "facultyEn": "Faculty of Economics",
+      "programEn": "Economics BS"
     },
     {
       "name": "Hagfræði 3. ár",
       "file": "hagfraedi-3-ar.html",
       "source": "0bbe706c",
-      "hash": "016f78a73a4c98a9",
-      "updated": "2026-11-10",
+      "hash": "4ec65bdd8eb87b53",
+      "updated": "2026-11-12",
       "dir": "hagfraedideild/hagfraedi",
       "faculty": "Hagfræðideild",
-      "program": "Hagfræði"
+      "program": "Hagfræði",
+      "facultyEn": "Faculty of Economics",
+      "programEn": "Economics BS"
     },
     {
       "name": "Hagfræði meistaranám, lota III",
       "file": "hagfraedi-meistaranam-lota-iii.html",
       "source": "0bbe706c",
-      "hash": "8316007452432b2c",
-      "updated": "2026-11-09",
+      "hash": "5f5f7bbf07a6e779",
+      "updated": "2026-11-12",
       "dir": "hagfraedideild",
       "faculty": "Hagfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Economics"
     },
     {
       "name": "Hagfræði meistaranám, lota IV",
       "file": "hagfraedi-meistaranam-lota-iv.html",
       "source": "0bbe706c",
-      "hash": "e3a3a5e4c6b9d5f3",
-      "updated": "2026-11-11",
+      "hash": "0f2b6bb3c4728d69",
+      "updated": "2026-11-12",
       "dir": "hagfraedideild",
       "faculty": "Hagfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Economics"
     },
     {
       "name": "Kjörgreinar í meistaranámi í lögfræði",
       "file": "kjorgreinar-i-meistaranami-i-logfraedi.html",
       "source": "0bbe706c",
-      "hash": "c41246e79d99f28d",
-      "updated": "2026-11-10",
+      "hash": "b44a1061bd5d1074",
+      "updated": "2026-11-12",
       "dir": "lagadeild",
       "faculty": "Lagadeild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Law"
     },
     {
       "name": "Kynjafræði, 60 eininga aukagrein",
       "file": "kynjafraedi-60-eininga-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "8dfa6b8dd4ce53be",
-      "updated": "2026-11-09",
+      "hash": "30b76ecd37994898",
+      "updated": "2026-11-12",
       "dir": "stjornmalafraedideild",
       "faculty": "Stjórnmálafræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Political Science"
     },
     {
       "name": "Lögfræði 1. ár",
       "file": "logfraedi-1-ar.html",
       "source": "0bbe706c",
-      "hash": "716ce793adb5cf36",
-      "updated": "2026-11-04",
+      "hash": "7fe2bb68073a1932",
+      "updated": "2026-11-12",
       "dir": "lagadeild/logfraedi",
       "faculty": "Lagadeild",
-      "program": "Lögfræði"
+      "program": "Lögfræði",
+      "facultyEn": "Faculty of Law",
+      "programEn": "Law BA"
     },
     {
       "name": "Lögfræði 2. ár",
       "file": "logfraedi-2-ar.html",
       "source": "0bbe706c",
-      "hash": "f183a9e704c52033",
-      "updated": "2026-11-04",
+      "hash": "44771a2c9be3ca0c",
+      "updated": "2026-11-12",
       "dir": "lagadeild/logfraedi",
       "faculty": "Lagadeild",
-      "program": "Lögfræði"
+      "program": "Lögfræði",
+      "facultyEn": "Faculty of Law",
+      "programEn": "Law BA"
     },
     {
       "name": "Lögfræði 3. ár",
       "file": "logfraedi-3-ar.html",
       "source": "0bbe706c",
-      "hash": "71a1826af164bf87",
-      "updated": "2026-11-04",
+      "hash": "2e41032ffe9f6842",
+      "updated": "2026-11-12",
       "dir": "lagadeild/logfraedi",
       "faculty": "Lagadeild",
-      "program": "Lögfræði"
+      "program": "Lögfræði",
+      "facultyEn": "Faculty of Law",
+      "programEn": "Law BA"
     },
     {
       "name": "MA og örnám í afbrotafræði",
       "file": "ma-og-ornam-i-afbrotafraedi.html",
       "source": "0bbe706c",
-      "hash": "57b800de0bee77c3",
-      "updated": "2026-11-11",
+      "hash": "779568697ed9d798",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics"
     },
     {
       "name": "MA og örnám í alþjóðasamskiptum",
       "file": "ma-og-ornam-i-althjodasamskiptum.html",
       "source": "0bbe706c",
-      "hash": "df1275832fc52609",
-      "updated": "2026-11-10",
+      "hash": "4e9dac9f8efd468e",
+      "updated": "2026-11-12",
       "dir": "stjornmalafraedideild",
       "faculty": "Stjórnmálafræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Political Science"
     },
     {
       "name": "MA og örnám í félagsfræði",
       "file": "ma-og-ornam-i-felagsfraedi.html",
       "source": "0bbe706c",
-      "hash": "273781ab067311ae",
-      "updated": "2026-11-11",
+      "hash": "f8b05d50a2682f47",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics"
     },
     {
       "name": "MA og örnám í þjóðfræði",
       "file": "ma-og-ornam-i-thjodfraedi.html",
       "source": "0bbe706c",
-      "hash": "870bd7a237fa91ac",
-      "updated": "2026-11-10",
+      "hash": "fd4cecf3319f2cdb",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics"
     },
     {
       "name": "MA í aðferðafræði",
       "file": "ma-i-adferdafraedi.html",
       "source": "0bbe706c",
-      "hash": "d5ffb644e4f978f9",
-      "updated": "2026-11-09",
+      "hash": "2641397c942c4e7a",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics"
     },
     {
       "name": "MA í félagsráðgjöf, öldrunarfræði, NordMaG og fjölskyldumeðferð",
       "file": "ma-i-felagsradgjof-oldrunarfraedi-nordmag-og-fjolskyldumedferd.html",
       "source": "0bbe706c",
-      "hash": "d0851084da0fcf59",
-      "updated": "2026-11-09",
+      "hash": "ba017669982f3ea8",
+      "updated": "2026-11-12",
       "dir": "felagsradgjafardeild",
       "faculty": "Félagsráðgjafardeild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Social Work"
     },
     {
       "name": "MA í kynjafræði og örnám í hagnýtri jafnréttisfræði",
       "file": "ma-i-kynjafraedi-og-ornam-i-hagnytri-jafnrettisfraedi.html",
       "source": "0bbe706c",
-      "hash": "62ce8914320638a9",
-      "updated": "2026-11-09",
+      "hash": "3a357b5c05ff9916",
+      "updated": "2026-11-12",
       "dir": "stjornmalafraedideild",
       "faculty": "Stjórnmálafræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Political Science"
     },
     {
       "name": "MA í mannfræði og í hnattrænum fræðum",
       "file": "ma-i-mannfraedi-og-i-hnattraenum-fraedum.html",
       "source": "0bbe706c",
-      "hash": "9f1dd1f4c92274ef",
-      "updated": "2026-11-10",
+      "hash": "4ac4acd61aedeb0d",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics"
     },
     {
       "name": "MA í náms- og starfsráðgjöf, 1. ár",
       "file": "ma-i-nams-og-starfsradgjof-1-ar.html",
       "source": "0bbe706c",
-      "hash": "f2ff5e6ccaea0526",
-      "updated": "2026-11-09",
+      "hash": "e105c92f36ddd497",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics"
     },
     {
       "name": "MA í náms- og starfsráðgjöf, 2. ár",
       "file": "ma-i-nams-og-starfsradgjof-2-ar.html",
       "source": "0bbe706c",
-      "hash": "a57d6e14e67170b0",
-      "updated": "2026-11-09",
+      "hash": "cc362fd766636ba7",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics"
     },
     {
       "name": "MA í skattarétti og reikningsskilum",
       "file": "ma-i-skattaretti-og-reikningsskilum.html",
       "source": "0bbe706c",
-      "hash": "f05c6fd8c2db9e4b",
-      "updated": "2026-11-11",
+      "hash": "eae54580246f770d",
+      "updated": "2026-11-12",
       "dir": "lagadeild/skattarettur-og-reikningsskil",
       "faculty": "Lagadeild",
-      "program": "Skattaréttur og reikningsskil"
+      "program": "Skattaréttur og reikningsskil",
+      "facultyEn": "Faculty of Law"
     },
     {
       "name": "MA, MIS og örnám í upplýsingafræði",
       "file": "ma-mis-og-ornam-i-upplysingafraedi.html",
       "source": "0bbe706c",
-      "hash": "a277fb752af39e8e",
-      "updated": "2026-11-09",
+      "hash": "998201f70e60add4",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics"
     },
     {
       "name": "Meistaranám í fjármálum fyrirtækja, lota III",
       "file": "meistaranam-i-fjarmalum-fyrirtaekja-lota-iii.html",
       "source": "0bbe706c",
-      "hash": "f36b67d5bee63070",
-      "updated": "2026-11-10",
+      "hash": "27a8aec7cb578c64",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/fjarmal-fyrirtaekja",
       "faculty": "Viðskiptafræðideild",
-      "program": "Fjármál fyrirtækja"
+      "program": "Fjármál fyrirtækja",
+      "facultyEn": "Faculty of Business Administration"
     },
     {
       "name": "Meistaranám í fjármálum fyrirtækja, lota IV",
       "file": "meistaranam-i-fjarmalum-fyrirtaekja-lota-iv.html",
       "source": "0bbe706c",
-      "hash": "4494857351aba519",
-      "updated": "2026-11-10",
+      "hash": "acc362a3db71b591",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/fjarmal-fyrirtaekja",
       "faculty": "Viðskiptafræðideild",
-      "program": "Fjármál fyrirtækja"
+      "program": "Fjármál fyrirtækja",
+      "facultyEn": "Faculty of Business Administration"
     },
     {
       "name": "Meistaranám í viðskiptafræði, lota III",
       "file": "meistaranam-i-vidskiptafraedi-lota-iii.html",
       "source": "0bbe706c",
-      "hash": "f580998addcb3686",
-      "updated": "2026-11-10",
+      "hash": "c41dca81ef02bc8f",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/vidskiptafraedi",
       "faculty": "Viðskiptafræðideild",
-      "program": "Viðskiptafræði"
+      "program": "Viðskiptafræði",
+      "facultyEn": "Faculty of Business Administration",
+      "programEn": "Business Administration MS"
     },
     {
       "name": "Meistaranám í viðskiptafræði, lota IV",
       "file": "meistaranam-i-vidskiptafraedi-lota-iv.html",
       "source": "0bbe706c",
-      "hash": "7617465b73581ff0",
-      "updated": "2026-11-09",
+      "hash": "024ebbd210120e7d",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/vidskiptafraedi",
       "faculty": "Viðskiptafræðideild",
-      "program": "Viðskiptafræði"
+      "program": "Viðskiptafræði",
+      "facultyEn": "Faculty of Business Administration",
+      "programEn": "Business Administration MS"
     },
     {
       "name": "MPA og örnám í opinberri stjórnsýslu",
       "file": "mpa-og-ornam-i-opinberri-stjornsyslu.html",
       "source": "0bbe706c",
-      "hash": "fa3cac1e2a76bc7d",
-      "updated": "2026-11-10",
+      "hash": "8e6cd084229bb1b4",
+      "updated": "2026-11-12",
       "dir": "stjornmalafraedideild",
       "faculty": "Stjórnmálafræðideild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Political Science"
     },
     {
       "name": "MS í reikningsskilum og endurskoðun, lotur III og IV",
       "file": "ms-i-reikningsskilum-og-endurskodun-lotur-iii-og-iv.html",
       "source": "0bbe706c",
-      "hash": "7d9a1e216974a53d",
-      "updated": "2026-11-11",
+      "hash": "585ad24a498915cf",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/reikningsskil-og-endurskodun",
       "faculty": "Viðskiptafræðideild",
-      "program": "Reikningsskil og endurskoðun"
+      "program": "Reikningsskil og endurskoðun",
+      "facultyEn": "Faculty of Business Administration",
+      "programEn": "Accounting and Auditing M.Acc."
     },
     {
       "name": "Safnafræði, 60 eininga aukagrein",
       "file": "safnafraedi-60-eininga-aukagrein.html",
       "source": "0bbe706c",
-      "hash": "81875a55f6416e25",
-      "updated": "2026-11-10",
+      "hash": "6a47efeff2a99414",
+      "updated": "2026-11-12",
       "dir": "felagsfraedi-mannfraedi-og-thjodfraedideild/safnafraedi",
       "faculty": "Félagsfræði-, mannfræði- og þjóðfræðideild",
-      "program": "Safnafræði"
+      "program": "Safnafræði",
+      "facultyEn": "Faculty of Sociology, Anthropology and Folkloristics",
+      "programEn": "Museum Studies Minor"
     },
     {
       "name": "Viðskiptafræði 1. ár (öll kjörsvið)",
       "file": "vidskiptafraedi-1-ar-oll-kjorsvid.html",
       "source": "0bbe706c",
-      "hash": "3df9f67c31bdc1f2",
-      "updated": "2026-11-09",
+      "hash": "c1f8ddbee23b612a",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/vidskiptafraedi",
       "faculty": "Viðskiptafræðideild",
-      "program": "Viðskiptafræði"
+      "program": "Viðskiptafræði",
+      "facultyEn": "Faculty of Business Administration",
+      "programEn": "Business Administration BS"
     },
     {
       "name": "Viðskiptafræði 2. ár (öll kjörsvið)",
       "file": "vidskiptafraedi-2-ar-oll-kjorsvid.html",
       "source": "0bbe706c",
-      "hash": "0f4883ba2a073f47",
-      "updated": "2026-11-10",
+      "hash": "7798bef05e591d71",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/vidskiptafraedi",
       "faculty": "Viðskiptafræðideild",
-      "program": "Viðskiptafræði"
+      "program": "Viðskiptafræði",
+      "facultyEn": "Faculty of Business Administration",
+      "programEn": "Business Administration BS"
     },
     {
       "name": "Viðskiptafræði 3. ár (öll kjörsvið)",
       "file": "vidskiptafraedi-3-ar-oll-kjorsvid.html",
       "source": "0bbe706c",
-      "hash": "48db8ab07a2c90e3",
-      "updated": "2026-11-04",
+      "hash": "aa00d9d6dae0affe",
+      "updated": "2026-11-12",
       "dir": "vidskiptafraedideild/vidskiptafraedi",
       "faculty": "Viðskiptafræðideild",
-      "program": "Viðskiptafræði"
+      "program": "Viðskiptafræði",
+      "facultyEn": "Faculty of Business Administration",
+      "programEn": "Business Administration BS"
     },
     {
       "name": "Örnám í félagsráðgjöf (staðlotur)",
       "file": "ornam-i-felagsradgjof-stadlotur.html",
       "source": "0bbe706c",
-      "hash": "c72ad6df33d75f67",
-      "updated": "2026-11-10",
+      "hash": "271283f9d772b217",
+      "updated": "2026-11-12",
       "dir": "felagsradgjafardeild",
       "faculty": "Félagsráðgjafardeild",
-      "program": ""
+      "program": "",
+      "facultyEn": "Faculty of Social Work"
     }
   ]
 }
