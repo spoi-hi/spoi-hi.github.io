@@ -1,20 +1,5 @@
 {
   "term": "vor-2027",
   "label": "Vor 2027",
-  "timetables": [
-    {
-      "name": "FER265 - Ferðamálafræði 1 ár - Drög",
-      "file": "fer265-ferdamalafraedi-1-ar-drog.html",
-      "source": "b10b4239",
-      "hash": "26c0a04a1adf92e2",
-      "updated": "2026-10-31"
-    },
-    {
-      "name": "LAN267 - Landfræði 1 ár - Drög",
-      "file": "lan267-landfraedi-1-ar-drog.html",
-      "source": "b10b4239",
-      "hash": "f4ac1757289e19a0",
-      "updated": "2026-10-31"
-    }
-  ]
+  "timetables": []
 }
