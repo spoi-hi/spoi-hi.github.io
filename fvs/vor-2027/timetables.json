@@ -333,8 +333,8 @@
       "name": "MA og örnám í alþjóðasamskiptum",
       "file": "ma-og-ornam-i-althjodasamskiptum.html",
       "source": "0bbe706c",
-      "hash": "4e9dac9f8efd468e",
-      "updated": "2026-11-12",
+      "hash": "2a06ae055970bca9",
+      "updated": "2026-11-24",
       "dir": "stjornmalafraedideild",
       "faculty": "Stjórnmálafræðideild",
       "program": "",
@@ -535,7 +535,7 @@
       "name": "Stjórnmálafræðideild: námskeið kennd á ensku",
       "file": "stjornmalafraedideild-namskeid-kennd-a-ensku.html",
       "source": "0bbe706c",
-      "hash": "34f06aeaea1e11d8",
+      "hash": "2ea9ce696712eb12",
       "updated": "2026-11-24",
       "dir": "stjornmalafraedideild",
       "faculty": "Stjórnmálafræðideild",
@@ -577,6 +577,17 @@
       "program": "Viðskiptafræði",
       "facultyEn": "Faculty of Business Administration",
       "programEn": "Business Administration BS"
+    },
+    {
+      "name": "Viðskiptafræðideild: námskeið kennd á ensku",
+      "file": "vidskiptafraedideild-namskeid-kennd-a-ensku.html",
+      "source": "0bbe706c",
+      "hash": "1c177b57b61a2dd9",
+      "updated": "2026-11-24",
+      "dir": "vidskiptafraedideild",
+      "faculty": "Viðskiptafræðideild",
+      "program": "",
+      "facultyEn": "Faculty of Business Administration"
     },
     {
       "name": "Örnám í félagsráðgjöf (staðlotur)",
